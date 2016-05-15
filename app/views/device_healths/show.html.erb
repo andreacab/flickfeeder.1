@@ -1,39 +1,32 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = DeviceHealth -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => DeviceHealth %></h1>
+</div>
 
-<p>
-  <strong>Current battery charge:</strong>
-  <%= @device_health.current_battery_charge %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:current_battery_charge) %></dt>
+      <dd><pre class="prettyprint"><%= @device_health.current_battery_charge %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:available_storage) %></dt>
+      <dd><pre class="prettyprint"><%= @device_health.available_storage %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:health) %></dt>
+      <dd><pre class="prettyprint"><%= @device_health.health %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:network_signal) %></dt>
+      <dd><pre class="prettyprint"><%= @device_health.network_signal %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:available_mobile_data) %></dt>
+      <dd><pre class="prettyprint"><%= @device_health.available_mobile_data %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>F fdevice:</strong>
-  <%= @device_health.f_fdevice %>
-</p>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              device_healths_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_device_health_path(@device_health), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              device_health_path(@device_health),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
-<p>
-  <strong>Available storage:</strong>
-  <%= @device_health.available_storage %>
-</p>
-
-<p>
-  <strong>Health:</strong>
-  <%= @device_health.health %>
-</p>
-
-<p>
-  <strong>Network signal:</strong>
-  <%= @device_health.network_signal %>
-</p>
-
-<p>
-  <strong>Available mobile data:</strong>
-  <%= @device_health.available_mobile_data %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @device_health.user %>
-</p>
-
-<%= link_to 'Edit', edit_device_health_path(@device_health) %> |
-<%= link_to 'Back', device_healths_path %>
