@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  current_battery_charge: MyString
+  f_fdevice_id: 
+  available_storage: MyString
+  health: MyString
+  network_signal: MyString
+  available_mobile_data: MyString
+  user_id: 
+
+two:
+  current_battery_charge: MyString
+  f_fdevice_id: 
+  available_storage: MyString
+  health: MyString
+  network_signal: MyString
+  available_mobile_data: MyString
+  user_id: 
