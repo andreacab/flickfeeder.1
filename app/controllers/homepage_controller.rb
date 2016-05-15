@@ -11,7 +11,11 @@ class HomepageController < ApplicationController
 	end
 
     def dropbox
-        @@flow = DropboxOAuth2Flow.new(APP_KEY, APP_SECRET, "http://localhost:3000/dropbox-redirect", session, :dropboxToken)
+        if Rails.env.production?
+            @@flow = DropboxOAuth2Flow.new(APP_KEY, APP_SECRET, "https://evening-shelf-81489.herokuapp.com/dropbox-redirect", session, :dropboxToken)
+        else 
+            @@flow = DropboxOAuth2Flow.new(APP_KEY_DEV, APP_SECRET_DEV, "http://localhost:3000/dropbox-redirect", session, :dropboxToken)
+        end
         authorize_url = @@flow.start()
         redirect_to(authorize_url)
     end
