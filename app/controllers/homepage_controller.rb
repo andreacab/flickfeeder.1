@@ -2,6 +2,8 @@ require 'dropbox_sdk'
 
 APP_KEY = 'zi4lgaw8hhg902c'
 APP_SECRET = 'az9gdeflab6ujwk'
+APP_KEY_DEV = '1qc6db7svbn3cpd'
+APP_SECRET_DEV = 'xgdifi9kvxd8yh0'
 
 class HomepageController < ApplicationController
 
