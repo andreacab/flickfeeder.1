@@ -16,10 +16,11 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'homepage#index'
 
-  get '/dropbox-redirect' => 'homepage#dropbox_redirect'
-  get '/dropbox' => 'homepage#dropbox'
-  get '/dropbox-webhook' => 'homepage#dropbox_verify'
-  post '/dropbox-webhook' => 'homepage#dropbox_webhook'
+  get 'dropbox-redirect' => 'homepage#dropbox_redirect'
+  get 'dropbox' => 'homepage#dropbox'
+  get 'dropbox-webhook' => 'homepage#dropbox_verify'
+  post 'dropbox-webhook' => 'homepage#dropbox_webhook'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

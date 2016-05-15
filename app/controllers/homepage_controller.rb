@@ -7,8 +7,8 @@ APP_SECRET_DEV = 'xgdifi9kvxd8yh0'
 
 class HomepageController < ApplicationController
 
-    def index
-    end
+	def index
+	end
 
     def dropbox
         @@flow = DropboxOAuth2Flow.new(APP_KEY, APP_SECRET, "http://localhost:3000/dropbox-redirect", session, :dropboxToken)
@@ -44,5 +44,4 @@ class HomepageController < ApplicationController
         puts "in webhook"
         head :ok
     end
-    
 end
