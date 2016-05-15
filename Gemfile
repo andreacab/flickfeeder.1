@@ -50,6 +50,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'dropbox-sdk'
 
+gem 'cloudinary'
+
 group :development do
   gem 'pry-rails'
 end
