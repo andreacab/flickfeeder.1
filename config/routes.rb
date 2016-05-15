@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :labels
+
   resources :events
 
   resources :f_fdevices
