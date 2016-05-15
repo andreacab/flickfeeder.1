@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
         :recoverable, :rememberable, :trackable, :validatable
   belongs_to :organization
   has_one :f_fdevice
+  has_many :media
 end
