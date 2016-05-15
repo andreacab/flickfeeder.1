@@ -1,19 +1,24 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = FFdevice -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => FFdevice %></h1>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @f_fdevice.name %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+      <dd><pre class="prettyprint"><%= @f_fdevice.name %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Organization:</strong>
-  <%= @f_fdevice.organization %>
-</p>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              f_fdevices_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_f_fdevice_path(@f_fdevice), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              f_fdevice_path(@f_fdevice),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
-<p>
-  <strong>User:</strong>
-  <%= @f_fdevice.user %>
-</p>
-
-<%= link_to 'Edit', edit_f_fdevice_path(@f_fdevice) %> |
-<%= link_to 'Back', f_fdevices_path %>

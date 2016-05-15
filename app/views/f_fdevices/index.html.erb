@@ -1,29 +1,36 @@
-<h1>Listing f_fdevices</h1>
-
-<table>
+<%- model_class = FFdevice -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => FFdevice %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Organization</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @f_fdevices.each do |f_fdevice| %>
       <tr>
+        <td><%= f_fdevice.id %></td>
         <td><%= f_fdevice.name %></td>
-        <td><%= f_fdevice.organization %></td>
-        <td><%= f_fdevice.user %></td>
-        <td><%= link_to 'Show', f_fdevice %></td>
-        <td><%= link_to 'Edit', edit_f_fdevice_path(f_fdevice) %></td>
-        <td><%= link_to 'Destroy', f_fdevice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l f_fdevice.created_at, format: :long %></td>
+        <td>
+          <%= link_to f_fdevice_path(f_fdevice), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to f_fdevice_path(f_fdevice), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New F fdevice', new_f_fdevice_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_f_fdevice_path,
+            :class => 'btn btn-primary' %>

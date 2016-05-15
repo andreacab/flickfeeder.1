@@ -1,5 +1,6 @@
-<h1>New f_fdevice</h1>
+<%- model_class = FFdevice -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => FFdevice %></h1>
+</div>
+<%= render :partial => 'form' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', f_fdevices_path %>
