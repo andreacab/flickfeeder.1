@@ -1,0 +1,29 @@
+<h1>Listing f_fdevices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Organization</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @f_fdevices.each do |f_fdevice| %>
+      <tr>
+        <td><%= f_fdevice.name %></td>
+        <td><%= f_fdevice.organization %></td>
+        <td><%= f_fdevice.user %></td>
+        <td><%= link_to 'Show', f_fdevice %></td>
+        <td><%= link_to 'Edit', edit_f_fdevice_path(f_fdevice) %></td>
+        <td><%= link_to 'Destroy', f_fdevice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New F fdevice', new_f_fdevice_path %>
