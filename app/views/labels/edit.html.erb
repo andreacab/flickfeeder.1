@@ -1,6 +1,5 @@
-<h1>Editing label</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @label %> |
-<%= link_to 'Back', labels_path %>
+<%- model_class = Label -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => Label %></h1>
+</div>
+<%= render :partial => 'form' %>
