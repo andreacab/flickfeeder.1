@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Current battery charge:</strong>
+  <%= @device_health.current_battery_charge %>
+</p>
+
+<p>
+  <strong>F fdevice:</strong>
+  <%= @device_health.f_fdevice %>
+</p>
+
+<p>
+  <strong>Available storage:</strong>
+  <%= @device_health.available_storage %>
+</p>
+
+<p>
+  <strong>Health:</strong>
+  <%= @device_health.health %>
+</p>
+
+<p>
+  <strong>Network signal:</strong>
+  <%= @device_health.network_signal %>
+</p>
+
+<p>
+  <strong>Available mobile data:</strong>
+  <%= @device_health.available_mobile_data %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @device_health.user %>
+</p>
+
+<%= link_to 'Edit', edit_device_health_path(@device_health) %> |
+<%= link_to 'Back', device_healths_path %>

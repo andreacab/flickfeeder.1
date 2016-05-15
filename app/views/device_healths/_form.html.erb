@@ -1,0 +1,45 @@
+<%= form_for(@device_health) do |f| %>
+  <% if @device_health.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@device_health.errors.count, "error") %> prohibited this device_health from being saved:</h2>
+
+      <ul>
+      <% @device_health.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :current_battery_charge %><br>
+    <%= f.text_field :current_battery_charge %>
+  </div>
+  <div class="field">
+    <%= f.label :f_fdevice_id %><br>
+    <%= f.text_field :f_fdevice_id %>
+  </div>
+  <div class="field">
+    <%= f.label :available_storage %><br>
+    <%= f.text_field :available_storage %>
+  </div>
+  <div class="field">
+    <%= f.label :health %><br>
+    <%= f.text_field :health %>
+  </div>
+  <div class="field">
+    <%= f.label :network_signal %><br>
+    <%= f.text_field :network_signal %>
+  </div>
+  <div class="field">
+    <%= f.label :available_mobile_data %><br>
+    <%= f.text_field :available_mobile_data %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

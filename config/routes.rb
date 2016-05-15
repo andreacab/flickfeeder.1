@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :device_healths
+
   resources :labels
 
   resources :events
