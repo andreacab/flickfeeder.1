@@ -48,6 +48,7 @@ gem 'bootstrap-sass-extras'
 gem 'devise', github: 'plataformatec/devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'dropbox-sdk'
 
 group :development do
   gem 'pry-rails'
