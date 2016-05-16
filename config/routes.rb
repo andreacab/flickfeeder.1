@@ -14,12 +14,19 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'homepage#index'
+  authenticate :user do
+    root 'homepage#index'
+  end
+  
 
-  get 'dropbox-redirect' => 'homepage#dropbox_redirect'
-  get 'dropbox' => 'homepage#dropbox'
-  get 'dropbox-webhook' => 'homepage#dropbox_verify'
-  post 'dropbox-webhook' => 'homepage#dropbox_webhook'
+  # dropbox routes
+  get 'dropbox/redirect' => 'users/dropbox#redirect'
+  get 'dropbox/enable' => 'users/dropbox#enable'
+  get 'dropbox/webhook' => 'users/dropbox#verify'
+  get 'dropbox/disable' => 'users/dropbox#disable'
+  post 'dropbox/webhook' => 'users/dropbox#webhook'
+
+  # cloudinary routes
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
