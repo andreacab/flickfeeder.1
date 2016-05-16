@@ -50,6 +50,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'dropbox-sdk'
 
+gem 'carrierwave'
 gem 'cloudinary'
 
 group :development do
