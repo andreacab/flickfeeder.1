@@ -1,0 +1,45 @@
+.sidebar {
+
+	height: 100%;
+	width: 250px;
+	background-image: url('stardust.png');
+	position: absolute;
+	top: 0;
+	left: 0;
+	.logo-container {
+		.logo {
+			position: relative;
+			left: 48%;
+			transform: translateX(-50%);
+		}
+	}
+	a {
+		text-decoration: none;
+	}
+	.avatar {
+		height:168px;
+		width: 100%;
+		border-bottom: 1px rgba(211, 211, 211, 0.1) solid;
+		border-top: 1px rgba(211, 211, 211, 0.1) solid;
+	}
+	.menu-item {
+		height:60px;
+		width: 100%;
+		border-bottom: 1px rgba(211, 211, 211, 0.1) solid;
+		cursor: pointer;
+		background-color: rgba(249, 247, 239, 0.03);
+
+		&:hover {
+			background-color:  rgba(211, 211, 211, 0.1);
+		}
+
+		.page-name {
+			font-size: 20px;
+			top: 18px;
+			position: relative;
+			margin:0;
+			color:rgba(249, 247, 239, 0.82);
+			text-align: center;
+		}
+	}
+}

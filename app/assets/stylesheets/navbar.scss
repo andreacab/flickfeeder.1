@@ -1,0 +1,15 @@
+.navbar {
+	width: calc(100vw - 250px);
+	background-image: url('photography.png');
+	background-color: #F9F7EF;
+	min-height: 60px; 
+	border-radius: 0 !important;
+	border:0;
+	border-bottom: 1px rgba(68, 67, 73, 0.23) solid;
+	margin:0;
+	.dropdown-toggle {
+		/*color:white !important;*/
+		height: 60px;
+		padding-top: 20px;
+	}
+}
