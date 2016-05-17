@@ -1,3 +1,6 @@
 class MediasController < ApplicationController
 
-end
+	def index
+	end
+
+end	
