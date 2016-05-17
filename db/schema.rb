@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160515233352) do
+ActiveRecord::Schema.define(version: 20160517003208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,15 +83,15 @@ ActiveRecord::Schema.define(version: 20160515233352) do
     t.datetime "updated_at"
   end
 
-  create_table "labels_media", force: true do |t|
+  create_table "labels_medias", force: true do |t|
     t.integer "label_id"
     t.integer "media_id"
   end
 
-  add_index "labels_media", ["label_id"], name: "index_labels_media_on_label_id", using: :btree
-  add_index "labels_media", ["media_id"], name: "index_labels_media_on_media_id", using: :btree
+  add_index "labels_medias", ["label_id"], name: "index_labels_medias_on_label_id", using: :btree
+  add_index "labels_medias", ["media_id"], name: "index_labels_medias_on_media_id", using: :btree
 
-  create_table "media", force: true do |t|
+  create_table "medias", force: true do |t|
     t.string   "type_of_media"
     t.integer  "user_id"
     t.integer  "organization_id"
@@ -102,9 +102,9 @@ ActiveRecord::Schema.define(version: 20160515233352) do
     t.datetime "updated_at"
   end
 
-  add_index "media", ["event_id"], name: "index_media_on_event_id", using: :btree
-  add_index "media", ["organization_id"], name: "index_media_on_organization_id", using: :btree
-  add_index "media", ["user_id"], name: "index_media_on_user_id", using: :btree
+  add_index "medias", ["event_id"], name: "index_medias_on_event_id", using: :btree
+  add_index "medias", ["organization_id"], name: "index_medias_on_organization_id", using: :btree
+  add_index "medias", ["user_id"], name: "index_medias_on_user_id", using: :btree
 
   create_table "organizations", force: true do |t|
     t.string   "name"

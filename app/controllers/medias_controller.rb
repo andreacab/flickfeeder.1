@@ -1,0 +1,3 @@
+class MediasController < ApplicationController
+
+end
