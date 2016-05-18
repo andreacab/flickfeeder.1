@@ -6,6 +6,8 @@ APP_KEY_DEV = '1qc6db7svbn3cpd'
 APP_SECRET_DEV = 'xgdifi9kvxd8yh0'
 
 class Users::DropboxController < ApplicationController
+    skip_before_filter :verify_authenticity_token, :only => [:webhook]
+
     def enable
         if Rails.env.production?
             @@flow = DropboxOAuth2Flow.new(APP_KEY, APP_SECRET, "https://evening-shelf-81489.herokuapp.com/dropbox/redirect", session, :dropboxToken)
