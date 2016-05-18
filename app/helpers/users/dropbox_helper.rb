@@ -1,10 +1,10 @@
 require 'net/http'
 
 module Users::DropboxHelper
-    def get_temporary_link(path, access_token)
+    def get_temporary_link(data, access_token)
         res = post_req(
             'https://api.dropboxapi.com/2/files/get_temporary_link',
-            { path: path }, 
+            data, 
             {
                 'Authorization' => 'Bearer ' + access_token, 
                 'Content-type' => 'application/json'
@@ -31,14 +31,14 @@ module Users::DropboxHelper
         uri = URI(address)
         req = Net::HTTP::Post.new(uri)
         req.body = data.to_json
-        headers.each { |name, value| req[name] = value}
+        headers.each { |name, value| req[name] = value }
 
         res = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
           http.request(req)
         end
     end
 
-    def hasConnectedDropbox?
-        !!current_user.dropbox_access_token
+    def hasDropboxAccount?(user)
+        !!user.dropbox_access_token
     end
 end

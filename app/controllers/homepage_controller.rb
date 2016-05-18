@@ -8,20 +8,26 @@ class HomepageController < ApplicationController
 
 	def index
         @dropbox_thumbnails = []
-        client = DropboxClient.new(current_user.dropbox_access_token)
-        root_metadata = client.metadata('/')
-        puts JSON.pretty_generate(root_metadata)
-        items = root_metadata['contents']
+        if(hasDropboxAccount?(current_user))
+            @dropbox_thumbnails = get_dropbox_thumbnails
+        end
+	end
+
+    private
+    
+    def get_dropbox_thumbnails
+        links = []
+        res = list_folder({ path: "", recursive: true, include_media_info: true }, current_user.dropbox_access_token)
+        items = JSON.parse(res.body)['entries']
 
         items.each do |item|
-            if item['mime_type'] == IMAGE_MIME_TYPE 
-                res = get_temporary_link(item['path'], current_user.dropbox_access_token)
-                @dropbox_thumbnails.push(JSON.parse(res.body))
-            elsif item['is_dir']
-                res = list_folder({path: item['path'], recursive: true, include_media_info: true}, current_user.dropbox_access_token)
+            if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
+                res = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
+                links.push(JSON.parse(res.body))
             end
         end
-        # render component: 'MediasList', props: { medias: @thumbnails }, class: 'mediasList'
-	end
+
+        return links
+    end
 
 end
