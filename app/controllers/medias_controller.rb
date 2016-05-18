@@ -23,7 +23,6 @@ class MediasController < ApplicationController
                 thumbs.push(JSON.parse(res.body))
             end
         end
-        puts thumbs
         return thumbs
     end
 
