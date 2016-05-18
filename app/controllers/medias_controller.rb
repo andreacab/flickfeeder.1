@@ -1,4 +1,4 @@
-# require 'users/dropbox_helper'
+require 'users/dropbox_helper'
 
 class MediasController < ApplicationController
     include Users::DropboxHelper
