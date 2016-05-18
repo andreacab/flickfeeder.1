@@ -38,13 +38,9 @@ class Users::DropboxController < ApplicationController
     end
 
     def webhook
-        puts "in webhook"
-        puts "in webhook"
-        puts "in webhook"
-        puts "in webhook"
-        puts "in webhook"
-        puts "in webhook"
+        puts "************ Recieved webhook notification *************"
+        puts params
+        puts params.inspect
         head :ok
     end
-
 end

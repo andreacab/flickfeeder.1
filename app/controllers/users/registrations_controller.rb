@@ -10,7 +10,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
-    puts '*********** FUCK *********** IN registration edit'
     super
   end
 end
