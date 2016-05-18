@@ -41,6 +41,6 @@ class Users::DropboxController < ApplicationController
         puts "************ Recieved webhook notification *************"
         puts params
         puts params.inspect
-        head :ok
+        puts res.body
     end
 end
