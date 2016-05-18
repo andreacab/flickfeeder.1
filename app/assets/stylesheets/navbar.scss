@@ -1,4 +1,6 @@
 .navbar {
+	position: fixed;
+	width: calc(100% - 250px);
 	background-image: url('photography.png');
 	background-color: #F9F7EF;
 	min-height: 60px;

@@ -22,6 +22,8 @@
 @import "sidebar";
 
 @import "navbar";
+
+@import "dashboard";
 //->Prelang (ui_framework:twitter_bootstrap)
 
 // Give everything in 'yield' margin to separate it.
@@ -60,9 +62,15 @@ h1,h2,h3,h4,h5 {
 	height: 100%;
 	position:relative;
 	left:250px;
+
 	.main-area {
-		margin:20px 40px;
+		position: relative;
+		overflow: scroll;
+
+		top: 60px;
+		padding: 20px 40px;
 		width: 100%;
+		height: calc(100% - 62px);
 	}
 }
 
