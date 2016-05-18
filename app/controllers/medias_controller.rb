@@ -1,3 +1,30 @@
-class MediasController < ApplicationController
+require 'users/dropbox_helper'
 
-end
+class MediasController < ApplicationController
+    include Users::DropboxHelper
+	
+    def index
+        @dropbox_thumbnails = []
+        if(hasDropboxAccount?(current_user))
+            @dropbox_thumbnails = get_dropbox_thumbnails
+        end
+	end
+
+    private
+    
+    def get_dropbox_thumbnails
+        thumbs = []
+        res = list_folder({ path: "", recursive: true, include_media_info: true }, current_user.dropbox_access_token)
+        items = JSON.parse(res.body)['entries']
+
+        items.each do |item|
+            if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
+                res = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
+                thumbs.push(JSON.parse(res.body))
+            end
+        end
+        puts thumbs
+        return thumbs
+    end
+
+end	

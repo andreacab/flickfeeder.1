@@ -10,8 +10,6 @@ module Users::DropboxHelper
                 'Content-type' => 'application/json'
             }
         )
-        puts res.body
-        return res
     end
 
     def list_folder(data, access_token)
@@ -23,8 +21,6 @@ module Users::DropboxHelper
                 'Content-type' => 'application/json'
             }
         )
-        puts res.body
-        return res
     end
 
     def post_req(address, data, headers)

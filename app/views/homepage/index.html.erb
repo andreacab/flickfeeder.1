@@ -1,4 +1,4 @@
-<h1>Homepage</h1>
-
-<%= react_component('Dashboard', title: 'hello', thumbnails: @dropbox_thumbnails) %>
-<%= cl_image_tag("sample.jpg", :alt => "Sample Image")  %>
+<h1>Dashboard</h1>
+<% @events.each do |event| %>
+	<%= event.name %>
+<% end %>

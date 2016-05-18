@@ -1,0 +1,24 @@
+<div class="sidebar">
+	<div class="logo-container"><%= image_tag("logo.png", width: "168", class: "logo") %></div>
+	<div class="avatar"></div>
+	<%= link_to root_path do %>
+		<div class="menu-item">
+			<h3 class="page-name">Dashboard</h3>
+		</div>
+	<% end %>
+<%= link_to events_path do %>
+	<div class="menu-item">
+		<h3 class="page-name">Events</h3>
+	</div>
+<% end %>
+<%= link_to device_healths_path do %>
+	<div class="menu-item">
+		<h3 class="page-name">Devices Health</h3>
+	</div>
+<% end %>
+<%= link_to medias_path do %>
+	<div class="menu-item">
+		<h3 class="page-name">Photo Stream</h3>
+	</div>
+<% end %>
+</div>

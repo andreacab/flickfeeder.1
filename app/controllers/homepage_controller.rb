@@ -1,33 +1,7 @@
-require 'dropbox_sdk'
-require 'users/dropbox_helper'
-
-IMAGE_MIME_TYPE = 'image/jpeg'
-
 class HomepageController < ApplicationController
-    include Users::DropboxHelper
 
 	def index
-        @dropbox_thumbnails = []
-        if(hasDropboxAccount?(current_user))
-            @dropbox_thumbnails = get_dropbox_thumbnails
-        end
+        @events = Event.where(organization_id: current_user.organization_id)
 	end
-
-    private
-    
-    def get_dropbox_thumbnails
-        links = []
-        res = list_folder({ path: "", recursive: true, include_media_info: true }, current_user.dropbox_access_token)
-        items = JSON.parse(res.body)['entries']
-
-        items.each do |item|
-            if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
-                res = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
-                links.push(JSON.parse(res.body))
-            end
-        end
-
-        return links
-    end
 
 end
