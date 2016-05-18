@@ -1,5 +1,9 @@
-.sidebar {
+@import "sidebar/avatar";
 
+$sidebar-overlay: rgba(249, 247, 239, 0.03);
+$sidebar-font-color: rgba(249, 247, 239, 0.82);
+
+.sidebar {
 	height: 100%;
 	width: 250px;
 	background-image: url('stardust.png');
@@ -16,18 +20,13 @@
 	a {
 		text-decoration: none;
 	}
-	.avatar {
-		height:168px;
-		width: 100%;
-		border-bottom: 1px rgba(211, 211, 211, 0.1) solid;
-		border-top: 1px rgba(211, 211, 211, 0.1) solid;
-	}
+
 	.menu-item {
 		height:60px;
 		width: 100%;
 		border-bottom: 1px rgba(211, 211, 211, 0.1) solid;
 		cursor: pointer;
-		background-color: rgba(249, 247, 239, 0.03);
+		background-color: $sidebar-overlay;
 
 		&:hover {
 			background-color:  rgba(211, 211, 211, 0.1);
@@ -38,7 +37,7 @@
 			top: 18px;
 			position: relative;
 			margin:0;
-			color:rgba(249, 247, 239, 0.82);
+			color:$sidebar-font-color;
 			text-align: center;
 		}
 	}

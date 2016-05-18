@@ -8,16 +8,17 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
 <meta name="viewport" content="width=device-width, initial-scale=1"/></head>
 <body>
+
+<%= render partial: "elements/sidebar" %>
+<div class="main-container">
 <%= render partial: "elements/navbar" %>
 
-<div class="main-container">
-	<%= render partial: "elements/sidebar" %>
 	<div class="main-area">
 		<%= bootstrap_flash %>
 		<%= yield %>
 	</div>
 
 </div>
-	
+
 </body>
 </html>
