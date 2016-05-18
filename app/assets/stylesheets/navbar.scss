@@ -1,5 +1,8 @@
+$sidebar-font-color: rgba(249, 247, 239, 0.82);
+
 .navbar {
 	position: fixed;
+	z-index: 9999;
 	width: calc(100% - 250px);
 	background-image: url('photography.png');
 	background-color: #F9F7EF;
@@ -8,9 +11,33 @@
 	border:0;
 	border-bottom: 1px rgba(68, 67, 73, 0.23) solid;
 	margin:0;
+
 	.dropdown-toggle {
 		/*color:white !important;*/
 		height: 60px;
 		padding-top: 20px;
+	}
+
+	.dropdown-menu {
+		padding:0;
+		width: 200px;
+		background-image: url('stardust.png');
+
+		.divider {
+			margin: 0;
+			background-color: rgba(249, 247, 239, 0.18);
+		}
+
+		li {
+			a	{
+				padding: 16px 19px;
+				color: $sidebar-font-color;
+				font-weight: 100;
+				&:hover {
+					background-color: rgba(249, 247, 239, 0.11) !important;
+				}
+			}
+		}
+
 	}
 }

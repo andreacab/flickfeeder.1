@@ -1,14 +1,52 @@
+
+
 .dashboard-container {
+  background-color: rgba(168, 121, 116, 0.09);
+  padding-top:5px;
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
+  padding-right:10px;
   height: 100%;
 
   .dashboard-card {
-    height:30rem;
-    width: 100%;
-    border-bottom: 1px solid lightgrey;
-  }
+      width: 100%;
+      display: flex;
+      margin-left:5px;
+      // flex-wrap: wrap;
+      flex-shrink: 0;
 
+    .card {
+      text-align: center;
+      margin: 5px 5px;
+      height:29rem;
+      background-color:white;
+      -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+      -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+      box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+      transition: all 0.12s;
+       &:hover {
+        transform: scale(1.02);
+      }
+    }
+
+    .big-card {
+      min-width:110rem;
+      width: 100%;
+    }
+
+    .medium-card {
+      min-width: 46rem;
+      width: calc(100%  /3);
+
+    }
+
+    .small-card {
+     min-width: 29rem;
+    width: calc(100%  /5);
+    }
+  }
 }
+
+
