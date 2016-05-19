@@ -14,13 +14,15 @@
       width: 100%;
       display: flex;
       margin-left:5px;
+      min-height: 20rem;
       // flex-wrap: wrap;
       flex-shrink: 0;
+      height: calc(100% /3);
+
 
     .card {
       text-align: center;
       margin: 5px 5px;
-      height:29rem;
       background-color:white;
       -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
       -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
@@ -32,19 +34,19 @@
     }
 
     .big-card {
-      min-width:110rem;
+      min-width:80rem;
       width: 100%;
     }
 
     .medium-card {
       min-width: 46rem;
-      width: calc(100%  /3);
+      width: calc(100%  /2);
 
     }
 
     .small-card {
-     min-width: 29rem;
-    width: calc(100%  /5);
+     min-width: 26rem;
+    width: calc(100%  /4);
     }
   }
 }
