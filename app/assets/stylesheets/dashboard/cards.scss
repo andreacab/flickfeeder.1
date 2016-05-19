@@ -1,0 +1,59 @@
+.dashboard-card {
+  width: 100%;
+  display: flex;
+  margin-left:5px;
+  min-height: 20rem;
+  // flex-wrap: wrap;
+  flex-shrink: 0;
+  height: calc(100% /3);
+.card {
+  text-align: center;
+  margin: 5px 5px;
+  background-color:white;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  transition: all 0.12s;
+  overflow: scroll;
+    &:hover {
+      transform: scale(1.005);
+    }
+
+    .card-title {
+      background-image: url('stardust.png');
+      // color:rgba(249, 247, 239,1);
+      // background-color:#CCFACF;
+      border-bottom: 1px #F6AFA8 solid;
+      height: 4.4rem;
+      padding-top: 10px;
+      h1,h2,h3,h4 {
+        color: #F9F7EF;
+        font-weight: 100;
+        margin:0;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .big-card {
+    min-width:80rem;
+    width: 100%;
+    // min-height: 20rem;
+  }
+  .medium-card {
+    min-width: 46rem;
+    // min-height: 20rem;
+    width: calc(100%  /2);
+  }
+  .small-card {
+   min-width: 26rem;
+  width: calc(100%  /4);
+  }
+}
+
+.medium-container {
+  height:calc((99% * 2)/3);
+  .medium-height {
+    height: 100%;
+  }
+}

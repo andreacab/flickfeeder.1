@@ -10,9 +10,9 @@
 <body>
 
 <%= render partial: "elements/sidebar" %>
-<div class="<%= params[:controller] == 'users/sessions' ? 'login-screen' : '' %> main-container">
+<div class="<%= params[:controller] == 'users/sessions' ? 'login-screen' : '' %> main-container <%= controller_name %> <%= action_name %>">
   <%= render partial: "elements/navbar" %>
-	<div class="<%= params[:controller] == 'users/sessions' ? 'full-screen' : '' %> main-area">
+	<div class="<%= params[:controller] == 'users/sessions' ? 'full-screen' : '' %><%= params[:controller] == 'events' && params[:action] == 'new' ? 'background-image' : '' %> main-area">
     <%= render partial: "elements/loader" %>
 		<%= bootstrap_flash %>
 		<%= yield %>

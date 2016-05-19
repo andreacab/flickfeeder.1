@@ -2,23 +2,37 @@
   <!-- <h1>Dashboard</h1> -->
   <div class="dashboard-card">
     <div class="card big-card">
-      <h2>Large card</h2>
-      <h1>Welcome to your Dashboard</h1>
+      <div class="card-title">
+        <h2>Dashboard</h2>
+      </div>
     </div>
   </div>
-  <div class="dashboard-card">
+<!--   <div class="dashboard-card">
     <% 4.times do |index|%>
       <div class="card small-card">
         <h2>Small card</h2>
       </div>
     <% end %>
-  </div>
-  <div class="dashboard-card medium-container">
-    <% 2.times do |index|%>
-      <div class="card medium-card">
-        <h2>Medium card </h2>
+  </div> -->
+  <div class="dashboard-card medium-container ">
+      <div class="card medium-card ">
+        <div class="card-title">
+          <h2>Upcoming events</h2>
+        </div>
+          <% @events.each do |event| %>
+            <%= link_to event_path(event) do%>
+              <div class="upcoming-event">
+                    <div class="event-name"><h3><%= event.name %></h3> </div>
+                    <div class="event-date"><h3><%= event.start_date.to_date.strftime("%B %d, %Y") %></h3></div>
+              </div>
+            <% end %>
+          <% end %>
       </div>
-    <% end %>
+      <div class="card medium-card">
+        <div class="card-title">
+          <h2>Statistics</h2>
+        </div>
+      </div>
   </div>
 </div>
 

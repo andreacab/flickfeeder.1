@@ -4,7 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   private
-  
+
+  def required_user_to_have_organization
+
+    if user_signed_in? && current_user.organization == nil
+      binding.pry
+    end
+
+  end
   #-> Prelang (user_login:devise)
   def require_user_signed_in
     unless user_signed_in?

@@ -1,28 +1,30 @@
-<%= form_for @event, :html => { :class => 'form-horizontal form-model' } do |f| %>
-  <div class="form-group">
-    <%= f.label :name, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :name, :class => 'text-field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :start_date, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.datetime_select :start_date, :class => 'text-field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :end_date, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.datetime_select :end_date, :class => 'text-field form-control' %>
-    </div>
-  </div>
+<%= form_for @event, :html => { :class => 'event-form' } do |f| %>
+  <div class="name-container event-box">
 
-  <div class="form-group">
-    <div class='col-md-offset-2 col-md-10'>
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  events_path, :class => 'btn btn-default' %>
+    <div class="">
+      <%= f.text_field :name, :placeholder => "Event name", :class => '' %>
+    </div>
+  </div>
+  <div class="event-dates">
+    <div class="start-date-container event-box">
+      <%= f.label :start_date, :class => ' ' %>
+      <div class="">
+        <%= f.datetime_select :start_date,start_year: DateTime.now.year, :class => '' %>
+      </div>
+    </div>
+    <div class="end-date-container event-box">
+      <%= f.label :end_date, :class => ' ' %>
+      <div class="">
+        <%= f.datetime_select :end_date, :class => '' %>
+      </div>
+    </div>
+
+    <div class="create-event-buttons event-box">
+      <div class=''>
+        <%= f.submit nil, :class => 'btn create-event-button' %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    events_path, :class => 'btn btn-default hide' %>
+      </div>
     </div>
   </div>
 <% end %>
