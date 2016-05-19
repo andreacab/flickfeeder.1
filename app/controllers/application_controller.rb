@@ -6,9 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def required_user_to_have_organization
-
     if user_signed_in? && current_user.organization == nil
-      binding.pry
     end
 
   end
