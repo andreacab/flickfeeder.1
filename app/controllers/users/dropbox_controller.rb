@@ -30,7 +30,7 @@ class Users::DropboxController < ApplicationController
 
     def webhook
         puts "************ Recieved webhook notification *************"
-        puts params
+        puts params.inspect
         render nothing: true
     end
 end
