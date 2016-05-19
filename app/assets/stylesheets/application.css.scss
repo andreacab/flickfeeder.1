@@ -77,8 +77,20 @@ h1,h2,h3,h4,h5 {
 		width: 100%;
 		height: calc(100% - 62px);
 	}
+}
 
-
+.alert.alert-danger {
+	position: absolute;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	max-width: 360px;
+	width: 100%;
+	text-align: center;
+	border: 1px #B8B8B8 solid;
+	background-color: #EFA3A3;
+	color: white;
+	font-size: 16px;
 }
 
 .login-screen {
@@ -86,6 +98,7 @@ h1,h2,h3,h4,h5 {
   left: 0;
   top: 0;
   width: 100%;
+  background-image: url("congruent_pentagon.png")
 }
 
 

@@ -11,10 +11,8 @@
 
 <%= render partial: "elements/sidebar" %>
 <div class="<%= params[:controller] == 'users/sessions' ? 'login-screen' : '' %> main-container">
-<%= render partial: "elements/navbar" %>
-
-
-	<div class="main-area">
+  <%= render partial: "elements/navbar" %>
+	<div class="<%= params[:controller] == 'users/sessions' ? 'full-screen' : '' %> main-area">
     <%= render partial: "elements/loader" %>
 		<%= bootstrap_flash %>
 		<%= yield %>

@@ -1,6 +1,6 @@
 <div class="login-container">
   <div class="page-header">
-    <h1><%=t ".title", default: "Login" %></h1>
+    <%= image_tag("logo.png", width: "100%") %>
   </div>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-horizontal form-user"}) do |f| %>
@@ -8,7 +8,7 @@
 
     <div class="email-container">
       <%= f.label :email, class: "" %>
-      <div class="">
+      <div class="input-field">
         <%= f.email_field :email, class: "text-field form-control", html: {spellcheck: "false"} %>
       </div>
     </div>
@@ -16,31 +16,33 @@
 
     <div class="password-container">
       <%= f.label :password, class: "" %>
-      <div class="">
+      <div class="input-field">
         <%= f.password_field :password, class: "text-field form-control", html: {autocomplete: "off"} %>
       </div>
     </div>
 
     <% if devise_mapping.rememberable? -%>
       <div class="remember-me">
-        <%= f.label :remember_me, "Remember Me", class: "" %>
         <div class="checkbox">
           <%= f.check_box :remember_me %>
         </div>
+        <%= f.label :remember_me, "Remember Me", class: "label-r" %>
       </div>
     <% end -%>
 
     <div class="">
       <div class=" ">
-        <%= f.submit "Login", class: "btn btn-primary" %>
+        <%= f.submit "Login", class: "btn" %>
       </div>
     </div>
 
-    <div class="">
-      <div class=" ">
-        <%= render "devise/shared/links" %>
-      </div>
-    </div>
+
 
   <% end %>
+</div>
+
+<div class="sign-up-links">
+  <div class=" ">
+    <%= render "devise/shared/links" %>
+  </div>
 </div>
