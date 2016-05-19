@@ -128,10 +128,13 @@ ActiveRecord::Schema.define(version: 20160517003208) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "avatar_url"
+    t.string   "first_name"
+    t.string   "last_name"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "user_type"
-    t.integer  "organization_id"
+    t.integer  "organization_id",        default: 1
     t.string   "phone"
     t.string   "dropbox_access_token"
     t.string   "dropbox_user_id"
