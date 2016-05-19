@@ -24,6 +24,9 @@
 @import "navbar";
 
 @import "dashboard";
+
+@import "dashboard/dashboardmediaqueries";
+
 //->Prelang (ui_framework:twitter_bootstrap)
 
 // Give everything in 'yield' margin to separate it.
@@ -50,6 +53,7 @@ body,html {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	font-color: #515151;
 	// justify-content: flex-end;
 	// align-items: flex-end;
 }
@@ -66,7 +70,6 @@ h1,h2,h3,h4,h5 {
 	.main-area {
 		position: relative;
 		overflow: scroll;
-
 		top: 60px;
 		padding: 20px 40px;
 		width: 100%;
