@@ -19,3 +19,17 @@
 //= require react_ujs
 //= require components
 //= require_tree .
+
+
+
+var ready;
+ready = function() {
+  $('.menu-item').on('click', function() {
+    $('.box-wrapper').fadeIn(200);
+  });
+  $('.box-wrapper').fadeOut(100);
+
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

@@ -1,0 +1,21 @@
+.login-container {
+  width: 36rem;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 20px 40px;
+  border-radius: 5px;
+  text-align: center;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  .email-container, .password-container, .remember-me {
+    text-align: left;
+  }
+  .remember-me {
+    .checkbox {
+      display: inline;
+    }
+  }
+}
