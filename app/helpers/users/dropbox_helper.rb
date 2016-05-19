@@ -23,6 +23,22 @@ module Users::DropboxHelper
         )
     end
 
+    def hasDropboxAccount?(user)
+        !!user.dropbox_access_token
+    end
+
+    def is_valid_webhook(data, hmac_header)
+        digest = OpenSSL::Digest::SHA256.new
+        if Rails.env.production?
+            calculated_hmac = OpenSSL::HMAC.hexdigest(digest, DROPBOX_SECRET, data).strip
+        else
+            calculated_hmac = OpenSSL::HMAC.hexdigest(digest, DROPBOX_SECRET_DEV, data).strip
+        end
+        calculated_hmac == hmac_header
+    end
+
+    private 
+    
     def post_req(address, data, headers)
         uri = URI(address)
         req = Net::HTTP::Post.new(uri)
@@ -32,9 +48,5 @@ module Users::DropboxHelper
         res = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
           http.request(req)
         end
-    end
-
-    def hasDropboxAccount?(user)
-        !!user.dropbox_access_token
     end
 end

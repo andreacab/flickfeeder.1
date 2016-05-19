@@ -2,6 +2,7 @@ require 'dropbox_sdk'
 
 class Users::DropboxController < ApplicationController
     skip_before_filter :verify_authenticity_token, :only => [:webhook]
+    include Users::DropboxHelper
 
     def enable
         if Rails.env.production?
@@ -18,7 +19,6 @@ class Users::DropboxController < ApplicationController
 
     def redirect
         access_token, user_id = @@flow.finish(params)
-        client = DropboxClient.new(access_token)
         current_user.update(dropbox_access_token: access_token, dropbox_user_id: user_id)
         flash[:notice] = "Successfully connected to Dropbox"
         redirect_to edit_user_registration_path
@@ -29,8 +29,16 @@ class Users::DropboxController < ApplicationController
     end
 
     def webhook
-        puts "************ Recieved webhook notification *************"
+        dropbox_signature = request.headers['X-Dropbox-Signature']
+        if !is_valid_webhook(request.body.read, dropbox_signature)
+            return render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
+        end
         puts params.inspect
+        binding.pry
+        params['dropbox']['list_folder']['accounts'].each do |account| 
+            
+        end
+        binding.pry
         render nothing: true
     end
 end
