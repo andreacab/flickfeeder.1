@@ -15,9 +15,11 @@ class MediasController < ApplicationController
     def get_dropbox_thumbnails
         thumbs = []
         res = list_folder({ path: "", recursive: true, include_media_info: true }, current_user.dropbox_access_token)
-        items = JSON.parse(res.body)['entries']
+        entries = JSON.parse(res.body)['entries']
+        current_user.dropbox_cursor = JSON.parse(res.body)['cursor']
+        current_user.save!
 
-        items.each do |item|
+        entries.each do |item|
             if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
                 res = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
                 thumbs.push(JSON.parse(res.body))
@@ -26,4 +28,4 @@ class MediasController < ApplicationController
         return thumbs
     end
 
-end	
+end

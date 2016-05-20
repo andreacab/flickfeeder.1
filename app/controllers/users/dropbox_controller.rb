@@ -33,12 +33,17 @@ class Users::DropboxController < ApplicationController
         if !is_valid_webhook(request.body.read, dropbox_signature)
             return render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
         end
+
         puts params.inspect
         binding.pry
-        params['dropbox']['list_folder']['accounts'].each do |account| 
-            
+        if params['dropbox'] && params['dropbox']['delta']
+            params['dropbox']['delta']['users'].each do |user_id| 
+                Thread.new do
+                    puts "a user's dropbox folder has changed!"
+                end
+            end
         end
-        binding.pry
+
         render nothing: true
     end
 end
