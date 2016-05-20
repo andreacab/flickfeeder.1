@@ -28,4 +28,8 @@ class MediasController < ApplicationController
         return thumbs
     end
 
+    def stream
+        binding.pry
+    end
+
 end

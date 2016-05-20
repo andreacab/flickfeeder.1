@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'dropbox/disable' => 'users/dropbox#disable'
   post 'dropbox/webhook' => 'users/dropbox#webhook'
 
+  get 'medias/stream' => 'medias#stream'
   # cloudinary routes
 
   # Example of regular route:
