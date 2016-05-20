@@ -206,6 +206,8 @@ GEM
       activemodel
     warden (1.2.6)
       rack (>= 1.0)
+    websocket (1.2.3)
+    websocket-native (1.0.0)
 
 PLATFORMS
   ruby
@@ -235,3 +237,5 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   validates_formatting_of
+  websocket
+  websocket-native

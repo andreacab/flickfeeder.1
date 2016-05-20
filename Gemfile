@@ -53,6 +53,9 @@ gem 'dropbox-sdk'
 gem 'carrierwave'
 gem 'cloudinary'
 
+gem 'websocket-native'
+gem 'websocket'
+
 group :development do
   gem 'pry-rails'
 end
