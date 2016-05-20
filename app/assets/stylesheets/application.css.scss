@@ -31,6 +31,11 @@
 
 @import "events/new";
 
+@import "bootstrap3-switch";
+
+@import "font-awesome";
+
+
 
 
 //->Prelang (ui_framework:twitter_bootstrap)
@@ -105,5 +110,11 @@ h1,h2,h3,h4,h5 {
   background-image: url("congruent_pentagon.png")
 }
 
-
+.homepage.index {
+	.main-area {
+		background: #114357; /* fallback for old browsers */
+		background: -webkit-linear-gradient(to left, #114357 , #F29492); /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to left, #114357 , #F29492); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	}
+}
 

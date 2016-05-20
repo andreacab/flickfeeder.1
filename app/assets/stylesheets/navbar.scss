@@ -12,6 +12,24 @@ $sidebar-font-color: rgba(249, 247, 239, 0.82);
 	border-bottom: 1px rgba(68, 67, 73, 0.23) solid;
 	margin:0;
 
+	.admin-tools {
+		position:absolute;
+		p {
+			position: relative;
+	    top: 20px;
+	    left: 55px;
+		}
+		.nav-cog {
+			position: absolute;
+			top: 16px;
+			left: 18px;
+			color: grey;
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+
 	.dropdown-toggle {
 		/*color:white !important;*/
 		height: 60px;

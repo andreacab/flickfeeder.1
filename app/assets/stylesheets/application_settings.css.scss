@@ -1,0 +1,18 @@
+.app-setting-container {
+  width: 280px;
+  margin: 0 30px;
+  padding-right:30px;
+  padding-top: 30px;
+  height: 100%;
+  border-right: 1px lightgrey solid;
+  text-align: center;
+  h2 {
+    margin-bottom: 10px;
+  }
+  .feature-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+  }
+}

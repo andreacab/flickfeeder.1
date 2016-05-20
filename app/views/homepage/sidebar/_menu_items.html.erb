@@ -1,0 +1,37 @@
+<div class="menu-items-container">
+  <% if @features_on_hold["dashboard"] %>
+    <%= link_to root_path do %>
+      <div class="menu-item">
+        <h3 class="page-name">Dashboard</h3>
+      </div>
+    <% end %>
+  <% end %>
+  <% if @features_on_hold["events"] %>
+    <%= link_to events_path do %>
+      <div class="menu-item">
+        <h3 class="page-name">Events</h3>
+      </div>
+    <% end %>
+  <% end %>
+    <% if @features_on_hold["devices_health"] %>
+    <%= link_to device_healths_path do %>
+      <div class="menu-item">
+        <h3 class="page-name">Devices Health</h3>
+      </div>
+    <% end %>
+  <% end %>
+    <% if @features_on_hold["photo_stream"] %>
+    <%= link_to medias_path do %>
+      <div class="menu-item">
+        <h3 class="page-name">Photo Stream</h3>
+      </div>
+    <% end %>
+  <% end %>
+    <% if @features_on_hold["team"] %>
+      <%= link_to teammates_path do %>
+        <div class="menu-item">
+          <h3 class="page-name">Team</h3>
+        </div>
+      <% end %>
+  <% end %>
+</div>

@@ -4,6 +4,8 @@ $sidebar-overlay: rgba(249, 247, 239, 0.03);
 $sidebar-font-color: rgba(249, 247, 239, 0.82);
 
 .sidebar {
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 	width: 250px;
 	background-image: url('stardust.png');
@@ -27,7 +29,9 @@ $sidebar-font-color: rgba(249, 247, 239, 0.82);
 		border-bottom: 1px rgba(211, 211, 211, 0.1) solid;
 		cursor: pointer;
 		background-color: $sidebar-overlay;
-
+		&:active, &:focus {
+			background-color: rgba(211, 211, 211, 0.4) !important;
+		}
 		&:hover {
 			background-color:  rgba(211, 211, 211, 0.1);
 		}
@@ -40,5 +44,30 @@ $sidebar-font-color: rgba(249, 247, 239, 0.82);
 			color:$sidebar-font-color;
 			text-align: center;
 		}
+	}
+	.sidebar-footer-container {
+		display: flex;
+		justify-content: column;
+		align-items: flex-end;
+		height: 100%;
+		.sidebar-footer{
+			height: 80px;
+			width: 100%;
+			border-top: 1px rgba(211, 211, 211, 0.1) solid;
+			background-color: rgba(249, 247, 239, 0.03);
+			display:flex;
+			.setting {
+				width: calc(100% / 3);
+				height: 100%;
+				&:hover {
+					background-color:  rgba(211, 211, 211, 0.1);
+				}
+
+			}
+			.setting:not(:first-child){
+				border-left: 1px rgba(211, 211, 211, 0.1) solid;
+			}
+		}
+
 	}
 }

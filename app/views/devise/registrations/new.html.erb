@@ -5,33 +5,55 @@
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-horizontal form-user"}) do |f| %>
     <%= devise_error_messages! %>
+    <div class="basic-information">
+      <div class="email-container">
+        <%= f.label :email, class: "" %>
+        <div class="input-field">
+          <%= f.email_field :email, class: "text-field form-control", html: {spellcheck: "false"},:required => true %>
+        </div>
+      </div>
 
+      <div class="password-container">
+        <%= f.label :password, class: "" %>
+        <div class="input-field">
+          <%= f.password_field :password, class: "text-field form-control", html: {autocomplete: "off"},:required => true %>
+        </div>
+      </div>
 
-
-    <div class="email-container">
-      <%= f.label :email, class: "" %>
-      <div class="input-field">
-        <%= f.email_field :email, class: "text-field form-control", html: {spellcheck: "false"} %>
+      <div class="password-container">
+        <%= f.label :password_confirmation, "Password Confirmation", class: "" %>
+        <div class="input-field">
+          <%= f.password_field :password_confirmation, class: "text-field form-control", html: {autocomplete: "off"},:required => true %>
+        </div>
       </div>
     </div>
 
-    <div class="password-container">
-      <%= f.label :password, class: "" %>
-      <div class="input-field">
-        <%= f.password_field :password, class: "text-field form-control", html: {autocomplete: "off"} %>
+    <div class="extra-information">
+      <div class="password-container">
+        <%= f.label :first_name, class: "" %>
+        <div class="input-field">
+          <%= f.text_field :first_name, class: "text-field form-control", html: {autocomplete: "off"},:required => true %>
+        </div>
       </div>
-    </div>
-
-    <div class="password-container">
-      <%= f.label :password_confirmation, "Password Confirmation", class: "" %>
-      <div class="input-field">
-        <%= f.password_field :password_confirmation, class: "text-field form-control", html: {autocomplete: "off"} %>
+      <div class="password-container">
+        <%= f.label :last_name, class: "" %>
+        <div class="input-field">
+          <%= f.text_field :last_name, class: "text-field form-control", html: {autocomplete: "off"},:required => true %>
+        </div>
+      </div>
+      <div class="password-container">
+        <%= f.label :organization, class: "" %>
+        <div class="input-field">
+          <% if @organizations %>
+            <%= select_tag "organizations", options_from_collection_for_select(@organizations, "id", "name") %>
+          <% end %>
+        </div>
       </div>
     </div>
 
     <div class="">
       <div class="">
-        <%= f.submit "Sign Up", class: "btn sign-up-button" %>
+        <%= f.submit "Next", class: "btn sign-up-button", disabled: true %>
       </div>
     </div>
 

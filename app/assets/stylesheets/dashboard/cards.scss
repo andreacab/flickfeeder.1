@@ -10,29 +10,48 @@
   text-align: center;
   margin: 5px 5px;
   background-color:white;
+  overflow-y: hidden;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
   transition: all 0.12s;
-  overflow: scroll;
+  border-radius: 5px;
     &:hover {
       transform: scale(1.005);
     }
-
-    .card-title {
-      background-image: url('stardust.png');
-      // color:rgba(249, 247, 239,1);
-      // background-color:#CCFACF;
-      border-bottom: 1px #F6AFA8 solid;
-      height: 4.4rem;
-      padding-top: 10px;
-      h1,h2,h3,h4 {
-        color: #F9F7EF;
-        font-weight: 100;
-        margin:0;
-        font-size: 20px;
-      }
+    .card-content {
+      overflow-y: hidden;
     }
+  .no-teammates {
+    position: relative;
+    top:50%;
+  }
+
+  .card-title {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7efef+0,ffffff+27,ffffff+65,f7efef+100 */
+    background: rgb(247,239,239); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(247,239,239,1) 0%, rgba(255,255,255,1) 27%, rgba(255,255,255,1) 65%, rgba(247,239,239,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(247,239,239,1) 0%,rgba(255,255,255,1) 27%,rgba(255,255,255,1) 65%,rgba(247,239,239,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(247,239,239,1) 0%,rgba(255,255,255,1) 27%,rgba(255,255,255,1) 65%,rgba(247,239,239,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7efef', endColorstr='#f7efef',GradientType=0 ); /* IE6-9 */
+
+
+    // background-image: url('stardust.png');
+    // color:rgba(249, 247, 239,1);
+    // background-color:#CCFACF;
+    border-bottom:1px rgba(162, 162, 162, 0.32) solid;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 6rem;
+    padding-top: 19px;
+    h1,h2,h3,h4 {
+      letter-spacing: 3px;
+      color: #656565;
+      font-weight: 300;
+      margin:0;
+      font-size: 20px;
+    }
+  }
   }
 
   .big-card {

@@ -53,6 +53,9 @@ gem 'dropbox-sdk'
 gem 'carrierwave'
 gem 'cloudinary'
 
+gem "bootstrap-switch-rails"
+gem "font-awesome-rails"
+
 group :development do
   gem 'pry-rails'
 end

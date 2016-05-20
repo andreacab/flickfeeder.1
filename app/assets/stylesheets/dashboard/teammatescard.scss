@@ -1,0 +1,37 @@
+.teammate {
+    overflow-x: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    height: 110px;
+    border-bottom: 1px rgba(211, 211, 211, 0.59) solid;
+    .teammate-email {
+      height: 100%;
+      width: 100%;
+      min-width: 178px;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(149, 152, 158, 0.11);
+      }
+      .email {
+        letter-spacing: 2px;
+        top: 50%;
+        position: relative;
+        transform: translateY(-50%);
+      }
+    }
+    .teammate-avatar-container {
+      display: flex;
+      align-items: center;
+      width: 100px;
+      height: 100px;
+
+      .teammate-avatar, .placeholder-avatar {
+        margin-right:20px;
+        width: 80px;
+        height: 80px;
+        border: 1px rgb(251, 175, 169) solid;
+        border-radius: 50%;
+      }
+    }
+  }

@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517003208) do
+ActiveRecord::Schema.define(version: 20160520184622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "application_settings", force: true do |t|
+    t.boolean  "dashboard",      default: true
+    t.boolean  "events",         default: true
+    t.boolean  "devices_health", default: true
+    t.boolean  "photo_stream",   default: true
+    t.boolean  "team",           default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require bootstrap-switch
 
 //= require react
 //= require react_ujs
@@ -24,10 +25,33 @@
 
 var ready;
 ready = function() {
+
+  // LOADER
   $('.menu-item').on('click', function() {
     $('.box-wrapper').fadeIn(200);
   });
   $('.box-wrapper').fadeOut(100);
+
+  // COG | NAVBAR
+  $('.nav-cog, #admin-tools').on('click', function(){
+    $('.nav-cog').addClass('fa-spin');
+  });
+
+  // SIGNUP LOGIC
+  $('input').on('change keyup', function() {
+    if ($('#user_email').val().length > 0 && $('#user_password').val().length > 0 && $('#user_password_confirmation').val().length > 0 ){
+      $('.sign-up-button').prop('disabled', false);
+    } else {
+      $('.sign-up-button').prop('disabled', true);
+    }
+  });
+
+  $('.sign-up-button').on('click', function(){
+     $('.basic-information').fadeOut(0);
+     $('.extra-information').fadeIn(0);
+     $('.sign-up-button').val("Sign up");
+  });
+
 
 };
 

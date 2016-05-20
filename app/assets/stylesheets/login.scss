@@ -7,6 +7,9 @@
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  .extra-information {
+    display: none;
+  }
   .email-container, .password-container, .remember-me {
     color:#F9F7EF;
     font-size: 16px;
