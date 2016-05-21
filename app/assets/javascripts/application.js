@@ -52,7 +52,6 @@ ready = function() {
      $('.sign-up-button').val("Sign up");
   });
 
-
 };
 
 $(document).ready(ready);

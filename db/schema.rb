@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20160520184622) do
     t.boolean  "devices_health", default: true
     t.boolean  "photo_stream",   default: true
     t.boolean  "team",           default: true
+    t.boolean  "image_design",   default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -78,6 +79,9 @@ ActiveRecord::Schema.define(version: 20160520184622) do
 
   create_table "f_fdevices", force: true do |t|
     t.string   "name"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.boolean  "is_active",       default: false
     t.integer  "organization_id"
     t.integer  "user_id"
     t.datetime "created_at"

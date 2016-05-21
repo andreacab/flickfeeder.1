@@ -11,7 +11,7 @@ class ApplicationSettingsController < ApplicationController
   private
 
   def application_settings_params
-    params.permit(:devices_health, :dashboard, :photo_stream, :team, :events)
+    params.permit(:devices_health, :dashboard, :photo_stream, :team, :events, :image_design)
   end
 
 end

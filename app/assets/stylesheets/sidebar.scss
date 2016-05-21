@@ -8,7 +8,6 @@ $sidebar-font-color: rgba(249, 247, 239, 0.82);
 	flex-direction: column;
 	height: 100%;
 	width: 250px;
-	background-image: url('stardust.png');
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -24,6 +23,8 @@ $sidebar-font-color: rgba(249, 247, 239, 0.82);
 	}
 
 	.menu-item {
+		display: flex;
+		align-items:center;
 		height:60px;
 		width: 100%;
 		border-bottom: 1px rgba(211, 211, 211, 0.1) solid;
@@ -35,14 +36,22 @@ $sidebar-font-color: rgba(249, 247, 239, 0.82);
 		&:hover {
 			background-color:  rgba(211, 211, 211, 0.1);
 		}
-
-		.page-name {
-			font-size: 20px;
-			top: 18px;
+		.menu-icon {
+			width:30%;
+			display: flex;
+			justify-content: center;
+			font-size: 19px;
+			color: #F9F7EF;
+			margin-right: 5px;
 			position: relative;
+			left: 10px;
+		}
+		.page-name {
+			font-size: 18px;
 			margin:0;
 			color:$sidebar-font-color;
-			text-align: center;
+
+
 		}
 	}
 	.sidebar-footer-container {
@@ -70,4 +79,14 @@ $sidebar-font-color: rgba(249, 247, 239, 0.82);
 		}
 
 	}
+}
+
+.blue-design {
+	background-color: #1F83C6;
+}
+.image-design {
+	background-image: url('stardust.png');
+}
+.dark-design {
+	background-color:#363B3E;
 }

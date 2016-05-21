@@ -2,8 +2,13 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_filter :features_on_hold
+  before_filter :features_on_hold, :current_design
   private
+
+  def current_design
+    image_design = ApplicationSettings.last.image_design
+    image_design ? @current_design = "image-design" : @current_design = "blue-design"
+  end
 
   def features_on_hold
     if ApplicationSettings.all == []

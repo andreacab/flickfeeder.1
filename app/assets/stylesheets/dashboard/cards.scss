@@ -1,3 +1,5 @@
+@import 'general/variables';
+
 .dashboard-card {
   width: 100%;
   display: flex;
@@ -15,12 +17,22 @@
   -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
   transition: all 0.12s;
-  border-radius: 5px;
-    &:hover {
-      transform: scale(1.005);
-    }
+  border-radius: 14px;
+    // &:hover {
+    //   transform: scale(1.005);
+    // }
     .card-content {
       overflow-y: hidden;
+      height: 350px;
+      min-height: 350px;
+      .no-data{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        letter-spacing: 1.3px;
+        color: #696969;
+      }
     }
   .no-teammates {
     position: relative;
@@ -28,31 +40,40 @@
   }
 
   .card-title {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f7efef+0,ffffff+27,ffffff+65,f7efef+100 */
-    background: rgb(247,239,239); /* Old browsers */
-    background: -moz-linear-gradient(top,  rgba(247,239,239,1) 0%, rgba(255,255,255,1) 27%, rgba(255,255,255,1) 65%, rgba(247,239,239,1) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  rgba(247,239,239,1) 0%,rgba(255,255,255,1) 27%,rgba(255,255,255,1) 65%,rgba(247,239,239,1) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom,  rgba(247,239,239,1) 0%,rgba(255,255,255,1) 27%,rgba(255,255,255,1) 65%,rgba(247,239,239,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7efef', endColorstr='#f7efef',GradientType=0 ); /* IE6-9 */
-
-
-    // background-image: url('stardust.png');
-    // color:rgba(249, 247, 239,1);
-    // background-color:#CCFACF;
-    border-bottom:1px rgba(162, 162, 162, 0.32) solid;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: $card-border-bottom;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     height: 6rem;
-    padding-top: 19px;
+    padding-top: 23px;
+    padding-left: 23px;
+    text-align: left;
     h1,h2,h3,h4 {
       letter-spacing: 3px;
       color: #656565;
       font-weight: 300;
       margin:0;
-      font-size: 20px;
+      font-size: 1.5rem;
+    }
+    .three-dots {
+      font-size: 50px;
+      color: #B4BCBE;
+      font-style: normal;
+      line-height: 0px;
+      margin: 0;
+      position: relative;
+      top: -6px;
+      right: 20px;
+      a {
+        color: #6BA4D5;
+        &:hover {
+          color: #428bca;
+        }
+      }
     }
   }
-  }
+}
 
   .big-card {
     min-width:80rem;

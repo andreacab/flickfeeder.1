@@ -1,0 +1,31 @@
+
+// PAGE | BACKGROUND
+$bg-dashboard: url("");
+$bg-events: url("congruent_pentagon.png");
+$bg-device-health: url("");
+$bg-photo-stream: url("");
+$bg-team: url("");
+
+.homepage.index {
+  .main-area {
+    background: #114357; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #114357 , #F29492); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #5C7B88, #D2D2D2);; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+}
+
+.events.new {
+  .main-area {
+    background: #114357; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #114357 , #F29492); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #5C7B88, #D2D2D2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+}
+
+// .login-screen.main-container {
+//   .main-area {
+//      background: #114357; /* fallback for old browsers */
+//     background: -webkit-linear-gradient(to left, #114357 , #F29492); /* Chrome 10-25, Safari 5.1-6 */
+//     background: linear-gradient(to left, #5C7B88, #D2D2D2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//   }
+// }

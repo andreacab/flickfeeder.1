@@ -1,56 +1,15 @@
 <div class="dashboard-container">
-  <!-- <h1>Dashboard</h1> -->
   <div class="dashboard-card">
-    <div class="card big-card">
-      <div class="card-title">
-        <h2>Dashboard</h2>
-      </div>
-    </div>
+    <%= render 'events/partials/card', attributes: {size: "big-card", title_text: "DASHBOARD"} %>
   </div>
-<!--   <div class="dashboard-card">
-    <% 4.times do |index|%>
-      <div class="card small-card">
-        <h2>Small card</h2>
-      </div>
-    <% end %>
-  </div> -->
-  <div class="dashboard-card medium-container ">
+  <div class="dashboard-card medium-container">
     <% if @features_on_hold["events"] %>
-      <div class="card medium-card ">
-        <div class="card-title">
-          <h2>UPCOMING EVENTS</h2>
-        </div>
-        <div class="card-content">
-          <% @events.each do |event| %>
-            <%= link_to event_path(event) do%>
-              <div class="upcoming-event">
-                    <div class="event-name"><h3><%= event.name %></h3> </div>
-                    <div class="event-date"><h3><%= event.start_date.to_date.strftime("%B %d, %Y") %></h3></div>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'events/partials/card', attributes: {size: "medium-card", title_text: "UPCOMING EVENTS", type: "events", url: events_path} %>
     <% end %>
-
-        <div class="card small-card">
-          <div class="card-title">
-            <h2>STATISTICS</h2>
-          </div>
-          <div class="card-content">
-
-          </div>
-        </div>
-      <% if @features_on_hold["team"] %>
-        <div class="card small-card">
-          <div class="card-title">
-            <h2>YOUR TEAM</h2>
-          </div>
-          <div class="card-content">
-            <%= render 'elements/card_content_team' %>
-          </div>
-        </div>
-      <% end %>
+    <%= render 'events/partials/card', attributes: {size: "small-card", title_text: "STATISTICS", type: "statistics"} %>
+    <% if @features_on_hold["team"] %>
+      <%= render 'events/partials/card', attributes: {size: "small-card", title_text: "TEAM", type: "team", url: teammates_path} %>
+    <% end %>
   </div>
 </div>
 
