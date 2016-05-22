@@ -34,7 +34,7 @@ ready = function() {
 
   // COG | NAVBAR
   $('.nav-cog, #admin-tools').on('click', function(){
-    $('.nav-cog').addClass('fa-spin');
+    $(this).addClass('fa-spin');
   });
 
   // SIGNUP LOGIC

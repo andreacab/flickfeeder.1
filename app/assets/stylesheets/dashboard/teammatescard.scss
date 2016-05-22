@@ -8,7 +8,7 @@
     height: 85px;
     border-bottom: $card-border-bottom;
     &:hover {
-      background-color: rgba(63, 157, 220, 0.06);
+      background-color: $card-hover-color;
     }
     .teammate-email {
       height: 100%;

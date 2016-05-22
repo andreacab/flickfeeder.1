@@ -1,3 +1,5 @@
+@import 'general/variables';
+
 h1,h2,h3,h4,h5,h6 {
   margin: 0;
 }
@@ -12,7 +14,7 @@ a:hover, a:active, a:focus {
   color:rgb(63, 157, 220);
   text-align: left;
   &:hover {
-    background-color: rgba(63, 157, 220, 0.06);
+        background-color: $card-hover-color;
   }
   .calendar-icon {
     display:flex;
@@ -31,16 +33,19 @@ a:hover, a:active, a:focus {
   }
 
   .event-date {
-    width: 63%;
+    width: 57%;
   }
   .event-name{
+    -webkit-font-smoothing: antialiased;
+    padding: 0 14px;
+    color: grey;
     border-right: 1px rgba(211, 211, 211, 0.59) solid;
     border-left: 1px rgba(211, 211, 211, 0.59) solid;
     text-align:center;
     // height: 80%;
     // padding: 0 10px;
     overflow: hidden;
-    width: 22%;
+    width: 28%;
     // margin-top:10px;
 
   }

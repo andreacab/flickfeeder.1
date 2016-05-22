@@ -12,7 +12,7 @@
 <body>
 
 <%= render partial: "elements/sidebar" %>
-<div class="<%= params[:controller] == 'users/sessions' || params[:controller] == 'users/registrations' ? 'login-screen' : '' %> main-container <%= controller_name %> <%= action_name %>">
+<div class="<%= (params[:controller] == 'users/sessions' && params[:action] != 'edit') || (params[:controller] == 'users/registrations' && params[:action] != 'edit') ? 'login-screen' : '' %> main-container <%= controller_name %> <%= action_name %>">
   <%= render partial: "elements/navbar" %>
 	<div class="<%= params[:controller] == 'users/sessions' || params[:controller] == 'users/registrations'? 'full-screen' : '' %><%= params[:controller] == 'events' && params[:action] == 'new' ? 'background-image' : '' %> main-area">
     <%= render partial: "elements/loader" %>

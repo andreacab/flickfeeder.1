@@ -1,5 +1,5 @@
 $ff-white: #F9F7EF;
-$primary-color: #2ECC71;;
+$primary-color: #2ECC71;
 $secondary-color: #B1F6CB;
 
 $transparent-overlay: rgba(249, 247, 239, 0.03);
@@ -9,3 +9,12 @@ $transparent-overlay: rgba(249, 247, 239, 0.03);
 $card-border-bottom: 1px rgba(162, 162, 162, 0.22) solid;
 
 
+$sidebar-width: 240px;
+
+.middle-align {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+
+$card-hover-color: rgba(122, 122, 122, 0.06);

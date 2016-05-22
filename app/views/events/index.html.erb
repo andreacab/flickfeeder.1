@@ -1,4 +1,50 @@
-  <%- model_class = Event -%>
+<div class="list-events-container">
+  <% @events.each do |event| %>
+    <%= link_to event_path(event) do %>
+      <div class="event">
+        <div class="event-info">
+          <div class="event-name"><%= event.name.upcase %></div>
+          <div class="event-date"><%= event.start_date.to_date.strftime("%B %d, %Y") %></div>
+        </div>
+        <div class="social facebook">
+          <div class="icon">
+            <%= fa_icon "facebook", class: 'fa-2x facebook' %>
+          </div>
+          <div class="shares">
+            <p>Likes<br> 0</p>
+          </div>
+        </div>
+        <div class="social google">
+          <div class="icon">
+           <%= fa_icon "google-plus", class: 'fa-2x google-plus' %>
+          </div>
+          <div class="shares">
+            <p>Likes<br> 0</p>
+          </div>
+        </div>
+        <div class="social twitter">
+          <div class="icon">
+            <%= fa_icon "twitter", class: 'fa-2x twitter' %>
+          </div>
+          <div class="shares">
+            <p>Likes<br> 0</p>
+          </div>
+        </div>
+        <div class="social ">
+           <%= fa_icon "cogs", class: 'fa-3x  social-cog' %>
+
+
+        </div>
+
+      <!-- <div class="total-reach"></div> -->
+      </div>
+    <% end %>
+  <% end %>
+  <div class="new-event-section">
+   <%= link_to("Create Event", new_event_path, class:"new-event-button") %>
+  </div>
+</div>
+ <!--  <%- model_class = Event -%>
   <div class="page-header">
     <h1><%=t '.title', :default => Event %></h1>
   </div>
@@ -33,9 +79,9 @@
         </tr>
       <% end %>
     </tbody>
-  </table>
+  </table> -->
 
-  <%= link_to t('.new', :default => t("helpers.links.new")),
+ <!--  <%= link_to t('.new', :default => t("helpers.links.new")),
               new_event_path,
-              :class => 'btn btn-primary' %>
+              :class => 'btn btn-primary' %> -->
 

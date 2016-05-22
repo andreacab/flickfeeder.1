@@ -7,6 +7,10 @@ class CreateMedia < ActiveRecord::Migration
       t.references :event, index: true
       t.string :url
       t.string :thumbnail
+      t.integer :facebook_shares, default: 0
+      t.integer :instagram_shares, default: 0
+      t.integer :twitter_shares, default: 0
+      t.integer :google_shares, default: 0
 
       t.timestamps
     end
