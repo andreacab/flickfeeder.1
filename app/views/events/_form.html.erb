@@ -9,13 +9,13 @@
     <div class="start-date-container event-box">
       <%= f.label :start_date, :class => ' ' %>
       <div class="">
-        <%= f.datetime_select :start_date,start_year: DateTime.now.year, :class => '' %>
+        <%= f.datetime_select :start_date,start_year: DateTime.now.year, end_year: DateTime.now.year + 2, use_short_month: true , :class => '' %>
       </div>
     </div>
     <div class="end-date-container event-box">
       <%= f.label :end_date, :class => ' ' %>
       <div class="">
-        <%= f.datetime_select :end_date, :class => '' %>
+        <%= f.datetime_select :end_date,end_year: DateTime.now.year + 2,start_year: DateTime.now.year,use_short_month: true, :class => '' %>
       </div>
     </div>
 
