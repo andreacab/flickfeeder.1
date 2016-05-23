@@ -37,7 +37,6 @@ Rails.application.routes.draw do
   post 'gallery' => 'shared_photos#show'
   get 'photostream' => 'shared_photos#access'
   post 'photostream' => 'shared_photos#editor'
-  get ':id' => 'shared_photos#client_access'
   get 'token' => 'shared_photos#client_access'
 
 
@@ -104,5 +103,7 @@ Rails.application.routes.draw do
     put    "signup"  => "users/registrations#update", as: :update_user_registration
     get    "account" => "users/registrations#edit",   as: :edit_user_registration
   end
+
+  get ':id' => 'shared_photos#client_access'
 
 end

@@ -9,3 +9,4 @@
 FFdevice.create(longitude: 4.893894 , latitude: 52.376014, name: "Device 1", organization_id: 1, user_id: 1)
 FFdevice.create(longitude: 4.898829 , latitude: 52.374678, name: "Device 2", organization_id: 1, user_id: 1)
 FFdevice.create(longitude: 4.888058 , latitude: 52.370643, name: "Device 3", organization_id: 1, user_id: 1)
+Token.create(token: "passpop")
