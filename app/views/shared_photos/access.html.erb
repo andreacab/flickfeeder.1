@@ -1,0 +1,6 @@
+<div class="access-container">
+    <%= form_tag("/photostream", method: "post") do %>
+      <%= text_field_tag :token,nil,id: "access-form",placeholder: 'access token', class: "token-input", required: true%>
+      <%= submit_tag("Access",class: "access-button") %>
+    <% end %>
+</div>

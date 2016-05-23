@@ -1,6 +1,8 @@
 <h1>Your Teammates:</h1>
 <% @teammates.each do |teammate|  %>
-  <div class="teammate">
-    <%= teammate.email %>
-  </div>
+  <%= link_to teammate_path(teammate) do %>
+    <div class="teammate">
+      <%= teammate.email %>
+    </div>
+  <% end %>
 <% end %>

@@ -7,6 +7,7 @@ class MediasController < ApplicationController
         @dropbox_thumbnails = []
         if(hasDropboxAccount?(current_user))
             @dropbox_thumbnails = get_dropbox_thumbnails
+
         end
 	end
 
@@ -22,6 +23,7 @@ class MediasController < ApplicationController
                 thumbs.push(JSON.parse(res.body))
             end
         end
+
         return thumbs
     end
 

@@ -1,0 +1,9 @@
+<% if @shared_photos.any? %>
+  <%= @shared_photos.each do |photo| %>
+    <%= image_tag(photo.url) %>
+  <% end %>
+<% else %>
+  <div class="no-photos">
+    <h2>No photos available yet...</h2>
+  </div>
+<% end %>

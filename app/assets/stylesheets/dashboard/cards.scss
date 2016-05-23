@@ -12,18 +12,21 @@
   text-align: center;
   margin: 5px 5px;
   background-color:white;
-  overflow: scroll;
+  overflow: hidden;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
   transition: all 0.12s;
   border-radius: 14px;
+  display: flex;
+  flex-direction: column;
     // &:hover {
     //   transform: scale(1.005);
     // }
     .card-content {
       overflow-y: scroll !important;
-      height: 400px;
+      height: 100%;
+      width: calc(100% + 14px);
       .no-data{
         display: flex;
         justify-content: center;
@@ -38,14 +41,18 @@
     top:50%;
   }
 
+
   .card-title {
+    background: white;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    z-index: 99999;
     display: flex;
     justify-content: space-between;
     border-bottom: $card-border-bottom;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     height: 6rem;
     padding-top: 23px;
+    min-height: 60px;
     padding-left: 23px;
     text-align: left;
     h1,h2,h3,h4 {

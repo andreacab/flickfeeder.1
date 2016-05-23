@@ -11,6 +11,8 @@ class CreateMedia < ActiveRecord::Migration
       t.integer :instagram_shares, default: 0
       t.integer :twitter_shares, default: 0
       t.integer :google_shares, default: 0
+      t.boolean :show_clients, default: true
+      t.references :token, index: true
 
       t.timestamps
     end

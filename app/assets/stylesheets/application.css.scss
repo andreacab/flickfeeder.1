@@ -79,14 +79,14 @@ h1,h2,h3,h4,h5 {
 }
 
 .main-container {
-	width: calc(100vw - 250px);
+	width: calc(100vw - 220px);
 	height: 100%;
 	position:relative;
-	left:250px;
+	left:235px;
 
 	.main-area {
 		position: relative;
-		overflow: scroll;
+		overflow-y: scroll;
 		top: 60px;
 		padding: 20px 40px;
 		width: 100%;

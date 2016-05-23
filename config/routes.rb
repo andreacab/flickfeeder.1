@@ -33,6 +33,15 @@ Rails.application.routes.draw do
   get 'dropbox/disable' => 'users/dropbox#disable'
   post 'dropbox/webhook' => 'users/dropbox#webhook'
 
+  # shared_photos
+  post 'gallery' => 'shared_photos#show'
+  get 'photostream' => 'shared_photos#access'
+  post 'photostream' => 'shared_photos#editor'
+  get ':id' => 'shared_photos#client_access'
+  get 'token' => 'shared_photos#client_access'
+
+
+
   # cloudinary routes
 
   # Example of regular route:

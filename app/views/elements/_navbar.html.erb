@@ -1,4 +1,4 @@
-<% if user_signed_in? %>
+<% if user_signed_in? && params[:controller] != "shared_photos" %>
   <nav class="navbar navbar-default" role="navigation">
   <% if current_user.user_type == "admin" %>
     <div class="admin-tools">

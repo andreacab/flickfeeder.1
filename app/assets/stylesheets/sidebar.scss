@@ -26,6 +26,7 @@ $sidebar-font-color: rgba(249, 247, 239, 0.82);
 		background-color: rgba(211, 211, 211, 0.25) !important;
 	}
 	.menu-item {
+
 		display: flex;
 		align-items:center;
 		height:60px;
@@ -53,10 +54,9 @@ $sidebar-font-color: rgba(249, 247, 239, 0.82);
 			font-size: 18px;
 			margin:0;
 			color:$sidebar-font-color;
-
-
 		}
 	}
+
 	.sidebar-footer-container {
 		display: flex;
 		justify-content: column;
@@ -85,7 +85,7 @@ $sidebar-font-color: rgba(249, 247, 239, 0.82);
 }
 
 .blue-design {
-	background-color: #1F83C6;
+	background-color: #3C454B;
 }
 .image-design {
 	background-image: url('stardust.png');

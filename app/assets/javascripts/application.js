@@ -33,7 +33,7 @@ ready = function() {
   $('.box-wrapper').fadeOut(100);
 
   // COG | NAVBAR
-  $('.nav-cog, #admin-tools').on('click', function(){
+  $('.admin-tools .nav-cog').on('click', function(){
     $(this).addClass('fa-spin');
   });
 
