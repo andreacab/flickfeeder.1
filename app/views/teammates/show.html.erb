@@ -1,1 +1,1 @@
-<h1><%= @teammate.email %></h1>
+<% unless @user.avatar.nil? %><%= image_tag @user.avatar_url %><br /><% end %>

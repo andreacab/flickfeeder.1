@@ -5,7 +5,7 @@ class TeammatesController < ApplicationController
   end
 
   def show
-    @teammate = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
 end

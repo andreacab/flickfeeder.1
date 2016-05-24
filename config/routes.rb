@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'tokens/create'
+
+  get 'tokens/new'
+
   resources :device_healths
 
   resources :labels
@@ -12,6 +16,8 @@ Rails.application.routes.draw do
   resources :medias
 
   resources :teammates
+
+  resources :tokens, only: [:new, :create]
 
   get 'application_settings' => 'application_settings#index'
   patch 'application_settings/update' => 'application_settings#update'
@@ -38,7 +44,6 @@ Rails.application.routes.draw do
   get 'photostream' => 'shared_photos#access'
   post 'photostream' => 'shared_photos#editor'
   get 'token' => 'shared_photos#client_access'
-
 
 
   # cloudinary routes

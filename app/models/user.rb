@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
   belongs_to :organization
   has_one :f_fdevice
   has_many :media
+  has_many :tokens
+
+  # cloudinary
+  mount_uploader :avatar, AvatarUploader
 end

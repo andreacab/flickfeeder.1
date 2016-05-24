@@ -1,9 +1,14 @@
-<% if @shared_photos.any? %>
-  <%= @shared_photos.each do |photo| %>
-    <%= image_tag(photo.url) %>
+<div class="show-clients">
+  <% if @shared_photos.any? %>
+    <% @shared_photos.each do |photo| %>
+      <%= link_to(photo.url_url) do %>
+        <%= image_tag(photo.url_url, height: '200') %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <div class="no-photos">
+      <h2>No photos available yet...</h2>
+    </div>
   <% end %>
-<% else %>
-  <div class="no-photos">
-    <h2>No photos available yet...</h2>
-  </div>
-<% end %>
+
+</div>

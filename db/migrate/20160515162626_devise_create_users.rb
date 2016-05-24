@@ -19,7 +19,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.inet     :current_sign_in_ip
       t.inet     :last_sign_in_ip
 
-      t.string :avatar_url
+      t.string :avatar
       t.string :first_name
       t.string :last_name
 

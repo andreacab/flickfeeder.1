@@ -1,2 +1,40 @@
-<h1>Photo Stream</h1>
-<%= react_component('ThumbnailsList', { thumbnails: @dropbox_thumbnails }, { prerender: true }) %>
+<div class="media-wrapper">
+  <div class="media-container">
+  <% if @medias.any? %>
+    <% @medias.each do |media| %>
+      <%= link_to(media.url_url) do %>
+        <div class="media">
+          <% unless media.url_url.nil? %><%= image_tag(media.url_url, height: "200") %><% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <div class="no-images">
+      No photos available yet..
+    </div>
+  <% end %>
+  </div>
+  <div class="token-list">
+    <div class="token-wrapper">
+      <div class="token-title">
+        <h4>Your Tokens</h4>
+      </div>
+      <% if !@tokens.nil? %>
+        <% @tokens.each do |token| %>
+          <%= link_to photostream_path(token: token.token), method: :post do %>
+            <div class="token">
+              <%= token.token %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="add-token">
+      <%= form_for @token, class: "token-form" do |f| %>
+          <%= text_field_tag :token, nil, :required => true, :max => 10 %>
+          <%= submit_tag "Add" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

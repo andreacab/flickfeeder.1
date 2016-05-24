@@ -1,5 +1,5 @@
 class SharedPhotosController < ApplicationController
-  before_filter :check_token, only: [:editor, :show]
+  # before_filter :check_token, only: [:editor, :show]
 
   def access
 
@@ -11,14 +11,18 @@ class SharedPhotosController < ApplicationController
     else
       @notice = ''
     end
+
   end
 
   def editor
-    @shared_photos = Media.where(token: params[:token])
+
+    token = Token.where(token: params[:token]).first
+    @shared_photos = Media.where(token_id: token.id)
   end
 
   def show
-    @shared_photos = Media.where(token: params[:token], show_clients: true)
+    token = Token.where(token: params[:token]).first
+    @shared_photos = Media.where(token_id: token.id)
   end
 
   private

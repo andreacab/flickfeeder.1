@@ -1,0 +1,4 @@
+<%= form_for @media, url: {action: "create"} do |f| %>
+  <%= f.file_field :url, multiple: true %>
+  <%= f.submit "Create" %>
+<% end %>

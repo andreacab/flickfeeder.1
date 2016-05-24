@@ -145,9 +145,12 @@ ActiveRecord::Schema.define(version: 20160523195700) do
 
   create_table "tokens", force: true do |t|
     t.string   "token"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tokens", ["user_id"], name: "index_tokens_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -160,7 +163,7 @@ ActiveRecord::Schema.define(version: 20160523195700) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "avatar_url"
+    t.string   "avatar"
     t.string   "first_name"
     t.string   "last_name"
     t.datetime "created_at",                          null: false
