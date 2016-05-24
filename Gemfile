@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# Simulate real ENV/config variables only for dev and test environment
+gem 'dotenv-rails', :groups => [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'

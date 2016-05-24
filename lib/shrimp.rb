@@ -1,6 +1,7 @@
 require 'faye/websocket'
 
 class Shrimp
+    # Heroku has a 50 seconds idle connection time limit. 
     KEEPALIVE_TIME = 15 # in seconds
 
     def initialize(app)
@@ -10,9 +11,10 @@ class Shrimp
 
     def call(env)
         if Faye::WebSocket.websocket?(env)
-            # WebSockets logic goes here
+
             puts websocket_string
-            # Return async Rack response
+            
+            # Send every KEEPALIVE_TIME sec a ping for keeping the connection open.
             ws = Faye::WebSocket.new(env, nil, {ping: KEEPALIVE_TIME })
 
             ws.on :open do |event|
@@ -38,7 +40,8 @@ class Shrimp
                 puts '***** WS ERROR *****'
                 p [:close, ws.object_id, event.code, event.reason]
             end 
-            
+
+            # Return async Rack response
             ws.rack_response
         else
             @app.call(env)

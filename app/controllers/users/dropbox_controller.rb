@@ -6,9 +6,9 @@ class Users::DropboxController < ApplicationController
 
     def enable
         if Rails.env.production?
-            @@flow = DropboxOAuth2Flow.new(DROPBOX_KEY, DROPBOX_SECRET, "https://flickfeeder.herokuapp.com/dropbox/redirect", session, :dropboxToken)
+            @@flow = DropboxOAuth2Flow.new(ENV["DROPBOX_KEY"], ENV["DROPBOX_SECRET"], "https://flickfeeder.herokuapp.com/dropbox/redirect", session, :dropboxToken)
         else
-            @@flow = DropboxOAuth2Flow.new(DROPBOX_KEY_DEV, DROPBOX_SECRET_DEV, "http://localhost:3000/dropbox/redirect", session, :dropboxToken)
+            @@flow = DropboxOAuth2Flow.new(ENV["DROPBOX_KEY_DEV"], ENV["DROPBOX_SECRET_DEV"], "http://localhost:3000/dropbox/redirect", session, :dropboxToken)
         end
         authorize_url = @@flow.start()
         redirect_to(authorize_url)
