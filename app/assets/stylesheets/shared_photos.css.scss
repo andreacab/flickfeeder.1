@@ -1,0 +1,69 @@
+@import "general/variables";
+
+.access-container {
+  background-color: white;
+  padding-top:5px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding-right:10px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .notice {
+    margin-bottom: 20px;
+    position: relative;
+    top: -50px;
+  }
+  #access-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -50px;
+
+
+  }
+  .access-button {
+    position: relative;
+    top: -50px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top:15px;
+    background-color: $primary-color;
+    color: white;
+    padding: 14px 60px;
+    font-size: 16px;
+    border:0;
+    font-weight: 100;
+    border-radius: 7px;
+    &:focus {
+     outline: none;
+    }
+    &:hover {
+     opacity: 0.8;
+     -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.20);
+     -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.20);
+     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.20);
+    }
+    &:active {
+     background-color:#88FFB5;
+    }
+  }
+  .token-input {
+    height: 42px;
+    width: 250px;
+    padding-left: 7px;
+
+  }
+
+}
+.no-photos {
+  color: white;
+}

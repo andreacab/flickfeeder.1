@@ -11,6 +11,11 @@ Rails.application.routes.draw do
 
   resources :medias
 
+  resources :teammates
+
+  get 'application_settings' => 'application_settings#index'
+  patch 'application_settings/update' => 'application_settings#update'
+
   devise_for :users, controllers: {registrations: "users/registrations", sessions: "users/sessions", passwords: "users/passwords"}, skip: [:sessions, :registrations]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -19,7 +24,7 @@ Rails.application.routes.draw do
   authenticate :user do
     root 'homepage#index'
   end
-  
+
 
   # dropbox routes
   get 'dropbox/redirect' => 'users/dropbox#redirect'
@@ -29,6 +34,13 @@ Rails.application.routes.draw do
   post 'dropbox/webhook' => 'users/dropbox#webhook'
 
   get 'medias/stream' => 'medias#stream'
+
+  # shared_photos
+  post 'gallery' => 'shared_photos#show'
+  get 'photostream' => 'shared_photos#access'
+  post 'photostream' => 'shared_photos#editor'
+  get 'token' => 'shared_photos#client_access'
+
   # cloudinary routes
 
   # Example of regular route:
@@ -79,17 +91,19 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  
+
   #->Prelang (user_login:devise/stylized_paths)
   devise_scope :user do
     get    "login"   => "users/sessions#new",         as: :new_user_session
     post   "login"   => "users/sessions#create",      as: :user_session
     delete "signout" => "users/sessions#destroy",     as: :destroy_user_session
-    
+
     get    "signup"  => "users/registrations#new",    as: :new_user_registration
     post   "signup"  => "users/registrations#create", as: :user_registration
     put    "signup"  => "users/registrations#update", as: :update_user_registration
     get    "account" => "users/registrations#edit",   as: :edit_user_registration
   end
+
+  get ':id' => 'shared_photos#client_access'
 
 end

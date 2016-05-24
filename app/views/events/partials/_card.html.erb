@@ -1,0 +1,51 @@
+  <div class="card <%= attributes[:size] %>">
+    <div class="card-title">
+      <div class="title-text">
+        <h2><%= attributes[:title_text] %></h2>
+      </div>
+      <div class="three-dots-container">
+        <p class="three-dots"><%= link_to("...", attributes[:url]) %></p>
+      </div>
+    </div>
+    <div class="card-content">
+
+      <% if attributes[:type] == "events" %>
+        <% if @events.to_a.any? %>
+          <% @events.each do |event| %>
+            <%= link_to event_path(event) do%>
+              <div class="upcoming-event">
+                  <div class="calendar-icon">
+                    <%= fa_icon "cog", class: 'fa-2x fa-calendar-check-o' %>
+                  </div>
+                  <div class="event-name"><h3><%= event.name.upcase %></h3> </div>
+                  <div class="event-date"><h3><%= event.start_date.to_date.strftime("%B %d, %Y") %></h3></div>
+              </div>
+            <% end %>
+          <% end %>
+        <% else %>
+          <div class="no-data">
+            <p>No upcoming events</p>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if attributes[:type] == "statistics" %>
+        <% if @statistics.any? %>
+          <% @statistics.each do |stat| %>
+            <div class="statistic">
+              <%= stat.name %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="no-data">
+            <p>No statistics available</p>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if attributes[:type] == "team" %>
+          <%= render 'elements/card_content_team' %>
+      <% end %>
+    </div>
+  </div>
+

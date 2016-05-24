@@ -1,5 +1,12 @@
-<% if user_signed_in? %>
+<% if user_signed_in? && params[:controller] != "shared_photos" %>
   <nav class="navbar navbar-default" role="navigation">
+  <% if current_user.user_type == "admin" %>
+    <div class="admin-tools">
+     <%= link_to application_settings_path do %>
+       <%= fa_icon "cog", class: 'fa-2x nav-cog' %><p id="admin-tools">App Settings</p>
+      <% end %>
+    </div>
+  <% end %>
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -23,6 +30,10 @@
                 <li><%= link_to "Edit Account", edit_user_registration_path %></li>
                 <li class="divider"></li>
                 <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+                <% if current_user.user_type == "admin" %>
+                  <li class="divider"></li>
+                  <li><%= link_to("App Settings", application_settings_path ) %></li>
+                <% end %>
               </ul>
             </li>
           <% else %>

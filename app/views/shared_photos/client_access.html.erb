@@ -1,0 +1,9 @@
+<div class="access-container">
+  <div class="notice">
+    <h2><%= @notice %></h2>
+  </div>
+    <%= form_tag("/gallery", method: "post") do %>
+      <%= text_field_tag :token,nil,id: "access-form",placeholder: 'access token', class: "token-input", required: true%>
+      <%= submit_tag("Access",class: "access-button") %>
+    <% end %>
+</div>

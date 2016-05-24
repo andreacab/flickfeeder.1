@@ -1,0 +1,12 @@
+<div class="app-setting-container">
+  <h2>Features</h2>
+  <% @features_on_hold.each do |feature, active| %>
+    <div class="feature-container">
+      <h4><%= feature %></h4>
+      <%= check_box_tag feature, "yes", active, class: "settings-checkbox" %>
+    </div>
+  <% end %>
+</div>
+
+
+

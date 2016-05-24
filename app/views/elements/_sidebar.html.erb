@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-	<div class="sidebar">
+	<div class="sidebar <%= @current_design %>">
 		<div class="logo-container"><%= image_tag("logo.png", width: "168", class: "logo") %></div>
 		<div class="avatar">
 			<div class="avatar-image">
@@ -7,25 +7,7 @@
 			</div>
 			<div class="avatar-email"><h4><%= current_user.email %></h4></div>
 		</div>
-		<%= link_to root_path do %>
-			<div class="menu-item">
-				<h3 class="page-name">Dashboard</h3>
-			</div>
-		<% end %>
-	<%= link_to events_path do %>
-		<div class="menu-item">
-			<h3 class="page-name">Events</h3>
-		</div>
-	<% end %>
-	<%= link_to device_healths_path do %>
-		<div class="menu-item">
-			<h3 class="page-name">Devices Health</h3>
-		</div>
-	<% end %>
-	<%= link_to medias_path do %>
-		<div class="menu-item">
-			<h3 class="page-name">Photo Stream</h3>
-		</div>
-	<% end %>
+		<%= render 'homepage/sidebar/menu_items' %>
+		<!-- <%= render 'homepage/sidebar/footer' %> -->
 	</div>
 <% end %>

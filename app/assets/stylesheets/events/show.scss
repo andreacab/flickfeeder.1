@@ -1,0 +1,22 @@
+.current-event-container {
+  display: flex;
+  position: absolute;
+  top:0;
+  left:0;
+  height: 100%;
+  width:100%;
+  .left-container, .right-container {
+    width: 50%;
+    height: 100%;
+  }
+  .left-container {
+    border-right: 1px lightgrey solid;
+    background-image: url("/assets/map.png");
+  }
+}
+
+.main-container.events.show {
+  .main-area {
+    overflow: auto;
+  }
+}

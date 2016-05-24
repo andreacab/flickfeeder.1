@@ -56,6 +56,9 @@ gem 'cloudinary'
 gem 'websocket-native'
 gem 'websocket'
 
+gem "bootstrap-switch-rails"
+gem "font-awesome-rails"
+
 group :development do
   gem 'pry-rails'
 end

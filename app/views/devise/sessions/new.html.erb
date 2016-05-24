@@ -1,44 +1,48 @@
-<div class="page-header">
-  <h1><%=t ".title", default: "Login" %></h1>
-</div>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-horizontal form-user"}) do |f| %>
-                                                                                                                                        
-  
-  <div class="form-group">
-    <%= f.label :email, class: "control-label col-md-4" %>
-    <div class="col-md-8">
-      <%= f.email_field :email, class: "text-field form-control", html: {spellcheck: "false"} %>
-    </div>
+<div class="login-container">
+  <div class="page-header">
+    <%= image_tag("logo.png", width: "100%") %>
   </div>
-  
 
-  <div class="form-group">
-    <%= f.label :password, class: "control-label col-md-4" %>
-    <div class="col-md-8">
-      <%= f.password_field :password, class: "text-field form-control", html: {autocomplete: "off"} %>
-    </div>
-  </div>
-                                                                                                                                        
-  <% if devise_mapping.rememberable? -%>
-    <div class="form-group">
-      <%= f.label :remember_me, "Remember Me", class: "control-label col-md-4" %>
-      <div class="col-md-8">
-        <%= f.check_box :remember_me %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-horizontal form-user"}) do |f| %>
+
+
+    <div class="email-container">
+      <%= f.label :email, class: "" %>
+      <div class="input-field">
+        <%= f.email_field :email, class: "text-field form-control", html: {spellcheck: "false"} %>
       </div>
     </div>
-  <% end -%>
-                                                                                                                                        
-  <div class="form-group">
-    <div class="col-md-offset-4 col-md-8">
-      <%= f.submit "Login", class: "btn btn-primary" %>
-    </div>
-  </div>
 
-  <div class="form-group">
-    <div class="col-md-offset-4 col-md-8">
-      <%= render "devise/shared/links" %>
-    </div>
-  </div>
 
-<% end %>
+    <div class="password-container">
+      <%= f.label :password, class: "" %>
+      <div class="input-field">
+        <%= f.password_field :password, class: "text-field form-control", html: {autocomplete: "off"} %>
+      </div>
+    </div>
+
+    <% if devise_mapping.rememberable? -%>
+      <div class="remember-me">
+        <div class="checkbox">
+          <%= f.check_box :remember_me %>
+        </div>
+        <%= f.label :remember_me, "Remember Me", class: "label-r" %>
+      </div>
+    <% end -%>
+
+    <div class="">
+      <div class=" ">
+        <%= f.submit "Login", class: "btn" %>
+      </div>
+    </div>
+
+
+
+  <% end %>
+</div>
+
+<div class="sign-up-links">
+  <div class=" ">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

@@ -13,6 +13,8 @@
 *= require_tree .
 *= require_self
 */
+
+
 @import "bootstrap_configuration";
 
 @import "bootstrap-sprockets";
@@ -25,7 +27,20 @@
 
 @import "dashboard";
 
+@import "login";
+
 @import "dashboard/dashboardmediaqueries";
+
+@import "events/new";
+
+@import "bootstrap3-switch";
+
+@import "font-awesome";
+
+
+
+
+
 
 //->Prelang (ui_framework:twitter_bootstrap)
 
@@ -56,20 +71,22 @@ body,html {
 	font-color: #515151;
 	// justify-content: flex-end;
 	// align-items: flex-end;
+	overflow: hidden;
 }
+
 h1,h2,h3,h4,h5 {
 	font-weight: 100;
 }
 
 .main-container {
-	width: calc(100vw - 250px);
+	width: calc(100vw - 220px);
 	height: 100%;
 	position:relative;
-	left:250px;
+	left:235px;
 
 	.main-area {
 		position: relative;
-		overflow: scroll;
+		overflow-y: scroll;
 		top: 60px;
 		padding: 20px 40px;
 		width: 100%;
@@ -77,5 +94,26 @@ h1,h2,h3,h4,h5 {
 	}
 }
 
+.alert.alert-danger {
+	position: absolute;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	max-width: 360px;
+	width: 100%;
+	text-align: center;
+	border: 1px #B8B8B8 solid;
+	background-color: #FF5656;
+	color: white;
+	font-size: 16px;
+}
 
+.login-screen {
+	position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background: url("festival-hands1.jpg") no-repeat center center fixed;
+
+}
 

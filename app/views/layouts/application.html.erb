@@ -2,18 +2,20 @@
 <html>
 <head>
   <title>Flickfeeder</title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
-<meta name="viewport" content="width=device-width, initial-scale=1"/></head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/></head>
+
 <body>
 
 <%= render partial: "elements/sidebar" %>
-<div class="main-container">
-<%= render partial: "elements/navbar" %>
-
-	<div class="main-area">
+<div class="<%= (params[:controller] == 'users/sessions' && params[:action] != 'edit') || (params[:controller] == 'users/registrations' && params[:action] != 'edit') || params[:controller] == 'shared_photos' ? 'login-screen' : '' %> main-container <%= controller_name %> <%= action_name %>">
+  <%= render partial: "elements/navbar" %>
+	<div class="<%= params[:controller] == 'users/sessions' || params[:controller] == 'users/registrations' || params[:controller] == 'shared_photos' ? 'full-screen' : '' %><%= params[:controller] == 'events' && params[:action] == 'new' ? 'background-image' : '' %> main-area">
+    <%= render partial: "elements/loader" %>
 		<%= bootstrap_flash %>
 		<%= yield %>
 	</div>

@@ -4,10 +4,12 @@ $sidebar-overlay: rgba(249, 247, 239, 0.03);
 $sidebar-font-color: rgba(249, 247, 239, 0.82);
 
 .sidebar {
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 	width: 250px;
-	background-image: url('stardust.png');
 	position: absolute;
+	overflow-y: scroll;
 	top: 0;
 	left: 0;
 	.logo-container {
@@ -20,25 +22,74 @@ $sidebar-font-color: rgba(249, 247, 239, 0.82);
 	a {
 		text-decoration: none;
 	}
-
+	.selected {
+		background-color: rgba(211, 211, 211, 0.25) !important;
+	}
 	.menu-item {
+
+		display: flex;
+		align-items:center;
 		height:60px;
 		width: 100%;
 		border-bottom: 1px rgba(211, 211, 211, 0.1) solid;
 		cursor: pointer;
 		background-color: $sidebar-overlay;
-
+		&:active, &:focus {
+			background-color: rgba(211, 211, 211, 0.4) !important;
+		}
 		&:hover {
 			background-color:  rgba(211, 211, 211, 0.1);
 		}
-
-		.page-name {
-			font-size: 20px;
-			top: 18px;
+		.menu-icon {
+			width:30%;
+			display: flex;
+			justify-content: center;
+			font-size: 19px;
+			color: #F9F7EF;
+			margin-right: 5px;
 			position: relative;
+			left: 10px;
+		}
+		.page-name {
+			font-size: 18px;
 			margin:0;
 			color:$sidebar-font-color;
-			text-align: center;
 		}
 	}
+
+	.sidebar-footer-container {
+		display: flex;
+		justify-content: column;
+		align-items: flex-end;
+		height: 100%;
+		.sidebar-footer{
+			height: 80px;
+			width: 100%;
+			border-top: 1px rgba(211, 211, 211, 0.1) solid;
+			background-color: rgba(249, 247, 239, 0.03);
+			display:flex;
+			.setting {
+				width: calc(100% / 3);
+				height: 100%;
+				&:hover {
+					background-color:  rgba(211, 211, 211, 0.1);
+				}
+
+			}
+			.setting:not(:first-child){
+				border-left: 1px rgba(211, 211, 211, 0.1) solid;
+			}
+		}
+
+	}
+}
+
+.blue-design {
+	background-color: #3C454B;
+}
+.image-design {
+	background-image: url('stardust.png');
+}
+.dark-design {
+	background-color:#363B3E;
 }

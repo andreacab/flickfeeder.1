@@ -1,0 +1,45 @@
+<div class="menu-items-container">
+  <div class="triangle">
+
+  </div>
+  <% if @features_on_hold["dashboard"] %>
+    <%= link_to root_path do %>
+      <div class="menu-item <%= params[:controller] == 'homepage' ? 'selected ' : '' %>">
+        <%= fa_icon "cog", class: 'fa-2x  menu-icon fa-tachometer' %>
+        <h3 class="page-name">Dashboard</h3>
+      </div>
+    <% end %>
+  <% end %>
+  <% if @features_on_hold["events"] %>
+    <%= link_to events_path do %>
+      <div class="menu-item  <%= params[:controller] == 'events' ? 'selected ' : '' %>">
+        <%= fa_icon "cog", class: 'fa-2x menu-icon fa-calendar' %>
+        <h3 class="page-name">Events</h3>
+      </div>
+    <% end %>
+  <% end %>
+    <% if @features_on_hold["devices_health"] %>
+    <%= link_to device_healths_path do %>
+      <div class="menu-item <%= params[:controller] == 'device_healths' ? 'selected ' : '' %>">
+        <%= fa_icon "cog", class: 'fa-2x fa-battery-three-quarters menu-icon' %>
+        <h3 class="page-name">Devices Health</h3>
+      </div>
+    <% end %>
+  <% end %>
+    <% if @features_on_hold["photo_stream"] %>
+    <%= link_to medias_path do %>
+      <div class="menu-item <%= params[:controller] == 'medias' ? 'selected ' : '' %>">
+        <%= fa_icon "cog", class: 'fa-2x fa-file-image-o menu-icon' %>
+        <h3 class="page-name">Photo Stream</h3>
+      </div>
+    <% end %>
+  <% end %>
+    <% if @features_on_hold["team"] %>
+      <%= link_to teammates_path do %>
+        <div class="menu-item <%= params[:controller] == 'teammates' ? 'selected ' : '' %>">
+        <%= fa_icon "cog", class: 'fa-2x menu-icon fa-users' %>
+          <h3 class="page-name">Team</h3>
+        </div>
+      <% end %>
+  <% end %>
+</div>

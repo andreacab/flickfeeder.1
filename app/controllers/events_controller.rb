@@ -1,20 +1,21 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_if_user_has_events, only: [:index]
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.where(organization_id: current_user.organization_id)
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    @devices = FFdevice.all
   end
 
   # GET /events/new
   def new
-    @event = Event.new
+    @event = Event.new()
   end
 
   # GET /events/1/edit
@@ -24,7 +25,9 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    full_params = event_params
+    full_params["organization_id"] = current_user.organization_id
+    @event = Event.new(full_params)
 
     respond_to do |format|
       if @event.save
@@ -70,5 +73,11 @@ class EventsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit(:name, :start_date, :end_date, :organization_id)
+    end
+
+    def check_if_user_has_events
+      if Event.where(organization_id: current_user.organization_id) == []
+        redirect_to "/events/new"
+      end
     end
 end

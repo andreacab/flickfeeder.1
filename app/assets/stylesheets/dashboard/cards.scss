@@ -1,0 +1,105 @@
+@import 'general/variables';
+
+.dashboard-card {
+  width: 100%;
+  display: flex;
+  margin-left:5px;
+  min-height: 20rem;
+  // flex-wrap: wrap;
+  flex-shrink: 0;
+  height: calc(100% /3);
+.card {
+  text-align: center;
+  margin: 5px 5px;
+  background-color:white;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+  transition: all 0.12s;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+    // &:hover {
+    //   transform: scale(1.005);
+    // }
+    .card-content {
+      overflow-y: scroll !important;
+      height: 100%;
+      width: calc(100% + 14px);
+      .no-data{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        letter-spacing: 1.3px;
+        color: #696969;
+      }
+    }
+  .no-teammates {
+    position: relative;
+    top:50%;
+  }
+
+
+  .card-title {
+    background: white;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: $card-border-bottom;
+    height: 6rem;
+    padding-top: 23px;
+    min-height: 60px;
+    padding-left: 23px;
+    text-align: left;
+    h1,h2,h3,h4 {
+      letter-spacing: 3px;
+      color: #656565;
+      font-weight: 300;
+      margin:0;
+      font-size: 1.5rem;
+    }
+    .three-dots {
+      font-size: 50px;
+      color: #B4BCBE;
+      font-style: normal;
+      line-height: 0px;
+      margin: 0;
+      position: relative;
+      top: -6px;
+      right: 20px;
+      a {
+        color: #6BA4D5;
+        &:hover {
+          color: #428bca;
+        }
+      }
+    }
+  }
+}
+
+  .big-card {
+    min-width:80rem;
+    width: 100%;
+    // min-height: 20rem;
+  }
+  .medium-card {
+    min-width: 46rem;
+    // min-height: 20rem;
+    width: calc(100%  /2);
+  }
+  .small-card {
+   min-width: 26rem;
+  width: calc(100%  /4);
+  }
+}
+
+.medium-container {
+  height:calc((99% * 2)/3);
+  .medium-height {
+    height: 100%;
+  }
+}

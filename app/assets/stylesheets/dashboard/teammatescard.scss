@@ -1,0 +1,44 @@
+@import 'general/variables';
+
+.teammate {
+    overflow-x: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    height: 85px;
+    border-bottom: $card-border-bottom;
+    &:hover {
+      background-color: $card-hover-color;
+    }
+    .teammate-email {
+      height: 100%;
+      width: 100%;
+      min-width: 178px;
+      cursor: pointer;
+
+      .email {
+        letter-spacing: 2px;
+        top: 50%;
+        position: relative;
+        transform: translateY(-50%);
+      }
+    }
+    .teammate-avatar-container {
+      display: flex;
+      align-items: center;
+      width: 100px;
+      // height: 100px;
+
+      .spacer {
+        padding: 0 20px;
+        border-right: 1px rgba(211, 211, 211, 0.59) solid;
+      }
+
+      .teammate-avatar, .placeholder-avatar {
+        width: 65px;
+        height: 65px;
+        border: 1px rgb(251, 175, 169) solid;
+        border-radius: 50%;
+      }
+    }
+  }

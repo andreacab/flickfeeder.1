@@ -1,0 +1,25 @@
+<% if @teammates != [] %>
+  <% @teammates.each do |teammate| %>
+    <%= link_to teammate_path(teammate) do%>
+      <div class="teammate">
+        <div class="teammate-avatar-container">
+          <div class="spacer">
+           <% if teammate.avatar_url  %>
+                  <%= image_tag(teammate.avatar_url, class: "placeholder-avatar") %>
+           <% else %>
+                <%= image_tag("avatar-placeholder.png", class: "placeholder-avatar") %>
+           <% end %>
+          </div>
+       </div>
+        <div class="teammate-email">
+          <p class="email"><%= teammate.first_name + " " + teammate.last_name %></p>
+        </div>
+
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <div class="no-data">
+    <p>You have no teammates yet</p>
+  </div>
+<% end %>
