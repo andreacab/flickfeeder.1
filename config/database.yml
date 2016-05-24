@@ -83,3 +83,4 @@ production:
   database: flickfeeder_production
   username: flickfeeder
   password: <%= ENV['FLICKFEEDER_DATABASE_PASSWORD'] %>
+  pool: <%= ENV['RAILS_MAX_THREADS'] %>

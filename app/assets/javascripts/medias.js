@@ -1,6 +1,6 @@
 var FFWebsocketManager = (function () {
     var scheme = 'ws://';
-    var uri = scheme + 'localhost:3000/medias/stream';
+    var uri = scheme + 'localhost:3000/medias/stream/';
     var ws = new WebSocket(uri);
     console.log('****** created a new websocket connection');
 
@@ -12,4 +12,6 @@ var FFWebsocketManager = (function () {
         console.log('****** Received a message!');
         console.log(event.data);
     };
+
+    return ws;
 })();

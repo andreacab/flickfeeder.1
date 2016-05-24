@@ -5,9 +5,8 @@ class MediasController < ApplicationController
 
     def index
         @dropbox_thumbnails = []
-        if(hasDropboxAccount?(current_user))
+        if hasDropboxAccount?(current_user)
             @dropbox_thumbnails = get_dropbox_thumbnails
-
         end
 	end
 
@@ -28,10 +27,6 @@ class MediasController < ApplicationController
         end
 
         return thumbs
-    end
-
-    def stream
-        binding.pry
     end
 
 end

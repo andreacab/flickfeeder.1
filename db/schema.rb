@@ -63,6 +63,11 @@ ActiveRecord::Schema.define(version: 20160523195700) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer  "organization_id"
+    t.integer  "total_reach",            default: 0
+    t.integer  "total_facebook_shares",  default: 0
+    t.integer  "total_twitter_shares",   default: 0
+    t.integer  "total_instagram_shares", default: 0
+    t.integer  "total_google_shares",    default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -79,6 +84,9 @@ ActiveRecord::Schema.define(version: 20160523195700) do
 
   create_table "f_fdevices", force: true do |t|
     t.string   "name"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.boolean  "is_active",       default: false
     t.integer  "organization_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -102,20 +110,27 @@ ActiveRecord::Schema.define(version: 20160523195700) do
   add_index "labels_medias", ["label_id"], name: "index_labels_medias_on_label_id", using: :btree
   add_index "labels_medias", ["media_id"], name: "index_labels_medias_on_media_id", using: :btree
 
-  create_table "medias", force: true do |t|
+  create_table "media", force: true do |t|
     t.string   "type_of_media"
     t.integer  "user_id"
     t.integer  "organization_id"
     t.integer  "event_id"
     t.string   "url"
     t.string   "thumbnail"
+    t.integer  "facebook_shares",  default: 0
+    t.integer  "instagram_shares", default: 0
+    t.integer  "twitter_shares",   default: 0
+    t.integer  "google_shares",    default: 0
+    t.boolean  "show_clients",     default: true
+    t.integer  "token_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "medias", ["event_id"], name: "index_medias_on_event_id", using: :btree
-  add_index "medias", ["organization_id"], name: "index_medias_on_organization_id", using: :btree
-  add_index "medias", ["user_id"], name: "index_medias_on_user_id", using: :btree
+  add_index "media", ["event_id"], name: "index_media_on_event_id", using: :btree
+  add_index "media", ["organization_id"], name: "index_media_on_organization_id", using: :btree
+  add_index "media", ["token_id"], name: "index_media_on_token_id", using: :btree
+  add_index "media", ["user_id"], name: "index_media_on_user_id", using: :btree
 
   create_table "organizations", force: true do |t|
     t.string   "name"
@@ -151,7 +166,7 @@ ActiveRecord::Schema.define(version: 20160523195700) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "user_type"
-    t.integer  "organization_id"
+    t.integer  "organization_id",        default: 1
     t.string   "phone"
     t.string   "dropbox_access_token"
     t.string   "dropbox_user_id"
