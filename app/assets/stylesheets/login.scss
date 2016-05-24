@@ -84,6 +84,7 @@
 }
 
 .full-screen {
+  width: calc(100% + 17px) !important;
   display: flex;
   flex-direction: column;
   height: 100% !important;
