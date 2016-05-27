@@ -15,3 +15,8 @@
 /log/*.log
 /tmp
 
+/public/system
+
+# custom files
+.env
+conventions.txt
