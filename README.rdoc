@@ -1,32 +1,33 @@
 == README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Git flow: 
+# Flickfeeder
+## Git flow: 
 0) your local repo should have two remotes:
-    - heroku -> https://git.heroku.com/flickfeeder.git
-    - heorku-staging -> https://git.heroku.com/flickfeeder-staging.git
-    if not add them with `$ git remote add ...
-1) local branches should be at least:
+- heroku -> https://git.heroku.com/flickfeeder.git
+- heorku-staging -> https://git.heroku.com/flickfeeder-staging.git
+if not add them with `$ git remote add ...`
+1) You should have 2 local branches:
 - staging
 - master
 2) make them track their corresponding remotes
-- for staging app, i.e. heroku-staging:
-    on the master branch, type: 
-    `$ git checkout -b staging --track heroku-staging/master`
-    Result: now on "staging" branch, typing `$ git push will push automatically to heroku-staging/masters
-- for prod app, i.e. heroku:
-    on the master branch, type:
-    `$ git branch --set-upstream-to heroku/master master`
-    Result: now on "master" branch, typing `$ git push` will push automatically to heroku/master
+- for staging app (i.e. heroku-staging):
+on the master branch, type: 
+`$ git checkout -b staging --track heroku-staging/master`
+Now on "staging" branch, if you type 
+`$ git push`
+it will push automatically to heroku-staging/masters
+- for prod app (i.e. heroku):
+on the master branch, type:
+`$ git branch --set-upstream-to heroku/master master`
+Now on "master" branch, if you type
+`$ git push`
+it will push automatically to heroku/master
 3) branch out on a new branch when working on smg:
 - bug/(name) when fixing a bug
 - feature/(name) when creating a new feature
 4) when done merge to "staging" branch
 5) test locally (i.e. http://localhost:3000), if works go to 6)
-6) push to staging envrionment (i.e. on heroku-staging/master), if works go to 
-7) merge locally to master and push to production environment (i.i. on heroku/master)
+6) push to staging envrionment (i.e. on heroku-staging/master), if works go to 7
+7) merge locally to master and push to production environment (i.e. on heroku/master)
 
 Development: 
 - create .env file in your local repo and asks for keys and secrets. At time of writing, you should have the following:
@@ -39,25 +40,3 @@ Development:
 - to test dropbox webhook: 
 (on OSX with python installed)
 $ python dropbox_hook.py notify http://localhost:<PORT>/dropbox/webhook --secret <DROPBOX_SECRET_DEV> --user 1
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
