@@ -34,4 +34,7 @@ class MediasController < ApplicationController
         binding.pry
     end
 
+    def testttttt
+    end
+
 end
