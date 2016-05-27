@@ -5,7 +5,10 @@ class MediasController < ApplicationController
 
     def index
         @dropbox_thumbnails = []
+                puts '-1**************************'
         if(hasDropboxAccount?(current_user))
+                    puts '0**************************'
+
             @dropbox_thumbnails = get_dropbox_thumbnails
 
         end
