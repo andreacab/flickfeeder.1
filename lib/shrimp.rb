@@ -6,9 +6,7 @@ class Shrimp
 
     # Class methods
     def self.has_client(user_id)
-        puts '####### 999 ######'
         @@clients.index do |client| 
-            puts client.env["rack.session"]["warden.user.user.key"]
             client.env["rack.session"]["warden.user.user.key"][0][0] == user_id
         end > -1 
     end
