@@ -7,7 +7,6 @@ class MediasController < ApplicationController
         @dropbox_thumbnails = []
         if(hasDropboxAccount?(current_user))
             @dropbox_thumbnails = get_dropbox_thumbnails
-
         end
 	end
 
@@ -16,9 +15,14 @@ class MediasController < ApplicationController
     def get_dropbox_thumbnails
         thumbs = []
         res = list_folder({ path: "", recursive: true, include_media_info: true }, current_user.dropbox_access_token)
-        entries = JSON.parse(res.body)['entries']
-        current_user.dropbox_cursor = JSON.parse(res.body)['cursor']
-        current_user.save!
+        data = JSON.parse(res.body)
+        entries = data['entries']
+        cursor = data['cursor']
+        
+        if cursor
+            current_user.dropbox_cursor = cursor
+            current_user.save!
+        end
 
         entries.each do |item|
             if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
@@ -28,13 +32,6 @@ class MediasController < ApplicationController
         end
 
         return thumbs
-    end
-
-    def stream
-        binding.pry
-    end
-
-    def testttttt
     end
 
 end
