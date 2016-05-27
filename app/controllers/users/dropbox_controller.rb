@@ -48,7 +48,7 @@ class Users::DropboxController < ApplicationController
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
                 puts '*********** 1 ***********'
                 puts user.inspect
-                puts Shrimp.clients.inspect
+                puts Shrimp.has_client(user.id)
                 if (Shrimp.has_client(user.id))
                     puts '*********** 2 ***********'
                     if user.dropbox_access_token && user.dropbox_cursor
