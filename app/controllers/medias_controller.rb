@@ -19,10 +19,10 @@ class MediasController < ApplicationController
         entries = data['entries']
         cursor = data['cursor']
         
-        # if cursor
-        #     current_user.dropbox_cursor = JSON.parse(res.body)['cursor']
-        #     current_user.save!
-        # end
+        if cursor
+            # current_user.dropbox_cursor = JSON.parse(res.body)['cursor']
+            # current_user.save!
+        end
 
         entries.each do |item|
             if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
