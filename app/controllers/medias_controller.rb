@@ -19,7 +19,13 @@ class MediasController < ApplicationController
         entries = JSON.parse(res.body)['entries']
         current_user.dropbox_cursor = JSON.parse(res.body)['cursor']
         current_user.save!
+        puts '**************************'
+        puts '**************************'
+        puts '**************************'
         puts res
+        puts '**************************'
+        puts '**************************'
+        puts '**************************'
         entries.each do |item|
             if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
                 res = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
