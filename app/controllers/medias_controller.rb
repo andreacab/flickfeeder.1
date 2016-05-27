@@ -21,8 +21,8 @@ class MediasController < ApplicationController
         entries = JSON.parse(res.body)['entries']
         puts '3**************************'
         puts res
-        # current_user.dropbox_cursor = JSON.parse(res.body)['cursor']
-        # puts '4**************************'
+        current_user.dropbox_cursor = JSON.parse(res.body)['cursor']
+        puts '4**************************'
         # current_user.save!
         # puts '5**************************'
 
