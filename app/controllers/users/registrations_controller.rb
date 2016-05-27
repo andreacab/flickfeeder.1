@@ -4,14 +4,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     super
-    if current_user
-      first_name = params[:user]["first_name"] = params[:user]["first_name"].capitalize
-      last_name = params[:user]["last_name"] = params[:user]["last_name"].capitalize
-      current_user.update_attributes(first_name: first_name, last_name: last_name)
-      
-      if current_user.email.include?('@flickfeeder.com')
-        current_user.update_attributes(user_type: "admin")
-      end
+    first_name = params[:user]["first_name"] = params[:user]["first_name"].capitalize
+    last_name = params[:user]["last_name"] = params[:user]["last_name"].capitalize
+    current_user.update_attributes(first_name: first_name, last_name: last_name)
+    
+    if current_user.email.include?('@flickfeeder.com')
+      current_user.update_attributes(user_type: "admin")
     end
   end
 
