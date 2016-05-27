@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '2.2.4'
-
 # Simulate real ENV/config variables only for dev and test environment
 gem 'dotenv-rails', :groups => [:development, :test]
 
