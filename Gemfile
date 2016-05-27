@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# Simulate real ENV/config variables only for dev and test environment
+gem 'dotenv-rails', :groups => [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
@@ -53,11 +55,12 @@ gem 'dropbox-sdk'
 gem 'carrierwave'
 gem 'cloudinary'
 
-gem 'websocket-native'
-gem 'websocket'
-
 gem "bootstrap-switch-rails"
 gem "font-awesome-rails"
+
+gem "faye-websocket"
+gem "puma"
+gem "rack-timeout"
 
 group :development do
   gem 'pry-rails'

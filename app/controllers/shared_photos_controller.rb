@@ -25,7 +25,6 @@ class SharedPhotosController < ApplicationController
 
     def check_token
       if !Token.where(token: params[:token]).any?
-        # binding.pry
         redirect_to controller: 'shared_photos', action: 'client_access', failed: 'true'
       end
     end
