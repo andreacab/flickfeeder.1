@@ -60,9 +60,11 @@ gem 'cloudinary'
 gem "bootstrap-switch-rails"
 gem "font-awesome-rails"
 
-gem "faye-websocket"
 gem "puma"
 gem "rack-timeout"
+gem "faye-websocket"
+
+gem 'rails_12factor', group: :production
 
 group :development do
   gem 'pry-rails'
