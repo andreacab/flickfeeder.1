@@ -28,8 +28,9 @@ class Shrimp
     end
 
     def call(env)
+        puts '***** WS IN SHRIMP *****'
         if Faye::WebSocket.websocket?(env)
-
+            puts '***** WS IT IS!! *****'
             puts websocket_string
             
             # Send every KEEPALIVE_TIME sec a ping for keeping the connection open.
