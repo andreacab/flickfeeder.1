@@ -4,7 +4,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     super
-    binding.pry
     if current_user
       first_name = params[:user]["first_name"] = params[:user]["first_name"].capitalize
       last_name = params[:user]["last_name"] = params[:user]["last_name"].capitalize
