@@ -30,7 +30,6 @@ class Shrimp
     end
 
     def call(env)
-        puts '***** WS IN SHRIMP *****'
         if Faye::WebSocket.websocket?(env)
             puts websocket_string
             
