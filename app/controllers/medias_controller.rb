@@ -20,8 +20,8 @@ class MediasController < ApplicationController
         cursor = data['cursor']
         
         if cursor
-            # current_user.dropbox_cursor = JSON.parse(res.body)['cursor']
-            # current_user.save!
+            current_user.dropbox_cursor = JSON.parse(res.body)['cursor']
+            current_user.save!
         end
 
         entries.each do |item|
