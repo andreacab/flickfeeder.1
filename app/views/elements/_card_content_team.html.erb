@@ -1,4 +1,4 @@
-<% if @teammates != [] %>
+<% if @teammates && @teammates != [] %>
   <% @teammates.each do |teammate| %>
     <%= link_to teammate_path(teammate) do%>
       <div class="teammate">
