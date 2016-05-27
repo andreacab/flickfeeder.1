@@ -18,8 +18,9 @@ class MediasController < ApplicationController
         thumbs = []
         res = list_folder({ path: "", recursive: true, include_media_info: true }, current_user.dropbox_access_token)
         puts '2**************************'
-        # entries = JSON.parse(res.body)['entries']
-        # puts '3**************************'
+        entries = JSON.parse(res.body)['entries']
+        puts '3**************************'
+        puts res
         # current_user.dropbox_cursor = JSON.parse(res.body)['cursor']
         # puts '4**************************'
         # current_user.save!
