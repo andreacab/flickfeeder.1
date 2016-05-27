@@ -16,8 +16,8 @@ class MediasController < ApplicationController
     def get_dropbox_thumbnails
         puts '1**************************'
         thumbs = []
-        # res = list_folder({ path: "", recursive: true, include_media_info: true }, current_user.dropbox_access_token)
-        # puts '2**************************'
+        res = list_folder({ path: "", recursive: true, include_media_info: true }, current_user.dropbox_access_token)
+        puts '2**************************'
         # entries = JSON.parse(res.body)['entries']
         # puts '3**************************'
         # current_user.dropbox_cursor = JSON.parse(res.body)['cursor']
