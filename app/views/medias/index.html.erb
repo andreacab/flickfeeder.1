@@ -10,7 +10,6 @@
         ws.onopen = function (event) {
             console.log('[FFWebsocketManager] Opeing ws!!');
             ws.send('[FFWebsocketManager] Can you hear me?', event);
-            // console.log(getCookie('_flickfeeder_session'));
         };
         
         ws.onmessage = function (event) {
