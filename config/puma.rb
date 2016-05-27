@@ -5,8 +5,8 @@
 # => max db connections (i.e. "20" for us using Hobby tier Heroku Postgres plan )
 # => number of threads (i.e. "1" because we are not thread safe yet)
 # => number of puma processes (i.e. 2)
-# => one thread take up 1 db connection
-# => one process take up 1 db connection (in that configuration, our app can start up up to 10 dynos at most)   
+# => threads share the db connection pool
+# => each process has its own db connection pool (in that configuration, our app can start up up to 10 dynos at most)   
 # 3) With free, hobby or standard-1x dyno, use between 2 and 4 puma worker processes. Watch for R14 errors with '$ heroku logs' which indicates too much RAM is used
 # 4) Thread consumes more CPU && Puma Worker Processes consume more RAM
 # 5) To test if flickfeeder works well under a threaded enviroment, increase thread number in corresponding config vars: 

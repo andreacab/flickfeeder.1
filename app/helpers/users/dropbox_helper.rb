@@ -23,6 +23,17 @@ module Users::DropboxHelper
         )
     end
 
+    def list_folder_continue(data, access_token)
+        res = post_req(
+            'https://api.dropboxapi.com/2/files/list_folder/continue',
+            data,
+            {
+                'Authorization' => 'Bearer ' + access_token, 
+                'Content-type' => 'application/json'
+            }
+        )
+    end
+
     def hasDropboxAccount?(user)
         !!user.dropbox_access_token
     end
@@ -30,9 +41,9 @@ module Users::DropboxHelper
     def is_valid_webhook(data, hmac_header)
         digest = OpenSSL::Digest::SHA256.new
         if Rails.env.production?
-            calculated_hmac = OpenSSL::HMAC.hexdigest(digest, DROPBOX_SECRET, data).strip
+            calculated_hmac = OpenSSL::HMAC.hexdigest(digest, ENV['DROPBOX_SECRET'], data).strip
         else
-            calculated_hmac = OpenSSL::HMAC.hexdigest(digest, DROPBOX_SECRET_DEV, data).strip
+            calculated_hmac = OpenSSL::HMAC.hexdigest(digest, ENV['DROPBOX_SECRET_DEV'], data).strip
         end
         calculated_hmac == hmac_header
     end

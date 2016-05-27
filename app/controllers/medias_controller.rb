@@ -1,5 +1,6 @@
 require 'users/dropbox_helper'
 
+
 class MediasController < ApplicationController
     include Users::DropboxHelper
 
@@ -27,6 +28,10 @@ class MediasController < ApplicationController
         end
 
         return thumbs
+    end
+
+    def update_thumbnails
+        
     end
 
 end

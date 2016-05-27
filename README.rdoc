@@ -5,6 +5,15 @@ application up and running.
 
 Things you may want to cover:
 
+Development app: 
+- to test dropbox webhook, refers to: 
+(on OSX with python installed)
+$ python dropbox_hook.py notify http://localhost:<PORT>/dropbox/webhook --secret <DROPBOX_SECRET_DEV> --user 1
+
+Staging app:
+
+Prod app:
+
 * Ruby version
 
 * System dependencies
