@@ -10,9 +10,9 @@ class Users::DropboxController < ApplicationController
 
     def enable
         if Rails.env.production?
-            @@flow = DropboxOAuth2Flow.new(ENV["DROPBOX_KEY"], ENV["DROPBOX_SECRET"], "https://flickfeeder.herokuapp.com/dropbox/redirect", session, :dropboxToken)
+            @@flow = DropboxOAuth2Flow.new(ENV["DROPBOX_KEY"], ENV["DROPBOX_SECRET"], ENV["DROPBOX_REDIRECT"], session, :dropboxToken)
         else
-            @@flow = DropboxOAuth2Flow.new(ENV["DROPBOX_KEY_DEV"], ENV["DROPBOX_SECRET_DEV"], "http://localhost:3000/dropbox/redirect", session, :dropboxToken)
+            @@flow = DropboxOAuth2Flow.new(ENV["DROPBOX_KEY_DEV"], ENV["DROPBOX_SECRET_DEV"], ENV["DROPBOX_REDIRECT"], session, :dropboxToken)
         end
         authorize_url = @@flow.start()
         redirect_to(authorize_url)
@@ -43,17 +43,32 @@ class Users::DropboxController < ApplicationController
         
         # logic on a separate thread as we need to respond to the webhook as quickly as possible.
         Thread.new do
+            new_thumbs = []
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
                 
                 if (Shrimp.has_client(user.id))
                     if user.dropbox_access_token && user.dropbox_cursor
                         res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
+                        entries = JSON.parse(res.body)['entries']
+                        entries.each do |item|
+                            if ( item['.tag'] == 'photo' )
+                                data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
+                                new_thumbs.push(JSON.parse(data.body))
+                            end
+                        end
                     elsif user.dropbox_access_token
                         res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
+                        entries = JSON.parse(res.body)['entries']
+                        entries.each do |item|
+                            if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
+                                data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
+                                new_thumbs.push(JSON.parse(data.body))
+                            end
+                        end
                     end
 
-                    Shrimp.send_message_to_client(user.id, "your folder changed!")
+                    Shrimp.send_message_to_client(user.id, new_thumbs.to_json)
                 end
             end
         end
