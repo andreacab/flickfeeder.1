@@ -87,8 +87,10 @@ class Shrimp
         puts '******* 5 *******'
         @@clients.each do |client|
             puts '******* 6 *******'
+            puts @@clients.size
             puts @@clients
-            puts client
+            puts @@clients.inspect
+            puts client.inspect
             puts client.env["rack.session"].inspect
             client.env["rack.session"]["warden.user.user.key"].inspect
             if(client.env["rack.session"]["warden.user.user.key"][0][0] == user_id)
