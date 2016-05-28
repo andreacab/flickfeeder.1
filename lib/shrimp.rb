@@ -10,6 +10,7 @@ class Shrimp
         puts '******** 2 ********'
         puts user_id
         puts @@clients
+        puts @@clients.class
         puts @@clients.size
         client_index = @@clients.index do |client|
             self.load_session(client)
@@ -39,7 +40,7 @@ class Shrimp
 
     # Instance methods
     def initialize(app)
-      @app     = app
+      @app = app
     end
 
     def call(env)
