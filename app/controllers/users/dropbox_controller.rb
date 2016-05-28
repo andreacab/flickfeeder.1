@@ -55,15 +55,18 @@ class Users::DropboxController < ApplicationController
                         p res.body
                         puts 'LIST FOLDER ENTRIES'
                         puts entries
-                        # entries.each do |item|
-                        #     puts '******* 5 *******'
-                        #     if ( item['media_info']['metadata']['.tag'] == 'photo' )
-                        #         puts '******* 6 *******'
-                        #         data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
-                        #         p data.body
-                        #         new_thumbs.push(JSON.parse(data.body))
-                        #     end
-                        # end
+                        # puts 'LIST WS CLIENT IDS'
+                        # puts Shrimp.clients
+                        entries.each do |item|
+                            puts 'ITEM IS:'
+                            puts item
+                            # if ( item['media_info']['metadata']['.tag'] == 'photo' )
+                            #     puts '******* 6 *******'
+                            #     data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
+                            #     p data.body
+                            #     new_thumbs.push(JSON.parse(data.body))
+                            # end
+                        end
                     # elsif user.dropbox_access_token
 
                     #     res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
