@@ -16,7 +16,6 @@ class Shrimp
             self.load_session(client)
             client.env["rack.session"]["warden.user.user.key"][0][0] == user_id
         end
-        puts client_index
         !!( client_index && ( client_index > -1 ) )
     end
 
@@ -44,6 +43,7 @@ class Shrimp
     end
 
     def call(env)
+        env['rack.shrimp'] = self
         if Faye::WebSocket.websocket?(env)
             puts websocket_string
             
