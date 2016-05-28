@@ -9,7 +9,7 @@ class Shrimp
     class << self
 
         def clients
-            puts 'NUMBER OF CONNECTED WS CLIENTS: ' + clients.size.to_s
+            puts 'NUMBER OF CONNECTED WS CLIENTS: ' + @@clients.size.to_s
             @@clients
         end
 
