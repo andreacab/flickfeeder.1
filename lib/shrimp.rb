@@ -13,7 +13,9 @@ class Shrimp
     end
 
     def self.clients
-        @@clients
+        @@clients.map do |client|
+            client.env["rack.session"]["warden.user.user.key"][0][0] 
+        end
     end
 
     def self.send_message_to_client(user_id, data)

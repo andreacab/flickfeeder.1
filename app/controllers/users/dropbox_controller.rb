@@ -46,7 +46,11 @@ class Users::DropboxController < ApplicationController
             new_thumbs = []
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
+                puts '******* 1 *******'
+                puts Shrimp.clients
+                puts '******* 2 *******'
                 puts user.inspect
+                puts '******* 3 *******'
                 # if (Shrimp.has_client(user.id))
                 #     puts '******* 2 *******'
                     # if user.dropbox_access_token && user.dropbox_cursor
