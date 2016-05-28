@@ -54,18 +54,17 @@ class Users::DropboxController < ApplicationController
                         res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
                         entries = JSON.parse(res.body)['entries']
                         puts '******* 4 ********'
-                        p res
                         p res.body
                         puts entries
-                        # entries.each do |item|
-                        #     puts '******* 5 *******'
-                        #     if ( item['.tag'] == 'photo' )
-                        #         puts '******* 6 *******'
-                        #         data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
-                        #         puts data
-                        #         new_thumbs.push(JSON.parse(data.body))
-                        #     end
-                        # end
+                        entries.each do |item|
+                            puts '******* 5 *******'
+                            if ( item['.tag'] == 'photo' )
+                                puts '******* 6 *******'
+                                data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
+                                p data.body
+                                new_thumbs.push(JSON.parse(data.body))
+                            end
+                        end
                     # elsif user.dropbox_access_token
 
                     #     res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
