@@ -46,41 +46,40 @@ class Users::DropboxController < ApplicationController
             new_thumbs = []
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
-                puts user.inspect
                 if (Shrimp.has_client(user.id))
                     puts '******* 2 *******'
-                    if user.dropbox_access_token && user.dropbox_cursor
+                    # if user.dropbox_access_token && user.dropbox_cursor
 
-                        res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
-                        entries = JSON.parse(res.body)['entries']
-                        puts '******* 3 *******'
-                        puts res.inspect
-                        puts '******* 4 *******'
-                        puts entries.inspect
-                        puts entries.size
-                        entries.each do |item|
-                            puts '******* 5 *******'
-                            if ( item['.tag'] == 'photo' )
-                                data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
-                                new_thumbs.push(JSON.parse(data.body))
-                            end
-                        end
-                    elsif user.dropbox_access_token
+                    #     res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
+                    #     entries = JSON.parse(res.body)['entries']
+                    #     puts '******* 3 *******'
+                    #     puts res.inspect
+                    #     puts '******* 4 *******'
+                    #     puts entries.inspect
+                    #     puts entries.size
+                    #     entries.each do |item|
+                    #         puts '******* 5 *******'
+                    #         if ( item['.tag'] == 'photo' )
+                    #             data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
+                    #             new_thumbs.push(JSON.parse(data.body))
+                    #         end
+                    #     end
+                    # elsif user.dropbox_access_token
 
-                        res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
-                        entries = JSON.parse(res.body)['entries']
-                        puts '******* 7 *******'
-                        puts res.inspect
-                        puts '******* 8 *******'
-                        puts entries.inspect
-                        entries.each do |item|
-                            puts '******* 9 *******'
-                            if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
-                                data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
-                                new_thumbs.push(JSON.parse(data.body))
-                            end
-                        end
-                    end
+                    #     res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
+                    #     entries = JSON.parse(res.body)['entries']
+                    #     puts '******* 7 *******'
+                    #     puts res.inspect
+                    #     puts '******* 8 *******'
+                    #     puts entries.inspect
+                    #     entries.each do |item|
+                    #         puts '******* 9 *******'
+                    #         if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
+                    #             data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
+                    #             new_thumbs.push(JSON.parse(data.body))
+                    #         end
+                    #     end
+                    # end
 
                     Shrimp.send_message_to_client(user.id, new_thumbs.to_json)
                 end
