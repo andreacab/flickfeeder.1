@@ -48,7 +48,9 @@ class Users::DropboxController < ApplicationController
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
                 puts user.inspect
                 if (Shrimp.has_client(user.id))
+                    puts '******* 2 *******'
                     if user.dropbox_access_token && user.dropbox_cursor
+                        puts '******* 3 *******'
                         res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
                         entries = JSON.parse(res.body)['entries']
                         puts res.inspect
@@ -60,6 +62,7 @@ class Users::DropboxController < ApplicationController
                             end
                         end
                     elsif user.dropbox_access_token
+                        puts '******* 3 *******'
                         res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
                         entries = JSON.parse(res.body)['entries']
                         puts res.inspect
