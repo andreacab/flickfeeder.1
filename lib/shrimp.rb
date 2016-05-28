@@ -3,6 +3,7 @@ require 'faye/websocket'
 class Shrimp
     # Heroku has a 50 seconds idle connection time limit. 
     KEEPALIVE_TIME = 15 # in seconds
+    @@clients = []
 
     # Class methods
     def self.has_client?(user_id)
@@ -10,12 +11,12 @@ class Shrimp
         puts user_id
         puts @@clients
         puts @@clients.size
-        index = @@clients.index do |client|
+        client_index = @@clients.index do |client|
             self.load_session(client)
             client.env["rack.session"]["warden.user.user.key"][0][0] == user_id
         end
-        puts index
-        !!( index && ( index > -1 ) )
+        puts client_index
+        !!( client_index && ( client_index > -1 ) )
     end
 
     def self.say_hi
@@ -39,7 +40,6 @@ class Shrimp
     # Instance methods
     def initialize(app)
       @app     = app
-      @@clients = []
     end
 
     def call(env)
