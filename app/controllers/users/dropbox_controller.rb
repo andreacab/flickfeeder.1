@@ -47,7 +47,6 @@ class Users::DropboxController < ApplicationController
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
                 puts user.inspect
-                puts Shrimp.has_client(user.id)
                 if (Shrimp.has_client(user.id))
                     if user.dropbox_access_token && user.dropbox_cursor
                         res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
