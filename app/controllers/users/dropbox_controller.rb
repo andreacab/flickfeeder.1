@@ -1,5 +1,6 @@
 require 'dropbox_sdk'
 require 'shrimp'
+require 'users/dropbox_helper'
 
 class Users::DropboxController < ApplicationController
     skip_before_filter :verify_authenticity_token, :only => [:webhook]
@@ -53,7 +54,7 @@ class Users::DropboxController < ApplicationController
                         res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
                         entries = JSON.parse(res.body)['entries']
                         puts '******* 4 ********'
-                        # puts entries
+                        puts entries
                         # entries.each do |item|
                         #     puts '******* 5 *******'
                         #     if ( item['.tag'] == 'photo' )

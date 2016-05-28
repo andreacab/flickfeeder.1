@@ -8,6 +8,7 @@ class Shrimp
     def self.has_client?(user_id)
         puts '******** 2 ********'
         puts user_id
+        puts @@clients
         puts @@clients.size
         index = @@clients.index do |client|
             self.load_session(client)
