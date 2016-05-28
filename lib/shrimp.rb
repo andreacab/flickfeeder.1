@@ -85,11 +85,11 @@ class Shrimp
 
     def self.find_client(user_id)
         puts '******* 5 *******'
+        puts @@clients
+        puts @@clients.size
+        puts @@clients.inspect
         @@clients.each do |client|
             puts '******* 6 *******'
-            puts @@clients.size
-            puts @@clients
-            puts @@clients.inspect
             puts client.inspect
             puts client.env["rack.session"].inspect
             client.env["rack.session"]["warden.user.user.key"].inspect
