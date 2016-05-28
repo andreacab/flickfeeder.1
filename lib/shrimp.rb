@@ -24,8 +24,6 @@ class Shrimp
 
     def self.send_message_to_client(user_id, data)
         puts '******* 4 *******'
-        puts user_id
-        puts data
         Shrimp.find_client(user_id).send(data)
     end
 
@@ -50,6 +48,8 @@ class Shrimp
                 puts '***** WS OPEN *****'
                 p [:open, ws.object_id]
                 @@clients << ws
+                puts @@clients.size
+                puts @@clients
             end
 
             ws.on :message do |event|
@@ -87,7 +87,7 @@ class Shrimp
         puts '******* 5 *******'
         @@clients.each do |client|
             puts '******* 6 *******'
-            if client.env["rack.session"]["warden.user.user.key"][0][0] == user_id
+            if(client.env["rack.session"]["warden.user.user.key"][0][0] == user_id)
                 return client
             end
         end
