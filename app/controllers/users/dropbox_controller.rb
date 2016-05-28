@@ -58,7 +58,7 @@ class Users::DropboxController < ApplicationController
                         puts entries
                         entries.each do |item|
                             puts '******* 5 *******'
-                            if ( item['.tag'] == 'photo' )
+                            if ( item['media_info']['metadata']['.tag'] == 'photo' )
                                 puts '******* 6 *******'
                                 data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
                                 p data.body
