@@ -6,10 +6,11 @@ class Shrimp
 
     # Class methods
     def self.has_client(user_id)
-        @@clients.index do |client|
+        index = @@clients.index do |client|
             self.load_session(client)
             client.env["rack.session"]["warden.user.user.key"][0][0] == user_id
-        end > -1 
+        end
+        index && ( index > -1 )
     end
 
     def self.say_hi
