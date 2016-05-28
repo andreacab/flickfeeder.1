@@ -12,7 +12,7 @@ class Users::DropboxController < ApplicationController
         if Rails.env.production?
             @@flow = DropboxOAuth2Flow.new(ENV["DROPBOX_KEY"], ENV["DROPBOX_SECRET"], 'https://' + ENV["HOST"] + '/dropbox/redirect', session, :dropboxToken)
         else
-            @@flow = DropboxOAuth2Flow.new(ENV["DROPBOX_KEY_DEV"], ENV["DROPBOX_SECRET_DEV"], 'https://' + ENV["HOST"] + '/dropbox/redirect', session, :dropboxToken)
+            @@flow = DropboxOAuth2Flow.new(ENV["DROPBOX_KEY_DEV"], ENV["DROPBOX_SECRET_DEV"], 'http://' + ENV["HOST"] + '/dropbox/redirect', session, :dropboxToken)
         end
         authorize_url = @@flow.start()
         redirect_to(authorize_url)
