@@ -47,7 +47,7 @@ class Users::DropboxController < ApplicationController
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
                 puts '******* 1 *******'
-                puts Shrimp.clients
+                puts Shrimp.say_hi
                 puts '******* 2 *******'
                 puts user.inspect
                 puts '******* 3 *******'

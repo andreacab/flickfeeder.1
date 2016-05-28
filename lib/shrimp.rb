@@ -12,6 +12,10 @@ class Shrimp
         end > -1 
     end
 
+    def self.say_hi
+        puts "HELLO!!!!!!!!!!"
+    end
+
     def self.clients
         @@clients.map do |client|
             client.env["rack.session"]["warden.user.user.key"][0][0] 
