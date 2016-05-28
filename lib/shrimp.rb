@@ -23,7 +23,6 @@ class Shrimp
     end
 
     def self.send_message_to_client(user_id, data)
-        puts '******* 4 *******'
         Shrimp.find_client(user_id).send(data)
     end
 
@@ -48,8 +47,6 @@ class Shrimp
                 puts '***** WS OPEN *****'
                 p [:open, ws.object_id]
                 @@clients << ws
-                puts @@clients.size
-                puts @@clients
             end
 
             ws.on :message do |event|
@@ -84,18 +81,20 @@ class Shrimp
     end
 
     def self.find_client(user_id)
-        puts '******* 5 *******'
-        puts @@clients.size
         @@clients.each do |client|
-            puts '******* 6 *******'
-            p client
-            p client.env
-            puts client.env["rack.session"].inspect
-            client.env["rack.session"]["warden.user.user.key"].inspect
+            # need to load session manually as it is loaded lazily in rails
+            self.load_session(client)
+            puts client.env["rack.session"]["warden.user.user.key"].inspect
             if(client.env["rack.session"]["warden.user.user.key"][0][0] == user_id)
                 return client
             end
         end
         nil
+    end
+
+    def self.load_session(client)
+        if !client.env["rack.session"].loaded?
+            client.env["rack.session"][:init] = true
+        end
     end
 end 
