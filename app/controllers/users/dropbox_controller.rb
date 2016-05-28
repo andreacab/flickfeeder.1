@@ -48,21 +48,17 @@ class Users::DropboxController < ApplicationController
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
                 if (Shrimp.has_client(user.id))
                     if user.dropbox_access_token && user.dropbox_cursor
-                        puts '******* 2 *******'
                         res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
                         entries = JSON.parse(res.body)['entries']
-                        puts '******* 3 *******'
-                        puts res.inspect
-                        puts '******* 4 *******'
-                        puts entries.inspect
-                        puts entries.size
-                    #     entries.each do |item|
-                    #         puts '******* 5 *******'
-                    #         if ( item['.tag'] == 'photo' )
-                    #             data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
-                    #             new_thumbs.push(JSON.parse(data.body))
-                    #         end
-                    #     end
+                        entries.each do |item|
+                            puts '******* 5 *******'
+                            if ( item['.tag'] == 'photo' )
+                                puts '******* 6 *******'
+                                data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
+                                puts data
+                                new_thumbs.push(JSON.parse(data.body))
+                            end
+                        end
                     # elsif user.dropbox_access_token
 
                     #     res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
