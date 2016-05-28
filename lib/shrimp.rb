@@ -52,12 +52,14 @@ class Shrimp
                 puts '***** WS OPEN *****'
                 p [:open, ws.object_id]
                 @@clients << ws
+                puts @@clients.size
             end
 
             ws.on :message do |event|
                 puts '***** WS INCOMING MESSAGE *****'
                 p [:message, event.data]
                 @@clients.each { |client| client.send(event.data) }
+                puts @@clients.size
             end
 
             ws.on :close do |event|
@@ -65,6 +67,7 @@ class Shrimp
                 p [:close, ws.object_id, event.code, event.reason]
                 @@clients.delete(ws)
                 ws = nil
+                puts @@clients.size
             end
 
             ws.on :error do |event|
