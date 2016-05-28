@@ -7,6 +7,7 @@ class Shrimp
     # Class methods
     def self.has_client(user_id)
         @@clients.index do |client|
+            self.load_session(client)
             client.env["rack.session"]["warden.user.user.key"][0][0] == user_id
         end > -1 
     end
@@ -44,7 +45,6 @@ class Shrimp
 
             ws.on :open do |event|
                 puts '***** WS OPEN *****'
-                self.load_session(ws)
                 p [:open, ws.object_id]
                 @@clients << ws
             end
@@ -83,7 +83,7 @@ class Shrimp
     def self.find_client(user_id)
         @@clients.each do |client|
             # need to load session manually as it is loaded lazily in rails
-            # self.load_session(client)
+            self.load_session(client)
             if(client.env["rack.session"]["warden.user.user.key"][0][0] == user_id)
                 return client
             end
