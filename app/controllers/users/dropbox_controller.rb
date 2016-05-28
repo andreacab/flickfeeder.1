@@ -46,7 +46,9 @@ class Users::DropboxController < ApplicationController
             new_thumbs = []
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
-                if (Shrimp.has_client(user.id))
+                puts '******* 1 *********'
+                if (Shrimp.has_client?(user.id))
+                    puts '******** 3 ********'
                     if user.dropbox_access_token && user.dropbox_cursor
                         res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
                         entries = JSON.parse(res.body)['entries']

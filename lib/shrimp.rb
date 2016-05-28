@@ -5,12 +5,16 @@ class Shrimp
     KEEPALIVE_TIME = 15 # in seconds
 
     # Class methods
-    def self.has_client(user_id)
+    def self.has_client?(user_id)
+        puts '******** 2 ********'
+        puts user_id
+        puts @@clients.size
         index = @@clients.index do |client|
             self.load_session(client)
             client.env["rack.session"]["warden.user.user.key"][0][0] == user_id
         end
-        index && ( index > -1 )
+        puts index
+        !!( index && ( index > -1 ) )
     end
 
     def self.say_hi
