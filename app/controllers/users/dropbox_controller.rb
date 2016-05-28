@@ -52,9 +52,11 @@ class Users::DropboxController < ApplicationController
                     puts '******** 3 ********'
                     if user.dropbox_access_token && user.dropbox_cursor
                         res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
-                        # entries = JSON.parse(res.body)['entries']
+                        entries = JSON.parse(res.body)['entries']
                         puts '******* 4 ********'
-                        puts res.to_hash
+                        p res
+                        p res.body
+                        puts entries
                         # entries.each do |item|
                         #     puts '******* 5 *******'
                         #     if ( item['.tag'] == 'photo' )
