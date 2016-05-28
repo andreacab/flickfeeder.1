@@ -9,9 +9,9 @@ class Shrimp
     def self.has_client?(user_id)
         puts '******** 2 ********'
         puts user_id
-        puts @@clients.class
-        puts @@clients.size
-        client_index = @@clients.index do |client|
+        puts Shrimp.clients.class
+        puts Shrimp.clients.size
+        client_index = Shrimp.clients.index do |client|
             self.load_session(client)
             client.env["rack.session"]["warden.user.user.key"][0][0] == user_id
         end
@@ -23,9 +23,8 @@ class Shrimp
     end
 
     def self.clients
-        @@clients.map do |client|
-            client.env["rack.session"]["warden.user.user.key"][0][0] 
-        end
+        puts 'NUMBER OF CONNECTED WS CLIENTS: ' + Shrimp.clients.size.to_s
+        Shrimp.clients
     end
 
     def self.send_message_to_client(user_id, data)
@@ -33,7 +32,7 @@ class Shrimp
     end
 
     def self.send_to_all_clients(data)
-        @@clients.each { |client| client.send(data) }
+        Shrimp.clients.each { |client| client.send(data) }
     end
 
     # Instance methods
@@ -52,23 +51,23 @@ class Shrimp
             ws.on :open do |event|
                 puts '***** WS OPEN *****'
                 p [:open, ws.object_id]
-                @@clients << ws
-                puts @@clients.size
+                Shrimp.clients << ws
+                puts Shrimp.clients.size
             end
 
             ws.on :message do |event|
                 puts '***** WS INCOMING MESSAGE *****'
                 p [:message, event.data]
-                @@clients.each { |client| client.send(event.data) }
-                puts @@clients.size
+                Shrimp.clients.each { |client| client.send(event.data) }
+                puts Shrimp.clients.size
             end
 
             ws.on :close do |event|
                 puts '***** WS CLOSE *****'
                 p [:close, ws.object_id, event.code, event.reason]
-                @@clients.delete(ws)
+                Shrimp.clients.delete(ws)
                 ws = nil
-                puts @@clients.size
+                puts Shrimp.clients.size
             end
 
             ws.on :error do |event|
@@ -90,7 +89,7 @@ class Shrimp
     end
 
     def self.find_client(user_id)
-        @@clients.each do |client|
+        Shrimp.clients.each do |client|
             # need to load session manually as it is loaded lazily in rails
             self.load_session(client)
             if(client.env["rack.session"]["warden.user.user.key"][0][0] == user_id)
