@@ -23,6 +23,9 @@ class Shrimp
     end
 
     def self.send_message_to_client(user_id, data)
+        puts '******* 4 *******'
+        puts user_id
+        puts data
         Shrimp.find_client(user_id).send(data)
     end
 
@@ -81,7 +84,9 @@ class Shrimp
     end
 
     def self.find_client(user_id)
+        puts '******* 5 *******'
         @@clients.each do |client|
+            puts '******* 6 *******'
             if client.env["rack.session"]["warden.user.user.key"][0][0] == user_id
                 return client
             end
