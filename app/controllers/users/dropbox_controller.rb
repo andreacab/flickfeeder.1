@@ -46,10 +46,14 @@ class Users::DropboxController < ApplicationController
             new_thumbs = []
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
+                puts user.inspect
+                puts Shrimp.has_client(user.id)
                 if (Shrimp.has_client(user.id))
                     if user.dropbox_access_token && user.dropbox_cursor
                         res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
                         entries = JSON.parse(res.body)['entries']
+                        puts res.inspect
+                        puts entires.inspect
                         entries.each do |item|
                             if ( item['.tag'] == 'photo' )
                                 data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
@@ -59,6 +63,8 @@ class Users::DropboxController < ApplicationController
                     elsif user.dropbox_access_token
                         res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
                         entries = JSON.parse(res.body)['entries']
+                        puts res.inspect
+                        puts entires.inspect
                         entries.each do |item|
                             if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
                                 data = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
