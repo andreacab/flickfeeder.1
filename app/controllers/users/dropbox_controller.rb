@@ -42,7 +42,7 @@ class Users::DropboxController < ApplicationController
         return if !params['dropbox'] || !params['dropbox']['delta']
         
         # logic on a separate thread as we need to respond to the webhook as quickly as possible.
-        Thread.new do
+        # Thread.new do
             new_thumbs = []
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
@@ -89,7 +89,7 @@ class Users::DropboxController < ApplicationController
                     Shrimp.send_message_to_client(user.id, new_thumbs.to_json)
                 # end
             end
-        end
+        # end
 
         render nothing: true
     end
