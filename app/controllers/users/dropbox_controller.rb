@@ -47,16 +47,15 @@ class Users::DropboxController < ApplicationController
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
                 if (Shrimp.has_client(user.id))
-                    puts '******* 2 *******'
-                    # if user.dropbox_access_token && user.dropbox_cursor
-
-                    #     res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
-                    #     entries = JSON.parse(res.body)['entries']
-                    #     puts '******* 3 *******'
-                    #     puts res.inspect
-                    #     puts '******* 4 *******'
-                    #     puts entries.inspect
-                    #     puts entries.size
+                    if user.dropbox_access_token && user.dropbox_cursor
+                        puts '******* 2 *******'
+                        res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
+                        entries = JSON.parse(res.body)['entries']
+                        puts '******* 3 *******'
+                        puts res.inspect
+                        puts '******* 4 *******'
+                        puts entries.inspect
+                        puts entries.size
                     #     entries.each do |item|
                     #         puts '******* 5 *******'
                     #         if ( item['.tag'] == 'photo' )
@@ -79,7 +78,7 @@ class Users::DropboxController < ApplicationController
                     #             new_thumbs.push(JSON.parse(data.body))
                     #         end
                     #     end
-                    # end
+                    end
 
                     Shrimp.send_message_to_client(user.id, new_thumbs.to_json)
                 end
