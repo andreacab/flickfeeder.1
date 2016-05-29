@@ -15,7 +15,6 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-switch
-
 //= require react
 //= require react_ujs
 //= require components
