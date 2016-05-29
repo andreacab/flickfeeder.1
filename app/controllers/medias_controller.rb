@@ -29,7 +29,7 @@ class MediasController < ApplicationController
             if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
                 res = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
                 media = JSON.parse(res.body)
-                thumbs.push(media)
+                thumbs.push(media[:link])
             end
         end
 
