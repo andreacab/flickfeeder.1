@@ -56,12 +56,12 @@ class Users::DropboxController < ApplicationController
                         entries.each do |item|
                             puts 'ITEM IS:'
                             puts item
-                    #         if ( item['media_info']['metadata']['.tag'] == 'photo' )
-                    #             puts '******* 6 *******'
-                    #             data = get_temporary_link({path: item['path_lower']}, user.dropbox_access_token)
-                    #             p data.body
-                    #             new_thumbs.push(JSON.parse(data.body))
-                    #         end
+                            if ( item['media_info']['metadata']['.tag'] == 'photo' )
+                                puts '******* 6 *******'
+                                data = get_temporary_link({path: item['path_lower']}, user.dropbox_access_token)
+                                p data.body
+                                new_thumbs.push(JSON.parse(data.body))
+                            end
                         end
                     # elsif user.dropbox_access_token
 
