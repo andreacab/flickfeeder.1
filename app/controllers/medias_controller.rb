@@ -28,7 +28,8 @@ class MediasController < ApplicationController
         entries.each do |item|
             if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
                 res = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
-                thumbs.push(JSON.parse(res.body)['link'])
+                media = JSON.parse(res.body)
+                thumbs.push(media['link'])
             end
         end
 
