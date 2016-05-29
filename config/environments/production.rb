@@ -81,5 +81,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # react version
-  config.react.variant = :production
+  # config.react.variant = :production
 end
