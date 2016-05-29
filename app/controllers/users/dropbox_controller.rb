@@ -47,20 +47,17 @@ class Users::DropboxController < ApplicationController
             new_thumbs = []
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
+                
                 if (Shrimp.is_client_connected?(user.id))
                     if user.dropbox_access_token && user.dropbox_cursor
                         res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
                         entries = JSON.parse(res.body)['entries']
-                        puts 'LIST FOLDER RESPONSE BODY'
-                        p res.body
+                        p entries
                         entries.each do |item|
-                            puts 'ITEM IS:'
-                            puts item
                             if ( item['media_info']['metadata']['.tag'] == 'photo' )
-                                puts '******* 6 *******'
                                 data = get_temporary_link({path: item['path_lower']}, user.dropbox_access_token)
                                 p data.body
-                                new_thumbs.push(JSON.parse(data.body))
+                                new_thumbs.push(JSON.parse(data.body)['medadata']['link'])
                             end
                         end
                     # elsif user.dropbox_access_token
