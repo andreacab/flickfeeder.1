@@ -1,5 +1,5 @@
 <h1>Photo Stream</h1>
-<%= react_component('ThumbnailsList', { thumbnails: @dropbox_thumbnails }, { id: 'media_container' }) %>
+<%= react_component('ThumbnailsList', { thumbnails: @dropbox_thumbnails }, { prerender: true, id: 'media_container' }) %>
 
 <script type="text/javascript">
     var FFWebsocketManager = (function () {
