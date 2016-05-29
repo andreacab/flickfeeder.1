@@ -32,7 +32,7 @@ class MediasController < ApplicationController
                 thumbs.push(media['link'])
             end
         end
-
+        puts thumbs
         return thumbs
     end
 
