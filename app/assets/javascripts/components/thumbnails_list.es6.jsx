@@ -4,8 +4,8 @@ class ThumbnailsList extends React.Component {
             <div id={'medias_list'}>
                 {(!this.props.thumbnails || this.props.thumbnails.length <= 0 ) ? 
                     <p>{'No Thumbnails found...'}</p> : null}
-                {this.props.thumbnails.map(link => {
-                    return <img style={Imgstyle} src={link} />;
+                {this.props.thumbnails.map(thumbSrc => {
+                    return <img style={Imgstyle} src={thumbSrc} />;
                 })}
             </div>
         );

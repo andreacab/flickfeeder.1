@@ -18,7 +18,6 @@
             console.log('[FFWebsocketManager] Received a message!', event);
             console.log(event.data);
             if(event.data instanceof Array) {
-                debugger;
                 let imgs = event.data.map(link => {
                     return $('<img>').attr('src', link);
                 });
