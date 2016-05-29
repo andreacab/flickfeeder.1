@@ -56,8 +56,8 @@ class Users::DropboxController < ApplicationController
                         entries.each do |item|
                             if ( item['media_info']['metadata']['.tag'] == 'photo' )
                                 data = get_temporary_link({path: item['path_lower']}, user.dropbox_access_token)
-                                p data.body
-                                new_thumbs.push(JSON.parse(data.body)['medadata']['link'])
+                                p JSON.parse(data.body)
+                                new_thumbs.push(JSON.parse(data.body)['link'])
                             end
                         end
                     # elsif user.dropbox_access_token
