@@ -44,12 +44,11 @@ class Users::DropboxController < ApplicationController
         
         # logic on a separate thread as we need to respond to the webhook as quickly as possible.
         # Thread.new do
-            new_thumbnails = []
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
                 
-                if (Shrimp.is_client_connected?(user.id))
-                    if user.dropbox_access_token && user.dropbox_cursor
+                if Shrimp.is_client_connected?(user.id)
+                    if (user.dropbox_access_token && user.dropbox_cursor)
                         res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
                     elsif user.dropbox_access_token
                         res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
@@ -57,15 +56,16 @@ class Users::DropboxController < ApplicationController
                     
                     user.update_attributes( dropbox_cursor: JSON.parse(res.body)['cursor'] )
                     entries = JSON.parse(res.body)['entries']
-                    
-                    entries.each do |item|
-                        if (item['media_info'] && item['media_info']['metadata']['.tag'] == 'photo')
-                            data = get_temporary_link({path: item['path_lower']}, user.dropbox_access_token)
-                            new_thumbnails.push(JSON.parse(data.body)['link'])
+                                        
+                    new_thumbnail_urls = []
+                    entries.each do |entry|
+                        if (entry['media_info'] && entry['media_info']['metadata']['.tag'] == 'photo')
+                            data = get_temporary_link({path: entry['path_lower']}, user.dropbox_access_token)
+                            new_thumbnail_urls.push(JSON.parse(data.body)['link'])
                         end
                     end
 
-                    Shrimp.send_message_to_client(user.id, new_thumbnails.to_json)
+                    Shrimp.send_message_to_client(user.id, new_thumbnail_urls.to_json)
                 end
             end
         # end

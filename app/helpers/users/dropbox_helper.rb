@@ -34,6 +34,17 @@ module Users::DropboxHelper
         )
     end
 
+    def get_temporary_links(entries, access_token)
+        entries.map do |entry|
+            if (entry['media_info'] && entry['media_info']['metadata']['.tag'] == 'photo')
+                data = get_temporary_link({path: entry['path_lower']}, user.dropbox_access_token)
+                JSON.parse(data.body)['link']
+            else
+                nil
+            end
+        end.reject { |path| !path }
+    end
+
     def hasDropboxAccount?(user)
         !!user.dropbox_access_token
     end
