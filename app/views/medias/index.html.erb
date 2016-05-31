@@ -1,6 +1,5 @@
 <h1>Photo Stream</h1>
 <%= react_component('ThumbnailsList', { thumbnails: @dropbox_thumbnails }) %>
-<%= react_component('Footerr') %>
 
 <script type="text/javascript">
     var FFWebsocketManager = (function () {
@@ -20,7 +19,8 @@
             console.log(event.data);
             if(event.data instanceof Array) {
                 let imgs = event.data.map(link => {
-                    return $('<img>').attr('src', link);
+                    console.log('link is:', link);
+                    return $('<img>').attr({src: link, width:'20%', height:'auto'});
                 });
                 $('#medias_list').append(imgs);
             }
