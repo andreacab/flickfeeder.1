@@ -15,13 +15,15 @@
         };
         
         ws.onmessage = function (event) {
-            console.log('[FFWebsocketManager] Received a message!', event);
+            console.log('[FFWebsocketManager] HEYHEY message!', event);
             console.log(event.data);
             if(event.data instanceof Array) {
+                console.log('is array!!!');
                 var imgs = event.data.map(function(link) {
                     console.log('link is:', link);
                     return $('<img>').attr({src: link, width:'20%', height:'auto'});
                 });
+                console.log('imgs are: ', imgs);
                 $('#medias_list').append(imgs);
             }
         };
