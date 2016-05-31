@@ -76,6 +76,7 @@ class Shrimp
             ws.on :message do |event|
                 puts '***** WS INCOMING MESSAGE *****'
                 p [:message, event.data]
+                Shrimp.clients.each { |client| client.send(event.data.to_json) }
             end
 
             ws.on :close do |event|
