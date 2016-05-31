@@ -34,10 +34,11 @@ module Users::DropboxHelper
         )
     end
 
+    # entries is data received when accessing dropbox API endpoints list_folder or list_folder_continue 
     def get_temporary_links(entries, access_token)
         entries.map do |entry|
             if (entry['media_info'] && entry['media_info']['metadata']['.tag'] == 'photo')
-                data = get_temporary_link({path: entry['path_lower']}, user.dropbox_access_token)
+                data = get_temporary_link({path: entry['path_lower']}, access_token)
                 JSON.parse(data.body)['link']
             else
                 nil
