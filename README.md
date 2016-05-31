@@ -1,13 +1,12 @@
 # Flickfeeder
 ## Development Git flow: 
 1. Clone the repo
-
 `$ git clone https://github.com/andreacab/flickfeeder.1.git flickfeeder`
-2. On your local master branch, track corresponding remote branch
+2. On your local branch **master**, track corresponding remote branch
 `$ git branch -u origin/master`
-2. Create a "staging" branch
+2. Create a **staging** branch
 `$ git checkout -b staging`
-3. On your local "staging" branch track corresponding remote branch
+3. On your local branch **staging** track corresponding remote branch
 `$ git branch -u origin/staging
 
 Entering `$ git push` either on **master** or **staging** branch will push correctly to the right remote branch, **origin/master** and **origin/staging** respectively
