@@ -16,8 +16,8 @@ Entering `$ git push` either on local "master" or "staging" branch will push cor
 - prod app: `$ git push` on your local master branch automatically deploy to heroku/flickfeeder 
 
 # Links
-- staging: flickfeeder-staging.herokuapp.com
-- prod: flickfeeder.herokuapp.com
+- staging: [flickfeeder-staging](flickfeeder-staging.herokuapp.com)
+- prod: [flickfeeder](flickfeeder.herokuapp.com)
 
 # Development 
 - create .env file in your local repo and asks for keys and secrets. At time of writing, you should have the following:
