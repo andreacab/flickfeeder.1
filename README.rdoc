@@ -1,35 +1,25 @@
-== README
-# Flickfeeder
-## Git flow: 
-0) your local repo should have two remotes:
-- heroku -> https://git.heroku.com/flickfeeder.git
-- heorku-staging -> https://git.heroku.com/flickfeeder-staging.git
-if not add them with `$ git remote add ...`
-1) You should have 2 local branches:
-- staging
-- master
-2) make them track their corresponding remotes
-- for staging app (i.e. heroku-staging):
-on the master branch, type: 
-`$ git checkout -b staging --track heroku-staging/master`
-Now on "staging" branch, if you type 
-`$ git push`
-it will push automatically to heroku-staging/masters
-- for prod app (i.e. heroku):
-on the master branch, type:
-`$ git branch --set-upstream-to heroku/master master`
-Now on "master" branch, if you type
-`$ git push`
-it will push automatically to heroku/master
-3) branch out on a new branch when working on smg:
-- bug/(name) when fixing a bug
-- feature/(name) when creating a new feature
-4) when done merge to "staging" branch
-5) test locally (i.e. http://localhost:3000), if works go to 6)
-6) push to staging envrionment (i.e. on heroku-staging/master), if works go to 7
-7) merge locally to master and push to production environment (i.e. on heroku/master)
+== Flickfeeder
+# Development Git flow: 
+1. clone the repo
+`$ git clone https://github.com/andreacab/flickfeeder.1.git flickfeeder`
+2. On your local master branch, track corresponding remote branch
+`$ git branch -u origin/master`
+2. create a "staging" branch
+`$ git checkout -b staging`
+3. on your local "staging" branch track corresponding remote branch
+`$ git branch -u origin/staging
 
-Development: 
+Entering `$ git push` either on local "master" or "staging" branch will push correctly to the right remote branch, origin/master and origin/staging relatively
+
+# Deployment
+- staging app: `$ git push` on your local staging branch automatically deploy to heroku/flickfeeder-staging 
+- prod app: `$ git push` on your local master branch automatically deploy to heroku/flickfeeder 
+
+# Links
+- staging: flickfeeder-staging.herokuapp.com
+- prod: flickfeeder.herokuapp.com
+
+# Development 
 - create .env file in your local repo and asks for keys and secrets. At time of writing, you should have the following:
     DROPBOX_KEY=...
     DROPBOX_SECRET=...
