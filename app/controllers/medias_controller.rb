@@ -18,7 +18,7 @@ class MediasController < ApplicationController
         data = JSON.parse(res.body)
         entries = data['entries']
         cursor = data['cursor']
-        puts data
+
         current_user.update_attributes( dropbox_cursor: cursor ) if cursor
 
         get_temporary_links(entries, current_user.dropbox_access_token)
