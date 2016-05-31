@@ -14,10 +14,6 @@ class Shrimp
         end
 
         def is_client_connected?(user_id)
-            puts '******** 2 ********'
-            puts user_id
-            puts clients.class
-            puts clients.size
             client_index = clients.index do |client|
                 load_session(client)
                 client.env["rack.session"]["warden.user.user.key"][0][0] == user_id
@@ -75,14 +71,11 @@ class Shrimp
                 puts '***** WS OPEN *****'
                 p [:open, ws.object_id]
                 Shrimp.clients << ws
-                puts Shrimp.clients.size
             end
 
             ws.on :message do |event|
                 puts '***** WS INCOMING MESSAGE *****'
                 p [:message, event.data]
-                Shrimp.clients.each { |client| client.send(event.data) }
-                puts Shrimp.clients.size
             end
 
             ws.on :close do |event|
@@ -90,7 +83,6 @@ class Shrimp
                 p [:close, ws.object_id, event.code, event.reason]
                 Shrimp.clients.delete(ws)
                 ws = nil
-                puts Shrimp.clients.size
             end
 
             ws.on :error do |event|
