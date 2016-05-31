@@ -48,11 +48,8 @@ class Users::DropboxController < ApplicationController
                 while has_more
                     if Shrimp.is_client_connected?(user.id)
                         if (user.dropbox_cursor && user.dropbox_access_token)
-                            puts 'cursor!!!!'
-                            puts user.dropbox_cursor
                             res = list_folder_continue({ cursor: user.dropbox_cursor, include_media_info: true }, user.dropbox_access_token)
                         elsif user.dropbox_access_token
-                            puts 'NOT CURSOR!!!!'
                             res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
                         end
                         data = JSON.parse(res.body)
