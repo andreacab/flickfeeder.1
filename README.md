@@ -1,5 +1,5 @@
-== Flickfeeder
-# Development Git flow: 
+# Flickfeeder
+## Development Git flow: 
 1. clone the repo
 `$ git clone https://github.com/andreacab/flickfeeder.1.git flickfeeder`
 2. On your local master branch, track corresponding remote branch
@@ -11,15 +11,15 @@
 
 Entering `$ git push` either on local "master" or "staging" branch will push correctly to the right remote branch, origin/master and origin/staging relatively
 
-# Deployment
+## Deployment
 - staging app: `$ git push` on your local staging branch automatically deploy to heroku/flickfeeder-staging 
 - prod app: `$ git push` on your local master branch automatically deploy to heroku/flickfeeder 
 
-# Links
+## Links
 - staging: [flickfeeder-staging](flickfeeder-staging.herokuapp.com)
 - prod: [flickfeeder](flickfeeder.herokuapp.com)
 
-# Development 
+## Development 
 - create .env file in your local repo and asks for keys and secrets. At time of writing, you should have the following:
     DROPBOX_KEY=...
     DROPBOX_SECRET=...
