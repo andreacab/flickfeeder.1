@@ -50,7 +50,7 @@ class Users::DropboxController < ApplicationController
                     elsif user.dropbox_access_token
                         res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
                     end
-                    puts JSON.parse(res.body)['entries']
+                    puts JSON.parse(res.body)
                     user.update_attributes( dropbox_cursor: JSON.parse(res.body)['cursor'] )
                     new_thumbnail_urls = get_temporary_links(JSON.parse(res.body)['entries'], user.dropbox_access_token)
 
