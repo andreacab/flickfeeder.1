@@ -20,8 +20,6 @@
 //= require components
 //= require_tree .
 
-
-
 var ready;
 ready = function() {
 
