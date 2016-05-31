@@ -1,4 +1,5 @@
 <div class="list-events-container">
+<%= react_component('Footer') %>
   <% @events.each do |event| %>
     <%= link_to event_path(event) do %>
       <div class="event">
