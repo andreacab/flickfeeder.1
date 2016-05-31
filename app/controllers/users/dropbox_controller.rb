@@ -45,7 +45,6 @@ class Users::DropboxController < ApplicationController
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
                 
                 has_more = true
-                
                 while has_more
                     if Shrimp.is_client_connected?(user.id)
                         if (user.dropbox_cursor && user.dropbox_access_token)
