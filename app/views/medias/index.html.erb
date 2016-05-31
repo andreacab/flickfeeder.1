@@ -17,14 +17,10 @@
         ws.onmessage = function (event) {
             console.log('[FFWebsocketManager] HEYHEY message!', event);
             var data = JSON.parse(event.data);
-            console.log(data);
             if(data.constructor === Array) {
-                console.log('is array!!!');
                 var imgs = data.map(function(link) {
-                    console.log('link is:', link);
                     return $('<img>').attr({src: link, width:'20%', height:'auto'});
                 });
-                console.log('imgs are: ', imgs);
                 $('#medias_list').append(imgs);
             }
         };
