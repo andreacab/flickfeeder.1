@@ -51,12 +51,11 @@ class Users::DropboxController < ApplicationController
                 if (Shrimp.is_client_connected?(user.id))
                     if user.dropbox_access_token && user.dropbox_cursor
                         res = list_folder_continue({cursor: user.dropbox_cursor}, user.dropbox_access_token)
+                        user.update_attributes( dropbox_cursor: JSON.parse(res.body)['cursor'] )
                         entries = JSON.parse(res.body)['entries']
-                        p entries
                         entries.each do |item|
                             if ( item['media_info']['metadata']['.tag'] == 'photo' )
                                 data = get_temporary_link({path: item['path_lower']}, user.dropbox_access_token)
-                                p JSON.parse(data.body)
                                 new_thumbs.push(JSON.parse(data.body)['link'])
                             end
                         end
