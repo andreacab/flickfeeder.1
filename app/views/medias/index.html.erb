@@ -17,7 +17,7 @@
         ws.onmessage = function (event) {
             console.log('[FFWebsocketManager] HEYHEY message!', event);
             console.log(event.data);
-            if(event.data instanceof Array) {
+            if(event.data.constructor === Array) {
                 console.log('is array!!!');
                 var imgs = event.data.map(function(link) {
                     console.log('link is:', link);
