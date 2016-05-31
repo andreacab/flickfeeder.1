@@ -6,9 +6,6 @@ class Users::DropboxController < ApplicationController
     skip_before_filter :verify_authenticity_token, :only => [:webhook]
     include Users::DropboxHelper
 
-    def self.test
-    end
-
     def enable
         if Rails.env.production?
             @@flow = DropboxOAuth2Flow.new(ENV["DROPBOX_KEY"], ENV["DROPBOX_SECRET"], 'https://' + ENV["HOST"] + '/dropbox/redirect', session, :dropboxToken)
@@ -43,7 +40,7 @@ class Users::DropboxController < ApplicationController
         return if !params['dropbox'] || !params['dropbox']['delta']
         
         # logic on a separate thread as we need to respond to the webhook as quickly as possible.
-        # Thread.new do
+        Thread.new do
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
                 
@@ -55,20 +52,12 @@ class Users::DropboxController < ApplicationController
                     end
                     
                     user.update_attributes( dropbox_cursor: JSON.parse(res.body)['cursor'] )
-                    entries = JSON.parse(res.body)['entries']
-                                        
-                    new_thumbnail_urls = []
-                    entries.each do |entry|
-                        if (entry['media_info'] && entry['media_info']['metadata']['.tag'] == 'photo')
-                            data = get_temporary_link({path: entry['path_lower']}, user.dropbox_access_token)
-                            new_thumbnail_urls.push(JSON.parse(data.body)['link'])
-                        end
-                    end
+                    new_thumbnail_urls = get_temporary_links(JSON.parse(res.body)['entries'], user.dropbox_access_token)
 
                     Shrimp.send_message_to_client(user.id, new_thumbnail_urls.to_json)
                 end
             end
-        # end
+        end
 
         render nothing: true
     end

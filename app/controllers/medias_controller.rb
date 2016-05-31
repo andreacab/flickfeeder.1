@@ -21,17 +21,6 @@ class MediasController < ApplicationController
         
         current_user.update_attributes( dropbox_cursor: cursor ) if cursor
 
-        # thumbs = []
-        # entries.each do |item|
-        #     if ( item['media_info'] && ( item['media_info']['metadata']['.tag'] == 'photo' ) )
-        #         res = get_temporary_link({path: item['path_lower']}, current_user.dropbox_access_token)
-        #         media = JSON.parse(res.body)
-        #         thumbs.push(media)
-        #     end
-        # end
-
-        # return thumbs
-
         get_temporary_links(entries, current_user.dropbox_access_token)
     end
 
