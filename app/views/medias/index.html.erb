@@ -16,10 +16,11 @@
         
         ws.onmessage = function (event) {
             console.log('[FFWebsocketManager] HEYHEY message!', event);
-            console.log(event.data);
-            if(event.data.constructor === Array) {
+            var data = JSON.parse(event.data);
+            console.log(data);
+            if(data.constructor === Array) {
                 console.log('is array!!!');
-                var imgs = event.data.map(function(link) {
+                var imgs = data.map(function(link) {
                     console.log('link is:', link);
                     return $('<img>').attr({src: link, width:'20%', height:'auto'});
                 });
