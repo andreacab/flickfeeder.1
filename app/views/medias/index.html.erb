@@ -1,6 +1,7 @@
+<%= react_component('Footer') %>
 <h1>Photo Stream</h1>
 <%= react_component('ThumbnailsList', { thumbnails: @dropbox_thumbnails }) %>
-<%= react_component('Footer', {}, { prerender: true }) %>
+
 <script type="text/javascript">
     var FFWebsocketManager = (function () {
         var scheme = "<%= Rails.env.production? ? 'wss://' : 'ws://' %>"
