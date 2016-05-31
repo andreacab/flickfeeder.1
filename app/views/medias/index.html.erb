@@ -35,8 +35,7 @@
 
         return {
             send: function (message) {
-                console.log('Hello!');
-                ws.send("Hello!");
+                ws.send(JSON.stringify(message));
             }
         };
     })();

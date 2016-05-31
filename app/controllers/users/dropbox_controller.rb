@@ -37,7 +37,7 @@ class Users::DropboxController < ApplicationController
             return render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
         end
 
-        return if !params['dropbox'] || !params['dropbox']['delta']
+        return render nothing: true unless (params['dropbox'] && params['dropbox']['delta'])
         
         # TODO: logic on a separate thread as we need to respond to the webhook as quickly as possible.
         # Thread.new do
@@ -50,7 +50,7 @@ class Users::DropboxController < ApplicationController
                     elsif user.dropbox_access_token
                         res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
                     end
-                    
+                    puts JSON.parse(res.body)['entries']
                     user.update_attributes( dropbox_cursor: JSON.parse(res.body)['cursor'] )
                     new_thumbnail_urls = get_temporary_links(JSON.parse(res.body)['entries'], user.dropbox_access_token)
 
