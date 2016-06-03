@@ -1,5 +1,5 @@
 # Flickfeeder
-## Development Git flow: 
+## Git flow: 
 1. Clone the repo  
 `$ git clone https://github.com/andreacab/flickfeeder.1.git flickfeeder`  
 2. On your local branch **master**, track corresponding remote branch  
@@ -36,4 +36,4 @@ HOST=...
 - to test dropbox webhook (on OSX with python installed):
     1. Download the python script @ [Dropbox-webhook](https://blogs.dropbox.com/developers/2014/05/dropbox_hook-py-a-tool-for-testing-your-webhooks/)
     2. enter in the root of your dropbox-webhook folder the following:  
-    `$ python dropbox_hook.py notify http://localhost:<PORT>/dropbox/webhook --secret <DROPBOX_SECRET_DEV> --user <user_id>`
+`$ python dropbox_hook.py notify http://localhost:<PORT>/dropbox/webhook --secret <DROPBOX_SECRET_DEV> --user <user_id>`
