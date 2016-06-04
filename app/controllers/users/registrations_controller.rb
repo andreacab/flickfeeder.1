@@ -4,13 +4,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     super
+    # TODO: sometimes current_user is null, cannot reproduce the problem..
+    if current_user
+      current_user.update_attributes(
+        first_name: params[:user][:first_name].capitalize, 
+        last_name: params[:user][:last_name].capitalize
+      )
+    end
 
-    current_user.update_attributes(
-      first_name: params[:user][:first_name].capitalize, 
-      last_name: params[:user][:last_name].capitalize
-    )
-
-    if current_user.email.include?('@flickfeeder.com')
+    if current_user && current_user.email.include?('@flickfeeder.com')
       current_user.update_attributes(user_type: "admin")
     end
   end
