@@ -46,7 +46,6 @@ class Users::DropboxController < ApplicationController
                 
                 has_more = true
                 while has_more
-                    sleep 15
                     if Shrimp.is_client_connected?(user.id)
                         if (user.dropbox_cursor && user.dropbox_access_token)
                             res = list_folder_continue({ cursor: user.dropbox_cursor }, user.dropbox_access_token)
@@ -55,7 +54,6 @@ class Users::DropboxController < ApplicationController
                         end
 
                         data = JSON.parse(res.body)
-
                         puts data
                         user.update_attributes( dropbox_cursor: data['cursor'] )
                         new_thumbnail_urls = get_temporary_links(data['entries'], user.dropbox_access_token)
