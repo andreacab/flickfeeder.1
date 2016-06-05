@@ -46,6 +46,7 @@ class Users::DropboxController < ApplicationController
                 
                 has_more = true
                 while has_more
+                    sleep 200
                     if Shrimp.is_client_connected?(user.id)
                         if (user.dropbox_cursor && user.dropbox_access_token)
                             res = list_folder_continue({ cursor: user.dropbox_cursor }, user.dropbox_access_token)
@@ -54,11 +55,6 @@ class Users::DropboxController < ApplicationController
                         end
 
                         data = JSON.parse(res.body)
-                        
-                        # hack dropbox sends empty array if called to list_folder is made to soon
-                        if data['entries'].length <= 0
-                            next
-                        end
 
                         puts data
                         user.update_attributes( dropbox_cursor: data['cursor'] )
