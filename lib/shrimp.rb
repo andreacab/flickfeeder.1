@@ -4,7 +4,6 @@ class Shrimp
     # Heroku has a 50 seconds idle connection time limit. 
     KEEPALIVE_TIME = 15 # in seconds
     @@clients = []
-    CHANNEL = "media_stream"
 
     # Shrimp's eigenclass 
     class << self
@@ -19,7 +18,7 @@ class Shrimp
                 load_session(client)
                 client.env["rack.session"]["warden.user.user.key"][0][0] == user_id
             end
-            !!( client_index && ( client_index > -1 ) )
+            !!(client_index && ( client_index > -1 ))
         end
 
         def get_client(user_id)
@@ -72,18 +71,14 @@ class Shrimp
         @app = app
         
         redis_uri = URI.parse(ENV["REDISCLOUD_URL"])
-
         # work on a separte thread not to block current thread
         Thread.new do
             redis_sub = Redis.new(host: redis_uri.host, port: redis_uri.port, password: redis_uri.password)
-            redis_sub.subscribe(CHANNEL) do |on| # thread blocking operation
+            redis_sub.subscribe(ENV["REDIS_CHANNEL"]) do |on| # thread blocking operation
                 on.message do |channel, msg|
                     data = JSON.parse(msg)
-                    @@clients.each do |ws|
-                        if ws["rack.session"]["warden.user.user.key"][0][0] == data["user_id"]
-                            ws.send(data["thumbnail_urls"])
-                        end
-                    end
+                    client = Shrimp.get_client(data["user_id"])
+                    client.send(data["thumbnail_urls"].to_json)if client
                 end
             end
         end

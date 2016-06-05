@@ -43,24 +43,23 @@ class Users::DropboxController < ApplicationController
         # Thread.new do
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
-                
                 has_more = true
                 while has_more
-                    if Shrimp.is_client_connected?(user.id)
-                        if (user.dropbox_cursor && user.dropbox_access_token)
-                            res = list_folder_continue({ cursor: user.dropbox_cursor }, user.dropbox_access_token)
-                        elsif user.dropbox_access_token
-                            res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
-                        end
-
-                        data = JSON.parse(res.body)
-                        user.update_attributes( dropbox_cursor: data['cursor'] )
-                        new_thumbnail_urls = get_temporary_links(data['entries'], user.dropbox_access_token)
-
-                        $redis.publish("media_stream", { user_id: user.id, thumbnail_urls: new_thumbnail_urls }.to_json)
-                        # Shrimp.send_message_to_client({user_id: user.id, thumbnail_urls: new_thumbnail_urls})
-                        has_more = data['has_more']
+                    if (user.dropbox_cursor && user.dropbox_access_token)
+                        res = list_folder_continue({ cursor: user.dropbox_cursor }, user.dropbox_access_token)
+                    elsif user.dropbox_access_token
+                        res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
                     end
+                    data = JSON.parse(res.body)
+                    new_thumbnail_urls = get_temporary_links(data['entries'], user.dropbox_access_token)
+                    
+                    # update new cursor
+                    user.update_attributes( dropbox_cursor: data['cursor'] )
+
+                    # send message to redis cloud instance 
+                    $redis.publish(ENV["REDIS_CHANNEL"], { user_id: user.id, thumbnail_urls: new_thumbnail_urls }.to_json)
+
+                    has_more = data['has_more']
                 end
             end
         # end

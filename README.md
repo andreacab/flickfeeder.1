@@ -25,6 +25,7 @@ Entering `$ git push` either on **master** or **staging** branch will push corre
 - prod: [flickfeeder](flickfeeder.herokuapp.com)
 
 ## Development 
+### Environment variables
 - create `.env` file in your local repo and asks for keys and secrets. At time of writing, you should have the following:
 ```
 DROPBOX_KEY=...
@@ -33,7 +34,18 @@ DROPBOX_KEY_DEV=...
 DROPBOX_SECRET_DEV=...
 HOST=...
 ```    
+### Dropbox
 - to test dropbox webhook (on OSX with python installed):
     1. Download the python script @ [Dropbox-webhook](https://blogs.dropbox.com/developers/2014/05/dropbox_hook-py-a-tool-for-testing-your-webhooks/)
     2. enter in the root of your dropbox-webhook folder the following:  
-`$ python dropbox_hook.py notify http://localhost:<PORT>/dropbox/webhook --secret <DROPBOX_SECRET_DEV> --user <user_id>`
+`$ python dropbox_hook.py notify http://localhost:<PORT>/dropbox/webhook --secret <DROPBOX_SECRET_DEV> --user <dropbox_user_id>`
+
+### Redis
+- install redis (use homebrew on mac)
+`$ brew update && brew install redis`
+- in one tab: 
+`$ redis-server --requestpass flickfeeder`
+- in an other tab: 
+`$ redis-cli`
+`$> AUTH flickfeeder`
+`$> MONITOR` 
