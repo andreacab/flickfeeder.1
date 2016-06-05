@@ -52,12 +52,14 @@ class Users::DropboxController < ApplicationController
                         elsif user.dropbox_access_token
                             res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
                         end
+
+                        data = JSON.parse(res.body)
+                        
                         # hack dropbox sends empty array if called to list_folder is made to soon
                         if data['entries'].length <= 0
                             next
                         end
-                        
-                        data = JSON.parse(res.body)
+
                         puts data
                         user.update_attributes( dropbox_cursor: data['cursor'] )
                         new_thumbnail_urls = get_temporary_links(data['entries'], user.dropbox_access_token)
