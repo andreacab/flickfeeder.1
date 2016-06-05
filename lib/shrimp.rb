@@ -52,23 +52,22 @@ class Shrimp
         
         redis_uri = URI.parse(ENV["REDISCLOUD_URL"])
         # work on a separte thread not to block current thread
-        # Thread.new do
-        #     redis_sub = Redis.new(host: redis_uri.host, port: redis_uri.port, password: redis_uri.password)
-        #     redis_sub.subscribe(ENV["REDIS_CHANNEL"]) do |on| # thread blocking operation
-        #         p [:instance_redis_suscribe, true]
-        #         p [:clients_size_0, @@clients.size]
-        #         on.message do |channel, msg|
-        #             p [:clients_size_2, @@clients.size]
-        #             data = JSON.parse(msg)
-        #             p [:instance_redis_incoming_message, data]
-        #             p [:clients_size_3, @@clients.size]
-        #             client = Shrimp.get_client(data["user_id"])
-        #             p [:clients_size_4, @@clients.size]
-        #             p [:client_is, client]
-        #             client.send(data["thumbnail_urls"].to_json)if client
-        #         end
-        #     end
-        # end
+        Thread.new do
+            redis_sub = Redis.new(host: redis_uri.host, port: redis_uri.port, password: redis_uri.password)
+            redis_sub.subscribe(ENV["REDIS_CHANNEL"]) do |on| # thread blocking operation
+                p [:instance_redis_suscribe, true]
+                on.message do |channel, msg|
+                    p [:clients_size_2, Shrimp.clients.size]
+                    data = JSON.parse(msg)
+                    p [:instance_redis_incoming_message, data]
+                    p [:clients_size_3, Shrimp.clients.size]
+                    client = Shrimp.get_client(data["user_id"])
+                    p [:clients_size_4, Shrimp.clients.size]
+                    p [:client_is, client]
+                    client.send(data["thumbnail_urls"].to_json)if client
+                end
+            end
+        end
     end
 
     def call(env)
@@ -88,10 +87,6 @@ class Shrimp
             ws.on :message do |event|
                 puts '***** WS INCOMING MESSAGE *****'
                 p [:message, event.data]
-                p [:client_size_0, Shrimp.clients.size]
-                Thread.new do
-                    p [:client_size_1, Shrimp.clients.size]
-                end
                 Shrimp.clients.each { |client| client.send(event.data.to_json) }
             end
 
