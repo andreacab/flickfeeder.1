@@ -13,14 +13,6 @@ class Shrimp
             @@clients
         end
 
-        def is_client_connected?(user_id)
-            client_index = clients.index do |client|
-                load_session(client)
-                client.env["rack.session"]["warden.user.user.key"][0][0] == user_id
-            end
-            !!(client_index && ( client_index > -1 ))
-        end
-
         def get_client(user_id)
             # check if user_id is one of the ws clients  
             clients.each do |client|
@@ -35,22 +27,10 @@ class Shrimp
             nil
         end
 
-        def send_message_to_client(user_id, data)
-            get_client(user_id).send(data)
-        end
-
-        def send_to_all_clients(data)
-            clients.each { |client| client.send(data) }
-        end
-
         def load_session(client)
             if !client.env["rack.session"].loaded?
                 client.env["rack.session"][:init] = true
             end
-        end
-
-        def say_hi
-            puts "HELLO!!!!!!!!!!"
         end
 
         def add_client(client_id)
@@ -75,8 +55,10 @@ class Shrimp
         Thread.new do
             redis_sub = Redis.new(host: redis_uri.host, port: redis_uri.port, password: redis_uri.password)
             redis_sub.subscribe(ENV["REDIS_CHANNEL"]) do |on| # thread blocking operation
+                p [:instance_redis_suscribe, true]
                 on.message do |channel, msg|
                     data = JSON.parse(msg)
+                    p [:instance_redis_incoming_message, data]
                     client = Shrimp.get_client(data["user_id"])
                     client.send(data["thumbnail_urls"].to_json)if client
                 end
@@ -124,17 +106,6 @@ class Shrimp
     end
 
     private
-    def add_client(client_id)
-        $redis.sadd("ws_clients", client_id.to_json)
-    end
-
-    def remove_client(client_id)
-        $redis.srem("ws_clients", client_id.to_json)
-    end
-
-    def client_connected?(client_id)
-        $redis.sismember("ws_clients", client_id.to_json)
-    end
     
     def websocket_string
         "*********************************\n****** I AM A WEBSOCKET!!! ******\n*********************************"
