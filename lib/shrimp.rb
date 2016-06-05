@@ -52,6 +52,7 @@ class Shrimp
         
         redis_uri = URI.parse(ENV["REDISCLOUD_URL"])
         # work on a separte thread not to block current thread
+        p [:clients_size_0, @@clients.size]
         Thread.new do
             redis_sub = Redis.new(host: redis_uri.host, port: redis_uri.port, password: redis_uri.password)
             redis_sub.subscribe(ENV["REDIS_CHANNEL"]) do |on| # thread blocking operation
@@ -59,9 +60,9 @@ class Shrimp
                 on.message do |channel, msg|
                     data = JSON.parse(msg)
                     p [:instance_redis_incoming_message, data]
-                    p [:clients_size_before, @@clients.size]
+                    p [:clients_size_2, @@clients.size]
                     client = Shrimp.get_client(data["user_id"])
-                    p [:clients_size_after, @@clients.size]
+                    p [:clients_size_3, @@clients.size]
                     p [:client_is, client]
                     client.send(data["thumbnail_urls"].to_json)if client
                 end
