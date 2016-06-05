@@ -4,6 +4,7 @@ class Shrimp
     # Heroku has a 50 seconds idle connection time limit. 
     KEEPALIVE_TIME = 15 # in seconds
     @@clients = []
+    CHANNEL = "media_stream"
 
     # Shrimp's eigenclass 
     class << self
@@ -52,14 +53,40 @@ class Shrimp
         def say_hi
             puts "HELLO!!!!!!!!!!"
         end
+
+        def add_client(client_id)
+            $redis.sadd("ws_clients", client_id.to_json)
+        end
+
+        def remove_client(client_id)
+            $redis.srem("ws_clients", client_id.to_json)
+        end
+
+        def client_connected?(client_id)
+            $redis.sismember("ws_clients", client_id.to_json)
+        end
     end
 
     # Instance methods
     def initialize(app)
-        bar = $redis.get("foo")
-        puts "************** INITIALIZING *****************"
-        puts bar
         @app = app
+        
+        redis_uri = URI.parse(ENV["REDISCLOUD_URL"])
+
+        # work on a separte thread not to block current thread
+        Thread.new do
+            redis_sub = Redis.new(host: redis_uri.host, port: redis_uri.port, password: redis_uri.password)
+            redis_sub.subscribe(CHANNEL) do |on| # thread blocking operation
+                on.message do |channel, msg|
+                    data = JSON.parse(msg)
+                    @@clients.each do |ws|
+                        if ws["rack.session"]["warden.user.user.key"][0][0] == data["user_id"]
+                            ws.send(data["thumbnail_urls"])
+                        end
+                    end
+                end
+            end
+        end
     end
 
     def call(env)
@@ -71,9 +98,7 @@ class Shrimp
             ws = Faye::WebSocket.new(env, nil, { ping: KEEPALIVE_TIME })
 
             ws.on :open do |event|
-                # bar = $redis.get("foo")
                 puts '***** WS OPEN *****'
-                # puts bar
                 p [:open, ws.object_id]
                 Shrimp.clients << ws
             end
@@ -103,7 +128,18 @@ class Shrimp
         end
     end
 
-    private 
+    private
+    def add_client(client_id)
+        $redis.sadd("ws_clients", client_id.to_json)
+    end
+
+    def remove_client(client_id)
+        $redis.srem("ws_clients", client_id.to_json)
+    end
+
+    def client_connected?(client_id)
+        $redis.sismember("ws_clients", client_id.to_json)
+    end
     
     def websocket_string
         "*********************************\n****** I AM A WEBSOCKET!!! ******\n*********************************"

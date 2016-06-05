@@ -54,11 +54,11 @@ class Users::DropboxController < ApplicationController
                         end
 
                         data = JSON.parse(res.body)
-                        puts data
                         user.update_attributes( dropbox_cursor: data['cursor'] )
                         new_thumbnail_urls = get_temporary_links(data['entries'], user.dropbox_access_token)
 
-                        Shrimp.send_message_to_client(user.id, new_thumbnail_urls.to_json)
+                        $redis.publish("media_stream", { user_id: user.id, thumbnail_urls: new_thumbnail_urls }.to_json)
+                        # Shrimp.send_message_to_client({user_id: user.id, thumbnail_urls: new_thumbnail_urls})
                         has_more = data['has_more']
                     end
                 end

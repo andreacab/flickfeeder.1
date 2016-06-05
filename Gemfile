@@ -64,6 +64,8 @@ gem "rack-timeout"
 gem "faye-websocket"
 
 gem 'rails_12factor', group: :production
+
+# Redis and extras
 gem 'redis'
 
 group :development do
