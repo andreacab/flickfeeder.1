@@ -68,7 +68,9 @@ class Shrimp
             ws = Faye::WebSocket.new(env, nil, { ping: KEEPALIVE_TIME })
 
             ws.on :open do |event|
+                bar = $redis.get("foo")
                 puts '***** WS OPEN *****'
+                puts bar
                 p [:open, ws.object_id]
                 Shrimp.clients << ws
             end
