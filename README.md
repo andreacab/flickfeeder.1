@@ -44,7 +44,7 @@ HOST=...
 - install redis (use homebrew on mac)
 `$ brew update && brew install redis`
 - in one tab: 
-`$ redis-server --requestpass flickfeeder`
+`$ redis-server --requirepass flickfeeder`
 - in an other tab: 
 `$ redis-cli`
 `$> AUTH flickfeeder`

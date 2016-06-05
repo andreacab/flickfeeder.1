@@ -63,8 +63,7 @@ class Shrimp
                     p [:clients_size_3, Shrimp.clients.size]
                     client = Shrimp.get_client(data["user_id"])
                     p [:clients_size_4, Shrimp.clients.size]
-                    p [:client_is, client]
-                    client.send(data["thumbnail_urls"].to_json)if client
+                    client.send(data["thumbnail_urls"].to_json) if client
                 end
             end
         end
