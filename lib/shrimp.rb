@@ -56,7 +56,10 @@ class Shrimp
 
     # Instance methods
     def initialize(app)
-      @app = app
+        bar = $redis.get("foo")
+        puts "************** INITIALIZING *****************"
+        puts bar
+        @app = app
     end
 
     def call(env)
@@ -68,9 +71,9 @@ class Shrimp
             ws = Faye::WebSocket.new(env, nil, { ping: KEEPALIVE_TIME })
 
             ws.on :open do |event|
-                bar = $redis.get("foo")
+                # bar = $redis.get("foo")
                 puts '***** WS OPEN *****'
-                puts bar
+                # puts bar
                 p [:open, ws.object_id]
                 Shrimp.clients << ws
             end
