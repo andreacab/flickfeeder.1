@@ -59,7 +59,9 @@ class Shrimp
                 on.message do |channel, msg|
                     data = JSON.parse(msg)
                     p [:instance_redis_incoming_message, data]
+                    p [:clients_size_before, @@clients.size]
                     client = Shrimp.get_client(data["user_id"])
+                    p [:clients_size_size, @@clients.size]
                     p [:client_is, client]
                     client.send(data["thumbnail_urls"].to_json)if client
                 end
