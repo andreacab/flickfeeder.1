@@ -99,6 +99,7 @@ class Shrimp
             ws.on :error do |event|
                 puts '***** WS ERROR *****'
                 p [:close, ws.object_id, event.code, event.reason]
+
             end 
 
             # Return async Rack response
