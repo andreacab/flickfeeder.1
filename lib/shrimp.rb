@@ -91,8 +91,10 @@ class Shrimp
 
     def get_client(user_id)
         # check if user_id is one of the ws clients  
+        p [:get_client, user_id]
         @@clients.each do |client|
             # need to load session manually as it is loaded lazily in rails
+            p [:get_client, client]
             load_session(client)
             
             # once session loaded, check with session's user id
@@ -104,6 +106,7 @@ class Shrimp
     end
 
     def load_session(client)
+        p [:load_session, client.env["rack.session"].loaded?]
         if !client.env["rack.session"].loaded?
             client.env["rack.session"][:init] = true
         end
