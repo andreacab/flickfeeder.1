@@ -57,8 +57,7 @@ class Users::DropboxController < ApplicationController
                     user.update_attributes( dropbox_cursor: data['cursor'] )
 
                     # send message to redis cloud instance 
-                    p [:sending_message, { user_id: user.id, thumbnail_urls: new_thumbnail_urls }]
-                    p [:clients_size_1, Shrimp.clients.size]
+                    p [:redis_sent_msg, { user_id: user.id, thumbnail_urls: new_thumbnail_urls }]
                     $redis.publish(ENV["REDIS_CHANNEL"], { user_id: user.id, thumbnail_urls: new_thumbnail_urls }.to_json)
 
                     has_more = data['has_more']

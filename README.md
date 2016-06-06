@@ -25,6 +25,9 @@ Entering `$ git push` either on **master** or **staging** branch will push corre
 - prod: [flickfeeder](flickfeeder.herokuapp.com)
 
 ## Development 
+### Puma server
+`$ puma -C config/puma.rb`
+
 ### Environment variables
 - create `.env` file in your local repo and asks for keys and secrets. At time of writing, you should have the following:
 ```
@@ -34,6 +37,7 @@ DROPBOX_KEY_DEV=...
 DROPBOX_SECRET_DEV=...
 HOST=...
 ```    
+
 ### Dropbox
 - to test dropbox webhook (on OSX with python installed):
     1. Download the python script @ [Dropbox-webhook](https://blogs.dropbox.com/developers/2014/05/dropbox_hook-py-a-tool-for-testing-your-webhooks/)
