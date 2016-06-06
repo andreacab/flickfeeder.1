@@ -81,6 +81,7 @@ class Shrimp
                     data = JSON.parse(msg)
                     p [:redis_received_msg, data]
                     client = get_client(data["user_id"])
+                    p [:redis_sent_to, client]
                     client.send(data["thumbnail_urls"].to_json) if client
                 end
             end
