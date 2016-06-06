@@ -5,15 +5,6 @@ class Shrimp
     KEEPALIVE_TIME = 15 # in seconds
     @@clients = []
 
-    # Shrimp's eigenclass 
-    class << self
-
-        def clients
-            @@clients
-        end
-
-    end
-
     # Instance methods
     def initialize(app)
         @app = app
@@ -97,6 +88,7 @@ class Shrimp
             p [:get_client, client]
             load_session(client)
             
+            p [:get_client, client.env["rack.session"]["warden.user.user.key"][0][0]]
             # once session loaded, check with session's user id
             if(client.env["rack.session"]["warden.user.user.key"][0][0] == user_id)
                 return client
@@ -108,6 +100,7 @@ class Shrimp
     def load_session(client)
         p [:load_session, client.env["rack.session"].loaded?]
         if !client.env["rack.session"].loaded?
+            p[:load_session_init, true]
             client.env["rack.session"][:init] = true
         end
     end
