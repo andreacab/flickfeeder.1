@@ -98,6 +98,7 @@ class Shrimp
     end
 
     def load_session(client)
+        p [:load_session, client.env["rack.session"]]
         p [:load_session, client.env["rack.session"].loaded?]
         if !client.env["rack.session"].loaded?
             p[:load_session_init, true]
