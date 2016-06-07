@@ -58,7 +58,7 @@ class Users::DropboxController < ApplicationController
                     p [[Process.pid], :dropbox_webhook, "data is: ", data]
                     
                     # retrieve the media uri for each entry
-                    sleep 5
+                    sleep 10
                     new_thumbnail_urls = get_temporary_links(data['entries'], user.dropbox_access_token)
                     
                     # update new cursor
