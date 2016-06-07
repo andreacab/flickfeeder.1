@@ -43,8 +43,12 @@ class Users::DropboxController < ApplicationController
         # Thread.new do
             params['dropbox']['delta']['users'].each do |dropbox_user_id| 
                 user = User.find_by(dropbox_user_id: dropbox_user_id.to_s)
+                
+                # As long as Dropbox has more user changes indicated by the key "has_more", make dropbox API calls
                 has_more = true
                 while has_more
+
+                    # check if we FF has a cursor for that user. If yes no need to request all user's files, only what changed since last time
                     if (user.dropbox_cursor && user.dropbox_access_token)
                         res = list_folder_continue({ cursor: user.dropbox_cursor }, user.dropbox_access_token)
                     elsif user.dropbox_access_token
@@ -52,6 +56,9 @@ class Users::DropboxController < ApplicationController
                     end
                     data = JSON.parse(res.body)
                     p [[Process.pid], :dropbox_webhook, "data is: ", data]
+                    
+                    # retrieve the media uri for each entry
+                    sleep 5
                     new_thumbnail_urls = get_temporary_links(data['entries'], user.dropbox_access_token)
                     
                     # update new cursor
