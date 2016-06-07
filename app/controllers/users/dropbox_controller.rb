@@ -51,13 +51,14 @@ class Users::DropboxController < ApplicationController
                         res = list_folder({ path: "", recursive: true, include_media_info: true }, user.dropbox_access_token)
                     end
                     data = JSON.parse(res.body)
+                    p [[Process.pid], :dropbox_webhook, "data is: ", data]
                     new_thumbnail_urls = get_temporary_links(data['entries'], user.dropbox_access_token)
                     
                     # update new cursor
                     user.update_attributes( dropbox_cursor: data['cursor'] )
 
                     # send message to redis cloud instance 
-                    p [:redis_sent_msg, { user_id: user.id, thumbnail_urls: new_thumbnail_urls }]
+                    p [[Process.pid], :redis_sent_msg, { user_id: user.id, thumbnail_urls: new_thumbnail_urls }]
                     $redis.publish(ENV["REDIS_CHANNEL"], { user_id: user.id, thumbnail_urls: new_thumbnail_urls }.to_json)
 
                     has_more = data['has_more']

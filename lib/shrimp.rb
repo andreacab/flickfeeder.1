@@ -15,37 +15,37 @@ class Shrimp
         # store the instance for later access
         env['rack.shrimp'] = self
         
-        # subscribe to redis channel
+        # subscribe to redis channel (it makes sure we subscribe only once)
         message_subscriber
 
         if Faye::WebSocket.websocket?(env)
-            puts websocket_string
+            puts "/*** New websocket connection ***/"
             
             # Send every KEEPALIVE_TIME sec a ping for keeping the connection open.
             ws = Faye::WebSocket.new(env, nil, { ping: KEEPALIVE_TIME })
 
             ws.on :open do |event|
-                puts '***** WS OPEN *****'
-                p [:open, ws.object_id]
+                puts '/*** Websocket OPEN ***/'
+                p [[Process.pid], :Shrimp_open, ws.object_id]
                 @@clients << ws
             end
 
             ws.on :message do |event|
-                puts '***** WS INCOMING MESSAGE *****'
-                p [:message, event.data]
-                @@clients.each { |client| client.send(event.data.to_json) }
+                puts '/*** Websocket ON ***/'
+                p [[Process.pid], :Shrimp_message, event.data]
+                ws.send("World".to_json)
             end
 
             ws.on :close do |event|
-                puts '***** WS CLOSE *****'
-                p [:close, ws.object_id, event.code, event.reason]
+                puts '/*** Websocket CLOSE ***/'
+                p [[Process.pid], :Shrimp_close, ws.object_id]
                 @@clients.delete(ws)
                 ws = nil
             end
 
             ws.on :error do |event|
-                puts '***** WS ERROR *****'
-                p [:close, ws.object_id, event.code, event.reason]
+                puts '/*** Websocket ERROR ***/'
+                p [[Process.pid], :close, ws.object_id, event.code, event.reason]
             end 
 
             # Return async Rack response
@@ -60,37 +60,45 @@ class Shrimp
     def message_subscriber
         return nil if @subscribed
 
-        p [:redis_subscribe]
         redis_uri = URI.parse(ENV["REDISCLOUD_URL"])
-        # work on a separte thread not to block current thread
+        
+        # Subscribe to the redis channel (work on separate thread)
         Thread.new do
             redis_sub = Redis.new(host: redis_uri.host, port: redis_uri.port, password: redis_uri.password)
-            redis_sub.subscribe(ENV["REDIS_CHANNEL"]) do |on| # thread blocking operation
+            
+            # thread blocking operation
+            redis_sub.subscribe(ENV["REDIS_CHANNEL"]) do |on|
                 @subscribed = true
-                
+                p [[Process.pid], :redis_subscribed]
+
                 on.message do |channel, msg|
                     data = JSON.parse(msg)
-                    p [:redis_received_msg, data]
+                    p [[Process.pid], :redis_received_msg, data]
+
+                    # find if user has an opened ws connection
                     client = get_client(data["user_id"])
-                    p [:redis_sent_to, client]
-                    p [:clients_connected, @@clients.size]
-                    client.send(data["thumbnail_urls"].to_json) if client
+                    
+                    # make sure a ws client was found 
+                    if client
+                        p [[Process.pid], :Shrimp, "sending message through websocket", data["thumbnail_urls"]]
+                        
+                        # send all the urls to the user's browser
+                        client.send(data["thumbnail_urls"].to_json) 
+                    end
                 end
             end
         end
     end
 
     def get_client(user_id)
-        # check if user_id is one of the ws clients  
-        p [:get_client, user_id]
         @@clients.each do |client|
-            # need to load session manually as it is loaded lazily in rails
-            p [:get_client, client]
-            load_session(client)
             
-            p [:get_client, client.env["rack.session"]["warden.user.user.key"][0][0]]
-            # once session loaded, check with session's user id
+            # need to load session manually as it is loaded lazily in rails
+            load_session(client)
+            p [[Process.pid], :get_client, "connect client is: ", client.env["rack.session"]["warden.user.user.key"][0][0], "looking for client n°", user_id]
+            # once session loaded, use it to retrieve user ids. Return the ws client
             if(client.env["rack.session"]["warden.user.user.key"][0][0] == user_id)
+                p [[Process.pid], :get_client, "found client! ", client.env["rack.session"]["warden.user.user.key"][0][0]]
                 return client
             end
         end
@@ -98,16 +106,10 @@ class Shrimp
     end
 
     def load_session(client)
-        p [:load_session, client.env["rack.session"]]
-        p [:load_session, client.env["rack.session"].loaded?]
         if !client.env["rack.session"].loaded?
-            p[:load_session_init, true]
+            p [[Process.pid], :load_session_init, true]
             client.env["rack.session"][:init] = true
         end
-    end
-    
-    def websocket_string
-        "********************************\n****** I AM A WEBSOCKET!!! ******\n*********************************"
     end
 
 end 

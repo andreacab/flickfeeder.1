@@ -7,16 +7,16 @@
         var host = "<%= ENV['HOST'] %>";
         var uri = scheme + host + '/medias/stream/';
         var ws = new WebSocket(uri);
-        console.log('[FFWebsocketManager] created a new websocket connection');
         
         ws.onopen = function (event) {
-            console.log('[FFWebsocketManager] Opeing ws!!');
-            ws.send('[FFWebsocketManager] Can you hear me?', event);
+            console.log('[FFWebsocketManager] websocket connection opened');
+            ws.send('[FFWebsocketManager] Hello?', event);
         };
         
         ws.onmessage = function (event) {
-            console.log('[FFWebsocketManager] HEYHEY message!', event);
             var data = JSON.parse(event.data);
+            console.log('[FFWebsocketManager] received message: ', data);
+            
             if(data.constructor === Array) {
                 var imgs = data.map(function(link) {
                     return $('<img>').attr({src: link, width:'20%', height:'auto'});
@@ -26,11 +26,11 @@
         };
 
         ws.onclose = function (event) {
-            console.log('[FFWebsocketManager] Closed...', event);
+            console.log('[FFWebsocketManager] ws closed', event);
         };
 
         ws.onerror = function (event) {
-            console.log('[FFWebsocketManager] Error....', event)
+            console.log('[FFWebsocketManager] ws error', event)
         };
 
         return {

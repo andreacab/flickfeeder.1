@@ -18,7 +18,7 @@
 # - https://devcenter.heroku.com/articles/procfile
 
 # if using windows or Jruby, delete 1st line as they don't support puma worker processes
-workers Integer(ENV['WEB_CONCURRENCY'] || 1)
+workers Integer(ENV['WEB_CONCURRENCY'] || 2)
 
 threads_count = Integer(ENV['RAILS_MAX_THREADS'] || 5)
 threads threads_count, threads_count
